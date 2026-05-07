@@ -487,7 +487,256 @@
     }
     .nav-cta {
       white-space: nowrap;
-    }</style>
+    }
+@media (max-width: 768px) {
+
+  /* TOPBAR */
+  .topbar { display: none; }
+
+  /* NAVBAR */
+  .navbar .container {
+    padding: 12px 20px;
+    position: relative;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    z-index: 9999;
+    gap: 4px;
+  }
+  .nav-links.mobile-open {
+    display: flex;
+  }
+  .nav-links a {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+  .nav-cta {
+    margin-top: 8px;
+    text-align: center;
+  }
+  .mobile-toggle {
+    display: none !important;
+  }
+
+  /* HAMBURGER BUTTON */
+  .hamburger {
+    display: flex !important;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--navy);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* MEGA MENU MOBILE */
+  .mega-menu {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all !important;
+    padding-top: 0 !important;
+    display: none;
+  }
+  .mega-menu.mobile-open {
+    display: block;
+  }
+  .nav-dropdown-trigger .ph-caret-down {
+    float: right;
+  }
+
+  /* HERO SECTIONS */
+  .hero .container,
+  .hero-container,
+  section .container {
+    grid-template-columns: 1fr !important;
+    display: block !important;
+  }
+  .hero {
+    min-height: auto !important;
+    padding: 60px 0 40px !important;
+  }
+  .hero h1 {
+    font-size: 32px !important;
+  }
+  .hero p {
+    font-size: 15px !important;
+  }
+  .hero-visual,
+  .hero-cards,
+  .hero-icon-wrapper {
+    display: none !important;
+  }
+  .hero-btns {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .hero-btns a {
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .hero-stats {
+    gap: 16px !important;
+  }
+  .hero-stat strong {
+    font-size: 24px !important;
+  }
+
+  /* FEATURE STRIP */
+  .feature-strip .container {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .feature-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+    padding: 16px !important;
+  }
+
+  /* ABOUT SECTION */
+  .about .container {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .about-img {
+    display: none !important;
+  }
+  .section-title {
+    font-size: 28px !important;
+  }
+
+  /* SERVICES GRID */
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* STATS */
+  .stats .container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+  .stat-item .number {
+    font-size: 36px !important;
+  }
+
+  /* EVENTS GRID */
+  .events-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* TESTIMONIALS */
+  .testi-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* TEAM GRID */
+  .team-grid,
+  [class*="team"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* FOOTER */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 8px !important;
+    text-align: center !important;
+  }
+
+  /* SERVICE PAGES HERO */
+  .hero-content h1 {
+    font-size: 30px !important;
+  }
+  .quick-links-bar .container {
+    padding: 0 16px !important;
+    gap: 0 !important;
+  }
+  .quick-links-bar a {
+    font-size: 12px !important;
+    padding: 12px 10px !important;
+  }
+
+  /* STEPS/PROCESS */
+  [class*="steps"],
+  [class*="process"],
+  [class*="how"] {
+    flex-direction: column !important;
+  }
+
+  /* GENERAL CONTAINER */
+  .container {
+    padding: 0 20px !important;
+  }
+
+  /* SECTION PADDING */
+  section {
+    padding: 60px 0 !important;
+  }
+
+  /* CARDS */
+  [class*="grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* CTA SECTION */
+  .cta-section h2 {
+    font-size: 28px !important;
+  }
+
+  /* BLOG GRID */
+  [class*="blog"] [class*="grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* GALLERY */
+  [class*="masonry"],
+  [class*="gallery"] [class*="grid"] {
+    column-count: 1 !important;
+  }
+
+  /* OLYMPIAD SUBJECT PAGES */
+  .hero-icon-wrapper {
+    display: none !important;
+  }
+  .syllabus-grid,
+  [class*="syllabus"] {
+    grid-template-columns: 1fr !important;
+  }
+  .class-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  [class*="advantage"] .container,
+  [class*="benefits"] .container {
+    grid-template-columns: 1fr !important;
+  }
+}</style>
 </head>
 <body>
   <div class="topbar">
@@ -515,7 +764,14 @@
       <button class="mobile-toggle" id="mobileToggle">
         <i class="ph ph-list"></i>
       </button>
-      <div class="nav-menu" id="navMenu">
+      <button class="hamburger" 
+  id="hamburgerBtn"
+  style="display:none;"
+  onclick="toggleMobileMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button><div class="nav-menu nav-links" id="navMenu">
         <a href="index.html" class="nav-link">Home</a>
         <a href="index.html#about" class="nav-link">About</a>
         <div class="nav-dropdown">
@@ -884,5 +1140,37 @@
       }
     });
   </script>
-</body>
+
+<script>
+function toggleMobileMenu() {
+  const nav = document.querySelector('.nav-links');
+  const btn = document.getElementById('hamburgerBtn');
+  if (!nav || !btn) return;
+  nav.classList.toggle('mobile-open');
+}
+
+// Close menu when link clicked
+document.querySelectorAll('.nav-links a')
+  .forEach(link => {
+    link.addEventListener('click', () => {
+      const nav = document.querySelector('.nav-links');
+      if (nav) nav.classList.remove('mobile-open');
+    });
+  });
+
+// Show hamburger only on mobile via JS
+function checkMobile() {
+  const btn = document.getElementById('hamburgerBtn');
+  const nav = document.querySelector('.nav-links');
+  if (!btn || !nav) return;
+  if (window.innerWidth <= 768) {
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+    nav.classList.remove('mobile-open');
+  }
+}
+window.addEventListener('resize', checkMobile);
+checkMobile();
+</script></body>
 </html>
