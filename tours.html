@@ -1902,7 +1902,7 @@ body {
         <div class="form-card">
           <h2>Plan Your Educational Tour</h2>
           <p>Share your school requirements and our team will help you design the right tour package.</p>
-          <div id="form-wrapper"><form id="inquiryForm" class="form-grid">
+          <div id="formWrapper"><form id="inquiryForm" class="form-grid">
             <div class="field">
               <label for="schoolName">School Name</label>
               <input type="text" id="schoolName" name="schoolName" required>
@@ -2232,7 +2232,7 @@ function getCheckedValues(form, name) {
 }
 
 function showError(message) {
-  const form = document.querySelector('form#registrationForm, form#inquiryForm, form#contactForm, form')
+  const form = document.querySelector('form#inquiryForm, form#inquiryForm, form#contactForm, form')
   if (!form) return alert(message)
   let errorBox = form.querySelector('.supabase-error')
   if (!errorBox) {
@@ -2284,31 +2284,35 @@ async function submitForm(e) {
     btn.disabled = false;
     showError('Something went wrong. Please try again.');
   } else {
-        const wrapper = document.getElementById('form-wrapper');
-    if (wrapper) {
-      wrapper.innerHTML = `
-  <div style="text-align:center;padding:60px 40px;">
-    <i class="ph-fill ph-check-circle" 
-       style="font-size:72px;color:#22c55e;
-       display:block;margin-bottom:20px;"></i>
-    <h3 style="font-family:'Nunito',sans-serif;
-        font-size:26px;font-weight:900;
-        color:#0D1B3E;margin-bottom:12px;">
-      Thank You! We'll be in touch soon.
-    </h3>
-    <p style="color:#64748B;font-size:15px;
-       line-height:1.7;">
-      Our team will contact you within 24 hours.<br>
-      Meanwhile reach us at: 
-      info@awesomeeducation.in
-    </p>
+    // Hide form, show success
+    document.getElementById('inquiryForm')
+      .style.display = 'none';
+
+    // Create success div
+    const successDiv = document.createElement('div');
+    successDiv.style.cssText = 
+      'text-align:center;padding:60px 40px;';
+    successDiv.innerHTML = `
+  <div style="font-size:72px;margin-bottom:20px;">
+    ✅
   </div>
+  <h3 style="font-family:Nunito,sans-serif;
+      font-size:26px;font-weight:900;
+      color:#0D1B3E;margin-bottom:12px;">
+    Thank You! We will contact you soon.
+  </h3>
+  <p style="color:#64748B;font-size:15px;">
+    Our team will reach you within 24 hours.
+  </p>
 `;
-    }
+
+    // Insert after form
+    document.getElementById('inquiryForm')
+      .parentNode.appendChild(successDiv);
   }
 }
 
-document.querySelectorAll('form#registrationForm, form#inquiryForm, form#contactForm').forEach(form => {
+document.querySelectorAll('form#inquiryForm, form#inquiryForm, form#contactForm').forEach(form => {
   form.addEventListener('submit', submitForm, true);
 });
 </script></body>

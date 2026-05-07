@@ -622,7 +622,7 @@ body {
     <section class="stats-strip reveal"><div class="container"><div class="stats-grid"><div class="mini-stat"><strong>500+</strong><span>Parents Trained</span></div><div class="mini-stat"><strong>40+</strong><span>Workshops Conducted</span></div><div class="mini-stat"><strong>25</strong><span>Schools</span></div><div class="mini-stat"><strong>4.9★</strong><span>Average Rating</span></div></div></div></section>
     <section class="topics reveal" id="programs"><div class="container"><div class="section-header"><span class="section-tag">Topics</span><h2>What We Cover</h2><p>Focused, practical conversations that help parents support children with more confidence and clarity.</p></div><div class="topic-grid"><article class="topic-card"><div class="topic-icon teal"><i class="ph-fill ph-chat-circle"></i></div><h3>Effective Communication with Children</h3><p>Listening, empathy and practical conversation frameworks for daily family life.</p></article><article class="topic-card"><div class="topic-icon purple"><i class="ph-fill ph-brain"></i></div><h3>Understanding Child Psychology</h3><p>Developmental needs, behavior patterns and emotional signals across age groups.</p></article><article class="topic-card"><div class="topic-icon navy"><i class="ph-fill ph-device-mobile"></i></div><h3>Digital Safety & Screen Time</h3><p>Healthy boundaries, online safety and balanced technology habits.</p></article><article class="topic-card"><div class="topic-icon red"><i class="ph-fill ph-heartbeat"></i></div><h3>Supporting Academic Stress</h3><p>Helping children manage expectations, exams, pressure and motivation.</p></article><article class="topic-card"><div class="topic-icon orange"><i class="ph-fill ph-heart"></i></div><h3>Building Emotional Intelligence</h3><p>Awareness, self-regulation, resilience and kindness at home.</p></article><article class="topic-card"><div class="topic-icon green"><i class="ph-fill ph-handshake"></i></div><h3>Parent-Teacher Collaboration</h3><p>Creating a consistent support system between school and home.</p></article></div></div></section>
     <section class="schedule reveal" id="schedule"><div class="container"><div class="section-header"><span class="section-tag">Schedule</span><h2>Upcoming Workshops</h2><p>Upcoming school-hosted workshops for parent communities.</p></div><div class="schedule-grid"><article class="schedule-card"><div class="date-badge"><strong>12</strong><span>Jun</span></div><h3>Digital Safety & Screen Time</h3><div class="schedule-meta"><span><i class="ph ph-map-pin"></i> Delhi Public School</span><span><i class="ph ph-clock"></i> 2 Hours</span></div><a href="#inquiry-form" class="btn btn-primary">Book Your Seat →</a></article><article class="schedule-card"><div class="date-badge"><strong>19</strong><span>Jun</span></div><h3>Understanding Child Psychology</h3><div class="schedule-meta"><span><i class="ph ph-map-pin"></i> Sunrise Academy Mumbai</span><span><i class="ph ph-clock"></i> 3 Hours</span></div><a href="#inquiry-form" class="btn btn-primary">Book Your Seat →</a></article><article class="schedule-card"><div class="date-badge"><strong>26</strong><span>Jun</span></div><h3>Parent-Teacher Collaboration</h3><div class="schedule-meta"><span><i class="ph ph-map-pin"></i> Lotus Valley School</span><span><i class="ph ph-clock"></i> 2.5 Hours</span></div><a href="#inquiry-form" class="btn btn-primary">Book Your Seat →</a></article></div></div></section>
-    <section class="inquiry reveal" id="inquiry-form"><div class="container"><div class="form-card"><h2>Parent Workshop Inquiry</h2><p>Fill this form and our team will contact you within 24 hours</p><div id="form-wrapper"><form id="inquiryForm" class="form-grid"><div class="field"><label for="schoolName">School Name</label><input id="schoolName" name="schoolName" type="text" required></div><div class="field"><label for="parentName">Parent Name</label><input id="parentName" name="parentName" type="text" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div><div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required></div><div class="field"><label for="grade">Child Grade</label><input id="grade" name="grade" type="text" required></div><div class="field"><label for="topic">Workshop Topic Interest</label><select id="topic" name="topic" required><option value="">Select topic</option><option>Effective Communication with Children</option><option>Understanding Child Psychology</option><option>Digital Safety & Screen Time</option><option>Supporting Academic Stress</option><option>Building Emotional Intelligence</option><option>Parent-Teacher Collaboration</option></select></div><div class="field"><label for="message">Message</label><textarea id="message" name="message"></textarea></div><button type="submit" class="btn btn-primary submit-btn">Send Workshop Inquiry →</button><div class="success-message" id="successMessage">Thank you! We'll contact you within 24 hours.</div></form></div></div></div></section>
+    <section class="inquiry reveal" id="inquiry-form"><div class="container"><div class="form-card"><h2>Parent Workshop Inquiry</h2><p>Fill this form and our team will contact you within 24 hours</p><div id="formWrapper"><form id="inquiryForm" class="form-grid"><div class="field"><label for="schoolName">School Name</label><input id="schoolName" name="schoolName" type="text" required></div><div class="field"><label for="parentName">Parent Name</label><input id="parentName" name="parentName" type="text" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div><div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required></div><div class="field"><label for="grade">Child Grade</label><input id="grade" name="grade" type="text" required></div><div class="field"><label for="topic">Workshop Topic Interest</label><select id="topic" name="topic" required><option value="">Select topic</option><option>Effective Communication with Children</option><option>Understanding Child Psychology</option><option>Digital Safety & Screen Time</option><option>Supporting Academic Stress</option><option>Building Emotional Intelligence</option><option>Parent-Teacher Collaboration</option></select></div><div class="field"><label for="message">Message</label><textarea id="message" name="message"></textarea></div><button type="submit" class="btn btn-primary submit-btn">Send Workshop Inquiry →</button><div class="success-message" id="successMessage">Thank you! We'll contact you within 24 hours.</div></form></div></div></div></section>
   </main>
   <footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="logo" aria-label="Awesome Education home"><img src="logo.png" 
      alt="Awesome Education Logo"
@@ -787,7 +787,7 @@ function getCheckedValues(form, name) {
 }
 
 function showError(message) {
-  const form = document.querySelector('form#registrationForm, form#inquiryForm, form#contactForm, form')
+  const form = document.querySelector('form#inquiryForm, form#inquiryForm, form#contactForm, form')
   if (!form) return alert(message)
   let errorBox = form.querySelector('.supabase-error')
   if (!errorBox) {
@@ -839,31 +839,35 @@ async function submitForm(e) {
     btn.disabled = false;
     showError('Something went wrong. Please try again.');
   } else {
-        const wrapper = document.getElementById('form-wrapper');
-    if (wrapper) {
-      wrapper.innerHTML = `
-  <div style="text-align:center;padding:60px 40px;">
-    <i class="ph-fill ph-check-circle" 
-       style="font-size:72px;color:#22c55e;
-       display:block;margin-bottom:20px;"></i>
-    <h3 style="font-family:'Nunito',sans-serif;
-        font-size:26px;font-weight:900;
-        color:#0D1B3E;margin-bottom:12px;">
-      Thank You! We'll be in touch soon.
-    </h3>
-    <p style="color:#64748B;font-size:15px;
-       line-height:1.7;">
-      Our team will contact you within 24 hours.<br>
-      Meanwhile reach us at: 
-      info@awesomeeducation.in
-    </p>
+    // Hide form, show success
+    document.getElementById('inquiryForm')
+      .style.display = 'none';
+
+    // Create success div
+    const successDiv = document.createElement('div');
+    successDiv.style.cssText = 
+      'text-align:center;padding:60px 40px;';
+    successDiv.innerHTML = `
+  <div style="font-size:72px;margin-bottom:20px;">
+    ✅
   </div>
+  <h3 style="font-family:Nunito,sans-serif;
+      font-size:26px;font-weight:900;
+      color:#0D1B3E;margin-bottom:12px;">
+    Thank You! We will contact you soon.
+  </h3>
+  <p style="color:#64748B;font-size:15px;">
+    Our team will reach you within 24 hours.
+  </p>
 `;
-    }
+
+    // Insert after form
+    document.getElementById('inquiryForm')
+      .parentNode.appendChild(successDiv);
   }
 }
 
-document.querySelectorAll('form#registrationForm, form#inquiryForm, form#contactForm').forEach(form => {
+document.querySelectorAll('form#inquiryForm, form#inquiryForm, form#contactForm').forEach(form => {
   form.addEventListener('submit', submitForm, true);
 });
 </script></body>

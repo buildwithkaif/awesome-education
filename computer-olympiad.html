@@ -2466,7 +2466,7 @@
           <i class="ph-fill ph-buildings"></i>
           <h3>Register Your School for Computer Science Olympiad</h3>
           <p class="subtitle">Fill this form and our team will contact you within 24 hours</p>
-          <div id="form-wrapper"><form id="registrationForm">
+          <div id="formWrapper"><form id="inquiryForm">
             <div class="form-grid">
               <div class="form-group">
                 <label>School Name <span class="req">*</span></label>
@@ -2904,7 +2904,7 @@
     });
 
     // Form submission
-    const form = document.getElementById('registrationForm');
+    const form = document.getElementById('inquiryForm');
     const successCard = document.getElementById('successCard');
 
     form.addEventListener('submit', (e) => {
@@ -3016,7 +3016,7 @@ function getCheckedValues(form, name) {
 }
 
 function showError(message) {
-  const form = document.querySelector('form#registrationForm, form#inquiryForm, form#contactForm, form')
+  const form = document.querySelector('form#inquiryForm, form#inquiryForm, form#contactForm, form')
   if (!form) return alert(message)
   let errorBox = form.querySelector('.supabase-error')
   if (!errorBox) {
@@ -3068,31 +3068,35 @@ async function submitForm(e) {
     btn.disabled = false;
     showError('Something went wrong. Please try again.');
   } else {
-        const wrapper = document.getElementById('form-wrapper');
-    if (wrapper) {
-      wrapper.innerHTML = `
-  <div style="text-align:center;padding:60px 40px;">
-    <i class="ph-fill ph-check-circle" 
-       style="font-size:72px;color:#22c55e;
-       display:block;margin-bottom:20px;"></i>
-    <h3 style="font-family:'Nunito',sans-serif;
-        font-size:26px;font-weight:900;
-        color:#0D1B3E;margin-bottom:12px;">
-      Thank You! We'll be in touch soon.
-    </h3>
-    <p style="color:#64748B;font-size:15px;
-       line-height:1.7;">
-      Our team will contact you within 24 hours.<br>
-      Meanwhile reach us at: 
-      info@awesomeeducation.in
-    </p>
+    // Hide form, show success
+    document.getElementById('inquiryForm')
+      .style.display = 'none';
+
+    // Create success div
+    const successDiv = document.createElement('div');
+    successDiv.style.cssText = 
+      'text-align:center;padding:60px 40px;';
+    successDiv.innerHTML = `
+  <div style="font-size:72px;margin-bottom:20px;">
+    ✅
   </div>
+  <h3 style="font-family:Nunito,sans-serif;
+      font-size:26px;font-weight:900;
+      color:#0D1B3E;margin-bottom:12px;">
+    Thank You! We will contact you soon.
+  </h3>
+  <p style="color:#64748B;font-size:15px;">
+    Our team will reach you within 24 hours.
+  </p>
 `;
-    }
+
+    // Insert after form
+    document.getElementById('inquiryForm')
+      .parentNode.appendChild(successDiv);
   }
 }
 
-document.querySelectorAll('form#registrationForm, form#inquiryForm, form#contactForm').forEach(form => {
+document.querySelectorAll('form#inquiryForm, form#inquiryForm, form#contactForm').forEach(form => {
   form.addEventListener('submit', submitForm, true);
 });
 </script></body>
