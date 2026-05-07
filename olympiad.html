@@ -1901,7 +1901,7 @@ body {
         <div class="form-card">
           <h2>Register Your School</h2>
           <p>Fill this form and our team will contact you within 24 hours</p>
-          <form id="registrationForm" class="form-grid">
+          <div id="form-wrapper"><form id="registrationForm" class="form-grid">
             <div class="field">
               <label for="schoolName">School Name</label>
               <input type="text" id="schoolName" name="schoolName" required>
@@ -1948,7 +1948,7 @@ body {
             </div>
             <button type="submit" class="btn btn-primary submit-btn">Submit Registration →</button>
             <div class="success-message" id="successMessage">Thank you! We'll contact you within 24 hours.</div>
-          </form>
+          </form></div>
         </div>
       </div>
     </section>
@@ -2279,7 +2279,7 @@ async function submitForm(e) {
       email: getFormValue(form, ['email']),
       phone: getFormValue(form, ['phone', 'mobile']),
       school: getFormValue(form, ['school', 'schoolName']),
-      city: getFormValue(form, ['city']),
+      city: getFormValue(form, ['city']) || FORM_SERVICE_NAME,
       service: FORM_SERVICE_NAME,
       message: message,
     }]);
@@ -2289,13 +2289,27 @@ async function submitForm(e) {
     btn.disabled = false;
     showError('Something went wrong. Please try again.');
   } else {
-    form.innerHTML = [
-      '<div style="text-align:center;padding:40px;grid-column:1/-1;">',
-      '<i class="ph-fill ph-check-circle" style="font-size:64px;color:#22c55e;display:block;margin-bottom:16px;"></i>',
-      '<h3 style="font-family:\'Nunito\',sans-serif;font-size:24px;font-weight:900;color:#0D1B3E;margin-bottom:8px;">Thank You! We\'ll be in touch soon.</h3>',
-      '<p style="color:#64748B;font-size:15px;">Our team will contact you within 24 hours.</p>',
-      '</div>'
-    ].join('');
+        const wrapper = document.getElementById('form-wrapper');
+    if (wrapper) {
+      wrapper.innerHTML = `
+  <div style="text-align:center;padding:60px 40px;">
+    <i class="ph-fill ph-check-circle" 
+       style="font-size:72px;color:#22c55e;
+       display:block;margin-bottom:20px;"></i>
+    <h3 style="font-family:'Nunito',sans-serif;
+        font-size:26px;font-weight:900;
+        color:#0D1B3E;margin-bottom:12px;">
+      Thank You! We'll be in touch soon.
+    </h3>
+    <p style="color:#64748B;font-size:15px;
+       line-height:1.7;">
+      Our team will contact you within 24 hours.<br>
+      Meanwhile reach us at: 
+      info@awesomeeducation.in
+    </p>
+  </div>
+`;
+    }
   }
 }
 

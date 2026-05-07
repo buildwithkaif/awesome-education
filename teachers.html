@@ -622,7 +622,7 @@ body {
     <section class="stats-strip reveal"><div class="container"><div class="stats-grid"><div class="mini-stat"><strong>500+</strong><span>Teachers Trained</span></div><div class="mini-stat"><strong>3-Day</strong><span>Intensive Programs</span></div><div class="mini-stat"><strong>40+</strong><span>Schools</span></div><div class="mini-stat"><strong>100%</strong><span>Would Recommend</span></div></div></div></section>
     <section class="modules reveal" id="programs"><div class="container"><div class="section-header"><span class="section-tag">Modules</span><h2>Program Modules</h2><p>Focused modules designed for practical classroom use, reflective teaching and stronger learner engagement.</p></div><div class="module-grid"><article class="module-card"><div class="module-icon orange"><i class="ph-fill ph-presentation-chart"></i></div><h3>Modern Teaching Techniques</h3><p>Active learning, questioning methods and student-centered classroom strategies.</p></article><article class="module-card"><div class="module-icon teal"><i class="ph-fill ph-chalkboard"></i></div><h3>Classroom Management</h3><p>Routines, behavior support and inclusive discipline for productive classrooms.</p></article><article class="module-card"><div class="module-icon purple"><i class="ph-fill ph-brain"></i></div><h3>Student Psychology & Motivation</h3><p>Understanding learner behavior, motivation and emotional needs.</p></article><article class="module-card"><div class="module-icon navy"><i class="ph-fill ph-laptop"></i></div><h3>Digital Tools for Teaching</h3><p>Smart use of digital resources, presentations and classroom technology.</p></article><article class="module-card"><div class="module-icon green"><i class="ph-fill ph-exam"></i></div><h3>Assessment & Feedback Methods</h3><p>Better rubrics, formative assessment and actionable student feedback.</p></article><article class="module-card"><div class="module-icon red"><i class="ph-fill ph-users"></i></div><h3>Inclusive Education Practices</h3><p>Supporting diverse learners through empathy, access and differentiated methods.</p></article></div></div></section>
     <section class="teacher-testimonial reveal"><div class="container"><div class="section-header"><span class="section-tag">Teacher Voice</span><h2>What Educators Say</h2></div><article class="testimonial-card"><i class="ph-fill ph-quotes"></i><p>"The Teacher Upliftment program helped me rethink classroom energy, student motivation and practical digital tools. It was not just theory; I could apply the ideas the very next week."</p><strong>Neha Kapoor</strong><span>Senior Teacher, Sunrise Academy Mumbai</span></article></div></section>
-    <section class="inquiry reveal" id="inquiry-form"><div class="container"><div class="form-card"><h2>Teacher Training Inquiry</h2><p>Fill this form and our team will contact you within 24 hours</p><form id="inquiryForm" class="form-grid"><div class="field"><label for="schoolName">School Name</label><input id="schoolName" name="schoolName" type="text" required></div><div class="field"><label for="principalName">Principal Name</label><input id="principalName" name="principalName" type="text" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div><div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required></div><div class="field"><label for="teachers">Number of Teachers</label><input id="teachers" name="teachers" type="text" required></div><div class="field"><label for="duration">Preferred Program Duration</label><select id="duration" name="duration" required><option value="">Select duration</option><option>Half Day</option><option>1 Day</option><option>2 Days</option><option>3-Day Intensive</option></select></div><div class="field"><label for="message">Message</label><textarea id="message" name="message"></textarea></div><button type="submit" class="btn btn-primary submit-btn">Send Training Inquiry →</button><div class="success-message" id="successMessage">Thank you! We'll contact you within 24 hours.</div></form></div></div></section>
+    <section class="inquiry reveal" id="inquiry-form"><div class="container"><div class="form-card"><h2>Teacher Training Inquiry</h2><p>Fill this form and our team will contact you within 24 hours</p><div id="form-wrapper"><form id="inquiryForm" class="form-grid"><div class="field"><label for="schoolName">School Name</label><input id="schoolName" name="schoolName" type="text" required></div><div class="field"><label for="principalName">Principal Name</label><input id="principalName" name="principalName" type="text" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div><div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required></div><div class="field"><label for="teachers">Number of Teachers</label><input id="teachers" name="teachers" type="text" required></div><div class="field"><label for="duration">Preferred Program Duration</label><select id="duration" name="duration" required><option value="">Select duration</option><option>Half Day</option><option>1 Day</option><option>2 Days</option><option>3-Day Intensive</option></select></div><div class="field"><label for="message">Message</label><textarea id="message" name="message"></textarea></div><button type="submit" class="btn btn-primary submit-btn">Send Training Inquiry →</button><div class="success-message" id="successMessage">Thank you! We'll contact you within 24 hours.</div></form></div></div></div></section>
   </main>
   <footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="logo" aria-label="Awesome Education home"><img src="logo.png" 
      alt="Awesome Education Logo"
@@ -833,7 +833,7 @@ async function submitForm(e) {
       email: getFormValue(form, ['email']),
       phone: getFormValue(form, ['phone', 'mobile']),
       school: getFormValue(form, ['school', 'schoolName']),
-      city: getFormValue(form, ['city']),
+      city: getFormValue(form, ['city']) || FORM_SERVICE_NAME,
       service: FORM_SERVICE_NAME,
       message: message,
     }]);
@@ -843,13 +843,27 @@ async function submitForm(e) {
     btn.disabled = false;
     showError('Something went wrong. Please try again.');
   } else {
-    form.innerHTML = [
-      '<div style="text-align:center;padding:40px;grid-column:1/-1;">',
-      '<i class="ph-fill ph-check-circle" style="font-size:64px;color:#22c55e;display:block;margin-bottom:16px;"></i>',
-      '<h3 style="font-family:\'Nunito\',sans-serif;font-size:24px;font-weight:900;color:#0D1B3E;margin-bottom:8px;">Thank You! We\'ll be in touch soon.</h3>',
-      '<p style="color:#64748B;font-size:15px;">Our team will contact you within 24 hours.</p>',
-      '</div>'
-    ].join('');
+        const wrapper = document.getElementById('form-wrapper');
+    if (wrapper) {
+      wrapper.innerHTML = `
+  <div style="text-align:center;padding:60px 40px;">
+    <i class="ph-fill ph-check-circle" 
+       style="font-size:72px;color:#22c55e;
+       display:block;margin-bottom:20px;"></i>
+    <h3 style="font-family:'Nunito',sans-serif;
+        font-size:26px;font-weight:900;
+        color:#0D1B3E;margin-bottom:12px;">
+      Thank You! We'll be in touch soon.
+    </h3>
+    <p style="color:#64748B;font-size:15px;
+       line-height:1.7;">
+      Our team will contact you within 24 hours.<br>
+      Meanwhile reach us at: 
+      info@awesomeeducation.in
+    </p>
+  </div>
+`;
+    }
   }
 }
 

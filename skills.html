@@ -628,7 +628,7 @@ body {
       <article class="program-card"><div class="program-top"><div class="program-icon grad-blue"><i class="ph-fill ph-crown"></i></div><div><h3>Chess Development</h3><span class="age-badge">Grades 2–12</span></div></div><ul class="include-list"><li><i class="ph ph-check"></i>Opening principles & strategy</li><li><i class="ph ph-check"></i>Pattern recognition</li><li><i class="ph ph-check"></i>Critical thinking & focus</li><li><i class="ph ph-check"></i>Tournament preparation</li><li><i class="ph ph-check"></i>Problem solving under pressure</li><li><i class="ph ph-check"></i>Sportsmanship & patience</li></ul><a href="#inquiry-form">Learn More →</a></article>
     </div></div></section>
     <section class="benefits reveal"><div class="container benefits-grid"><div class="benefit-visual" aria-hidden="true"><i class="ph-fill ph-lightbulb"></i></div><div class="benefit-content"><span class="section-tag">Benefits</span><h2>Why Schools Choose Our Skill Programs</h2><div class="benefits-list"><div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Activity-led learning that keeps students involved</div><div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Grade-wise modules for practical life readiness</div><div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Confidence-building outcomes parents can notice</div><div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Trained facilitators with school-friendly delivery</div><div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Custom programs aligned to school priorities</div><div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Certificates and feedback after completion</div></div></div></div></section>
-    <section class="inquiry reveal" id="inquiry-form"><div class="container"><div class="form-card"><h2>Skill Program Inquiry</h2><p>Fill this form and our team will contact you within 24 hours</p><form id="inquiryForm" class="form-grid"><div class="field"><label for="schoolName">School Name</label><input id="schoolName" name="schoolName" type="text" required></div><div class="field"><label for="contactPerson">Contact Person</label><input id="contactPerson" name="contactPerson" type="text" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div><div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required></div><div class="field"><label for="program">Program Interest</label><select id="program" name="program" required><option value="">Select program</option><option>Personality Development</option><option>Leadership Training</option><option>Coding for Students</option><option>Financial Literacy</option></select></div><div class="field"><label for="students">Number of Students</label><input id="students" name="students" type="text" required></div><div class="field"><label for="message">Message</label><textarea id="message" name="message"></textarea></div><button type="submit" class="btn btn-primary submit-btn">Send Inquiry →</button><div class="success-message" id="successMessage">Thank you! We'll contact you within 24 hours.</div></form></div></div></section>
+    <section class="inquiry reveal" id="inquiry-form"><div class="container"><div class="form-card"><h2>Skill Program Inquiry</h2><p>Fill this form and our team will contact you within 24 hours</p><div id="form-wrapper"><form id="inquiryForm" class="form-grid"><div class="field"><label for="schoolName">School Name</label><input id="schoolName" name="schoolName" type="text" required></div><div class="field"><label for="contactPerson">Contact Person</label><input id="contactPerson" name="contactPerson" type="text" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div><div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required></div><div class="field"><label for="program">Program Interest</label><select id="program" name="program" required><option value="">Select program</option><option>Personality Development</option><option>Leadership Training</option><option>Coding for Students</option><option>Financial Literacy</option></select></div><div class="field"><label for="students">Number of Students</label><input id="students" name="students" type="text" required></div><div class="field"><label for="message">Message</label><textarea id="message" name="message"></textarea></div><button type="submit" class="btn btn-primary submit-btn">Send Inquiry →</button><div class="success-message" id="successMessage">Thank you! We'll contact you within 24 hours.</div></form></div></div></div></section>
   </main>
   <footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="logo" aria-label="Awesome Education home"><img src="logo.png" 
      alt="Awesome Education Logo"
@@ -839,7 +839,7 @@ async function submitForm(e) {
       email: getFormValue(form, ['email']),
       phone: getFormValue(form, ['phone', 'mobile']),
       school: getFormValue(form, ['school', 'schoolName']),
-      city: getFormValue(form, ['city']),
+      city: getFormValue(form, ['city']) || FORM_SERVICE_NAME,
       service: FORM_SERVICE_NAME,
       message: message,
     }]);
@@ -849,13 +849,27 @@ async function submitForm(e) {
     btn.disabled = false;
     showError('Something went wrong. Please try again.');
   } else {
-    form.innerHTML = [
-      '<div style="text-align:center;padding:40px;grid-column:1/-1;">',
-      '<i class="ph-fill ph-check-circle" style="font-size:64px;color:#22c55e;display:block;margin-bottom:16px;"></i>',
-      '<h3 style="font-family:\'Nunito\',sans-serif;font-size:24px;font-weight:900;color:#0D1B3E;margin-bottom:8px;">Thank You! We\'ll be in touch soon.</h3>',
-      '<p style="color:#64748B;font-size:15px;">Our team will contact you within 24 hours.</p>',
-      '</div>'
-    ].join('');
+        const wrapper = document.getElementById('form-wrapper');
+    if (wrapper) {
+      wrapper.innerHTML = `
+  <div style="text-align:center;padding:60px 40px;">
+    <i class="ph-fill ph-check-circle" 
+       style="font-size:72px;color:#22c55e;
+       display:block;margin-bottom:20px;"></i>
+    <h3 style="font-family:'Nunito',sans-serif;
+        font-size:26px;font-weight:900;
+        color:#0D1B3E;margin-bottom:12px;">
+      Thank You! We'll be in touch soon.
+    </h3>
+    <p style="color:#64748B;font-size:15px;
+       line-height:1.7;">
+      Our team will contact you within 24 hours.<br>
+      Meanwhile reach us at: 
+      info@awesomeeducation.in
+    </p>
+  </div>
+`;
+    }
   }
 }
 
