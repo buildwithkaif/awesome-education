@@ -1925,6 +1925,7 @@
     grid-template-columns: 1fr !important;
   }
 }</style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="topbar">
@@ -2954,5 +2955,90 @@ function checkMobile() {
 }
 window.addEventListener('resize', checkMobile);
 checkMobile();
+</script><script>
+const SUPABASE_URL = 'https://qvbyrhmbbgiknbhfpsnz.supabase.co'
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF2YnlyaG1iYmdpa25iaGZwc256Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NjA4MDQsImV4cCI6MjA5MzAzNjgwNH0.N6BlFUES1LYsrqueNTJnHgtTomyURGYF8ivchQ-ouSA'
+const { createClient } = supabase
+const db = createClient(SUPABASE_URL, SUPABASE_KEY)
+const FORM_SERVICE_NAME = 'Mathematics Olympiad'
+
+function getFormValue(form, names) {
+  for (const name of names) {
+    const field = form.querySelector('[name="' + name + '"], #' + name)
+    if (field && field.value) return field.value.trim()
+  }
+  return ''
+}
+
+function getCheckedValues(form, name) {
+  return Array.from(form.querySelectorAll('input[name="' + name + '"]:checked')).map(input => input.value).join(', ')
+}
+
+function showError(message) {
+  const form = document.querySelector('form#registrationForm, form#inquiryForm, form#contactForm, form')
+  if (!form) return alert(message)
+  let errorBox = form.querySelector('.supabase-error')
+  if (!errorBox) {
+    errorBox = document.createElement('div')
+    errorBox.className = 'supabase-error'
+    errorBox.style.cssText = 'grid-column:1/-1;color:#DC2626;background:rgba(220,38,38,0.08);padding:12px 14px;border-radius:10px;font-size:13px;font-weight:700;margin-bottom:8px;'
+    const btn = form.querySelector('button[type="submit"]')
+    form.insertBefore(errorBox, btn || form.firstChild)
+  }
+  errorBox.textContent = message
+}
+
+async function submitForm(e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+  if (!btn) return;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  const extra = [];
+  const subjects = getCheckedValues(form, 'subjects');
+  const classes = getCheckedValues(form, 'classes');
+  const program = getFormValue(form, ['program', 'topic', 'tourType', 'duration']);
+  const students = getFormValue(form, ['students', 'totalStudents', 'teachers', 'grade', 'month', 'state']);
+  if (subjects) extra.push('Subjects: ' + subjects);
+  if (classes) extra.push('Classes: ' + classes);
+  if (program) extra.push('Interest: ' + program);
+  if (students) extra.push('Details: ' + students);
+  const baseMessage = getFormValue(form, ['message']);
+  const message = [baseMessage, ...extra].filter(Boolean).join('\n\n');
+
+  const { error } = await db
+    .from('inquiries')
+    .insert([{
+      name: getFormValue(form, ['name', 'coordinatorName', 'principalName', 'contactPerson', 'parentName', 'schoolName']),
+      email: getFormValue(form, ['email']),
+      phone: getFormValue(form, ['phone', 'mobile']),
+      school: getFormValue(form, ['school', 'schoolName']),
+      city: getFormValue(form, ['city']),
+      service: FORM_SERVICE_NAME,
+      message: message,
+    }]);
+
+  if (error) {
+    btn.textContent = 'Submit';
+    btn.disabled = false;
+    showError('Something went wrong. Please try again.');
+  } else {
+    form.innerHTML = [
+      '<div style="text-align:center;padding:40px;grid-column:1/-1;">',
+      '<i class="ph-fill ph-check-circle" style="font-size:64px;color:#22c55e;display:block;margin-bottom:16px;"></i>',
+      '<h3 style="font-family:\'Nunito\',sans-serif;font-size:24px;font-weight:900;color:#0D1B3E;margin-bottom:8px;">Thank You! We\'ll be in touch soon.</h3>',
+      '<p style="color:#64748B;font-size:15px;">Our team will contact you within 24 hours.</p>',
+      '</div>'
+    ].join('');
+  }
+}
+
+document.querySelectorAll('form#registrationForm, form#inquiryForm, form#contactForm').forEach(form => {
+  form.addEventListener('submit', submitForm, true);
+});
 </script></body>
 </html>
