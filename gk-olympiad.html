@@ -1,0 +1,2670 @@
+﻿<!-- FILE: gk-olympiad.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>General Knowledge Olympiad | Awesome Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D1B3E;
+      --blue: #1A3A6B;
+      --orange: #F97316;
+      --orange-light: #FB923C;
+      --yellow: #FCD34D;
+      --white: #FFFFFF;
+      --light: #F0F4FF;
+      --gray: #64748B;
+      --light-gray: #F8FAFF;
+      --cyan: #0891B2;
+      --green: #059669;
+      --red: #DC2626;
+      --purple: #7C3AED;
+      --amber: #D97706;
+      --shadow: 0 18px 50px rgba(13, 27, 62, 0.12);
+      --dot-pattern: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.8' fill='%23FFFFFF'/%3E%3C/svg%E");
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      color: var(--gray);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    body.nav-open {
+      overflow: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Nunito", sans-serif;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.08;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a,
+    .quick-link {
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 13px 26px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      box-shadow: 0 14px 34px rgba(249, 115, 22, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(249, 115, 22, 0.35);
+    }
+
+    .btn-ghost {
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .text-orange {
+      color: var(--orange);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    /* Topbar */
+    .topbar {
+      background: var(--navy);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 40px;
+      gap: 16px;
+    }
+
+    .topbar-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .topbar a:hover {
+      color: var(--orange);
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--white);
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 12px 32px rgba(13, 27, 62, 0.1);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 auto;
+      border-radius: 10px;
+      color: var(--white);
+      background: var(--navy);
+      font-family: "Nunito", sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(13, 27, 62, 0.2);
+    }
+
+    .logo-title {
+      display: block;
+      color: var(--navy);
+      font-family: "Nunito", sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .logo-subtitle {
+      display: block;
+      margin-top: 3px;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-link:hover {
+      color: var(--navy);
+      background: var(--light);
+      transform: translateY(-1px);
+    }
+
+    .nav-cta {
+      margin-left: 8px;
+      padding: 12px 22px;
+      border-radius: 25px;
+      color: var(--white);
+      background: var(--orange);
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 12px 26px rgba(249, 115, 22, 0.22);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(249, 115, 22, 0.32);
+      background: var(--orange-light);
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      color: var(--navy);
+      background: var(--light);
+      font-size: 26px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Quick Links Bar */
+    .quick-links-bar {
+      background: white;
+      border-bottom: 1px solid #EEF2FF;
+      position: sticky;
+      top: 73px;
+      z-index: 999;
+      padding: 0;
+    }
+    .quick-links-bar .container {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      padding: 0 40px;
+    }
+    .quick-links-bar a {
+      text-decoration: none;
+      color: #64748B;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 14px 16px;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .quick-links-bar a:hover {
+      color: #0D1B3E;
+      border-bottom-color: #F97316;
+    }
+    .quick-links-bar a.active {
+      color: #F97316;
+      border-bottom-color: #F97316;
+      font-weight: 600;
+    }
+    .quick-links-bar .ql-cta {
+      margin-left: auto;
+      color: #F97316;
+      font-weight: 700;
+    }
+
+    /* Hero Section */
+    .hero-science {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0D1B3E, #1A3A6B);
+    }
+
+    .hero-science::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--dot-pattern);
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .hero-science-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+      height: 500px;
+      padding: 40px 0;
+    }
+
+    .hero-science .breadcrumb {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .hero-science .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--orange);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero-science h1 {
+      color: var(--white);
+      font-size: clamp(36px, 5vw, 52px);
+      margin-bottom: 18px;
+      line-height: 1.1;
+    }
+
+    .hero-science h1 span {
+      color: var(--orange);
+    }
+
+    .hero-science .description {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 540px;
+    }
+
+    .info-pills {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 8px;
+      margin-bottom: 28px;
+      align-items: center;
+    }
+
+    .info-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: var(--white);
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 600;
+      max-width: fit-content;
+    }
+
+    .hero-science .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-icon-wrapper {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-main-icon {
+      font-size: 180px;
+      color: var(--orange);
+      filter: drop-shadow(0 20px 40px rgba(249,115,22,0.3));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .floating-card {
+      position: absolute;
+      background: white;
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 0 8px 32px rgba(13,27,62,0.2);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .floating-card strong {
+      display: block;
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .floating-card span {
+      font-size: 11px;
+      color: #64748B;
+      margin-top: 3px;
+      display: block;
+      white-space: nowrap;
+    }
+
+    .card-1 {
+      top: 0;
+      left: -60px;
+      animation-delay: 0s;
+    }
+
+    .card-2 {
+      top: 0;
+      right: -60px;
+      animation-delay: 0.5s;
+    }
+
+    .card-3 {
+      bottom: 20px;
+      right: -50px;
+      animation-delay: 1s;
+    }
+
+    /* Section: At a Glance */
+    .at-glance {
+      padding: 80px 0;
+      background: var(--white);
+    }
+
+    .at-glance h2 {
+      text-align: center;
+      font-size: clamp(30px, 4vw, 38px);
+      margin-bottom: 44px;
+    }
+
+    .glance-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .glance-card {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 28px;
+      border-left: 4px solid;
+    }
+
+    .glance-card:nth-child(1) { border-color: #F97316; }
+    .glance-card:nth-child(2) { border-color: #0891B2; }
+    .glance-card:nth-child(3) { border-color: #7C3AED; }
+    .glance-card:nth-child(4) { border-color: #059669; }
+    .glance-card:nth-child(5) { border-color: #DC2626; }
+    .glance-card:nth-child(6) { border-color: #D97706; }
+
+    .glance-card i {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .glance-card:nth-child(1) i { color: #F97316; }
+    .glance-card:nth-child(2) i { color: #0891B2; }
+    .glance-card:nth-child(3) i { color: #7C3AED; }
+    .glance-card:nth-child(4) i { color: #059669; }
+    .glance-card:nth-child(5) i { color: #DC2626; }
+    .glance-card:nth-child(6) i { color: #D97706; }
+
+    .glance-card label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+
+    .glance-card .value {
+      display: block;
+      color: var(--navy);
+      font-family: "Nunito", sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .glance-card .sub {
+      color: var(--gray);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Section: Our Advantage */
+    .advantage {
+      padding: 80px 0;
+      background: var(--light-gray);
+    }
+
+    .advantage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .advantage-content h2 {
+      font-size: clamp(30px, 4vw, 38px);
+      margin-bottom: 32px;
+    }
+
+    .advantage-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .advantage-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .advantage-item i {
+      flex-shrink: 0;
+      font-size: 22px;
+      color: var(--orange);
+      margin-top: 2px;
+    }
+
+    .advantage-item h4 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+
+    .advantage-item p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--gray);
+    }
+
+    .advantage-card {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .advantage-card i {
+      font-size: 80px;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .advantage-card h3 {
+      color: var(--white);
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .advantage-card .badge {
+      display: inline-flex;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 28px;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .stat-row-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 14px;
+    }
+
+    .stat-row-item i {
+      font-size: 18px;
+      color: var(--orange);
+      margin: 0;
+    }
+
+    /* Section: Syllabus */
+    .syllabus {
+      padding: 80px 0;
+      background: var(--white);
+    }
+
+    .syllabus-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .syllabus-info {
+      position: sticky;
+      top: 144px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius: 20px;
+      padding: 36px;
+    }
+
+    .syllabus-info i {
+      font-size: 48px;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .syllabus-info h3 {
+      color: var(--white);
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .syllabus-info p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .format-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .format-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .format-item i {
+      font-size: 18px;
+      color: var(--orange);
+      margin: 0;
+    }
+
+    .syllabus-right h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .syllabus-right .subtitle {
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .class-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .class-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 8px;
+      border: 1px solid var(--navy);
+      border-radius: 12px;
+      background: var(--white);
+      color: var(--navy);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .class-btn:hover {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .class-btn.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--white);
+    }
+
+    .class-btn .class-num {
+      font-family: "Nunito", sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .class-btn .class-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .syllabus-content {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid #EEF2FF;
+    }
+
+    .syllabus-content h4 {
+      font-size: 20px;
+      margin-bottom: 16px;
+      color: var(--navy);
+    }
+
+    .syllabus-content .subject-block {
+      margin-bottom: 16px;
+    }
+
+    .syllabus-content .subject-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .syllabus-content .subject-title i {
+      font-size: 18px;
+    }
+
+    .syllabus-content .subject-title.physics i { color: #F97316; }
+    .syllabus-content .subject-title.chemistry i { color: #0891B2; }
+    .syllabus-content .subject-title.biology i { color: #059669; }
+
+    .syllabus-content p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+      padding-left: 26px;
+    }
+
+    /* Section: Registration Process */
+    .registration {
+      padding: 80px 0;
+      background: var(--light-gray);
+    }
+
+    .registration h2 {
+      text-align: center;
+      font-size: clamp(30px, 4vw, 38px);
+      margin-bottom: 48px;
+    }
+
+    .steps-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .steps-row::before {
+      content: "";
+      position: absolute;
+      top: 38px;
+      left: 15%;
+      right: 15%;
+      height: 2px;
+      border-top: 2px dotted #CBD5E1;
+    }
+
+    .step-item {
+      flex: 1;
+      max-width: 260px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-icon {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      background: var(--white);
+      box-shadow: 0 8px 24px rgba(13, 27, 62, 0.1);
+    }
+
+    .step-icon i {
+      font-size: 32px;
+    }
+
+    .step-item:nth-child(1) .step-icon i { color: var(--navy); }
+    .step-item:nth-child(2) .step-icon i { color: #0891B2; }
+    .step-item:nth-child(3) .step-icon i { color: #059669; }
+    .step-item:nth-child(4) .step-icon i { color: var(--orange); }
+
+    .step-badge {
+      position: absolute;
+      top: -8px;
+      right: calc(50% - 48px);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-item h4 {
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .step-item p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* Section: Sample Papers */
+    .sample-papers {
+      padding: 80px 0;
+      background: var(--white);
+    }
+
+    .sample-papers h2 {
+      text-align: center;
+      font-size: clamp(30px, 4vw, 38px);
+      margin-bottom: 12px;
+    }
+
+    .sample-papers .subtitle {
+      text-align: center;
+      color: var(--gray);
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    .sample-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .sample-card {
+      background: var(--white);
+      border: 1px solid #EEF2FF;
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .sample-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(13, 27, 62, 0.12);
+    }
+
+    .sample-card i {
+      font-size: 48px;
+      color: #DC2626;
+      margin-bottom: 16px;
+    }
+
+    .sample-card h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .sample-card .desc {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+
+    .sample-card .meta {
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+
+    .sample-card .btn {
+      width: 100%;
+    }
+
+    .sample-note {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 13px;
+      font-style: italic;
+      color: #94A3B8;
+    }
+
+    /* Section: Inquiry Form */
+    .inquiry {
+      padding: 80px 0;
+      background: var(--light-gray);
+    }
+
+    .inquiry-card {
+      max-width: 650px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 24px;
+      padding: 48px;
+      box-shadow: 0 20px 50px rgba(13, 27, 62, 0.1);
+      text-align: center;
+    }
+
+    .inquiry-card > i {
+      font-size: 40px;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .inquiry-card h3 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .inquiry-card .subtitle {
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      text-align: left;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .form-group label .req {
+      color: var(--red);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px 16px;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--gray);
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+
+    .form-group textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .checkbox-group {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--navy);
+      cursor: pointer;
+    }
+
+    .checkbox-item input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--orange);
+    }
+
+    .inquiry-card .submit-btn {
+      width: 100%;
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 700;
+      box-shadow: 0 14px 34px rgba(249, 115, 22, 0.28);
+    }
+
+    .inquiry-card .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(249, 115, 22, 0.35);
+    }
+
+    /* Success State */
+    .success-card {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .success-card.show {
+      display: block;
+    }
+
+    .success-card > i {
+      font-size: 60px;
+      color: var(--green);
+      margin-bottom: 20px;
+    }
+
+    .success-card h3 {
+      font-size: 26px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .success-card p {
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .success-card .contact-info {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #E2E8F0;
+      font-size: 13px;
+      color: var(--navy);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 70px 0 0;
+      background: var(--navy);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      gap: 50px;
+      padding-bottom: 52px;
+    }
+
+    .footer .logo-title {
+      color: var(--white);
+    }
+
+    .footer-brand p {
+      max-width: 390px;
+      margin: 20px 0 24px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-link {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 19px;
+    }
+
+    .social-link:hover {
+      transform: translateY(-2px);
+      background: var(--orange);
+    }
+
+    .footer h3 {
+      margin-bottom: 20px;
+      color: var(--white);
+      font-size: 18px;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: grid;
+      gap: 11px;
+    }
+
+    .footer-list a {
+      display: inline-flex;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .footer-list a::before {
+      content: "→";
+      margin-right: 8px;
+      color: var(--orange);
+    }
+
+    .footer-list a:hover {
+      color: var(--orange);
+      transform: translateX(3px);
+    }
+
+    .contact-list {
+      list-style: none;
+      display: grid;
+      gap: 13px;
+    }
+
+    .contact-list a,
+    .contact-list span {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .contact-list i {
+      margin-top: 2px;
+      color: var(--orange);
+      font-size: 17px;
+    }
+
+    .contact-list a:hover {
+      color: var(--orange);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px 0;
+    }
+
+    .footer-bottom-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px;
+    }
+
+    /* Page transition */
+    body {
+      animation: pageFadeIn 0.5s ease forwards;
+    }
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-transitioning {
+      animation: pageFadeOut 0.3s ease forwards;
+    }
+    @keyframes pageFadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+
+    /* Dropdown wrapper */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .nav-dropdown-trigger:hover {
+      color: var(--navy);
+      background: var(--light);
+      transform: translateY(-1px);
+    }
+
+    .nav-dropdown:hover .nav-dropdown-trigger .ph-caret-down {
+      transform: rotate(180deg);
+    }
+
+    .mega-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      width: 420px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(13,27,62,0.15);
+      border: 1px solid #EEF2FF;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .mega-menu::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-left: 1px solid #EEF2FF;
+      border-top: 1px solid #EEF2FF;
+    }
+
+    .nav-dropdown.dropdown-open .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: all;
+    }
+
+    .mega-menu-inner {
+      padding: 12px;
+    }
+
+    .mega-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .mega-item:hover {
+      background: #F0F4FF;
+    }
+    .mega-item:hover .mega-arrow {
+      transform: translateX(4px);
+      color: var(--orange);
+    }
+
+    .mega-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+      color: white;
+    }
+
+    .mega-text {
+      flex: 1;
+    }
+    .mega-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0D1B3E;
+      font-family: 'Nunito', sans-serif;
+    }
+    .mega-desc {
+      display: block;
+      font-size: 12px;
+      color: #64748B;
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+
+    .mega-arrow {
+      font-size: 16px;
+      color: #CBD5E1;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .mega-item + .mega-item {
+      border-top: 1px solid #F8FAFF;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-science-inner {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .hero-science-visual {
+        display: none;
+      }
+
+      .glance-grid,
+      .sample-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .advantage-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .advantage-card {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .syllabus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .syllabus-info {
+        position: static;
+      }
+
+      .class-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .steps-row {
+        flex-wrap: wrap;
+        gap: 30px;
+      }
+
+      .steps-row::before {
+        display: none;
+      }
+
+      .step-item {
+        max-width: 45%;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar-inner {
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      .topbar-links {
+        justify-content: center;
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        top: 116px;
+        z-index: 1001;
+        display: grid;
+        gap: 8px;
+        padding: 18px;
+        border-radius: 18px;
+        background: var(--white);
+        box-shadow: 0 24px 70px rgba(13, 27, 62, 0.2);
+        opacity: 0;
+        transform: translateY(-12px);
+        pointer-events: none;
+      }
+
+      .nav-menu.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .nav-link,
+      .nav-cta {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .nav-cta {
+        margin-left: 0;
+      }
+
+      .quick-links-bar {
+        top: 70px;
+      }
+
+      .hero-science {
+        height: auto;
+        padding: 40px 0;
+      }
+
+      .hero-science-inner {
+        height: auto;
+      }
+
+      .class-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-dropdown,
+      .nav-dropdown-trigger {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+      .mega-menu {
+        position: static;
+        width: 100%;
+        margin-top: 8px;
+        transform: none;
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+      }
+      .mega-menu::before {
+        display: none;
+      }
+      .nav-dropdown:hover .mega-menu {
+        display: block;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav-inner {
+        min-height: 70px;
+      }
+
+      .logo-title {
+        font-size: 16px;
+      }
+
+      .logo-subtitle {
+        font-size: 10px;
+      }
+
+      .quick-links-inner {
+        padding: 0 16px;
+      }
+
+      .quick-link {
+        padding: 10px 14px;
+        font-size: 13px;
+      }
+
+      .glance-grid,
+      .sample-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .class-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .class-btn {
+        padding: 12px 6px;
+      }
+
+      .class-btn .class-num {
+        font-size: 22px;
+      }
+
+      .steps-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .step-item {
+        max-width: 100%;
+      }
+
+      .inquiry-card {
+        padding: 32px 24px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .topbar {
+        font-size: 12px;
+      }
+
+      .logo {
+        gap: 9px;
+      }
+
+      .logo-mark {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero-science h1 {
+        font-size: 32px;
+      }
+
+      .info-pills {
+        flex-direction: column;
+      }
+
+      .info-pill {
+        justify-content: center;
+      }
+
+      .hero-science .actions {
+        flex-direction: column;
+      }
+
+      .hero-science .actions .btn {
+        width: 100%;
+      }
+
+      .class-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  
+    .logo-text span:first-child {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .logo-text span:last-child {
+      display: block;
+      font-size: 11px;
+      color: var(--orange);
+      font-weight: 600;
+    }
+    .nav-cta {
+      white-space: nowrap;
+    }</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div>📍 Delhi, India | Serving Schools Across the Nation</div>
+      <div class="topbar-links">
+        <a href="mailto:info@awesomeeducation.in">info@awesomeeducation.in</a>
+        <a href="tel:+911234567890">+91 12345-67890</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar" id="navbar" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">
+  <img src="logo.png" 
+       alt="Awesome Education Logo"
+       style="height:48px;width:auto;
+       object-fit:contain;">
+  <div class="logo-text">
+    <span>Awesome Education</span>
+    <span>Beyond Academics. Real Growth.</span>
+  </div>
+</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation" aria-expanded="false">
+        <i class="ph ph-list"></i>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <div class="nav-dropdown">
+  <a href="olympiad.html" class="nav-dropdown-trigger">
+    Olympiads
+    <i class="ph ph-caret-down"
+       style="font-size:12px;margin-left:4px;
+       transition:transform 0.3s;"></i>
+  </a>
+  <div class="mega-menu">
+    <div class="mega-menu-inner">
+      <a href="science-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0D1B3E,#1A3A6B)">
+          <i class="ph-fill ph-flask"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Science</span>
+          <span class="mega-desc">National science olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="mathematics-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)">
+          <i class="ph-fill ph-calculator"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Mathematics</span>
+          <span class="mega-desc">National math olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="english-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">
+          <i class="ph-fill ph-book-open"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">English</span>
+          <span class="mega-desc">National English olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="gk-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+          <i class="ph-fill ph-globe"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">General Knowledge</span>
+          <span class="mega-desc">National GK olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="reasoning-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#059669,#34D399)">
+          <i class="ph-fill ph-brain"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Reasoning</span>
+          <span class="mega-desc">National reasoning olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="computer-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#DC2626,#F87171)">
+          <i class="ph-fill ph-desktop"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Computer Science</span>
+          <span class="mega-desc">National CS olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+    </div>
+  </div>
+</div>
+        <div class="nav-dropdown">
+  <a href="olympiad.html" class="nav-dropdown-trigger">
+    Programs
+    <i class="ph ph-caret-down"
+       style="font-size:12px;margin-left:4px;
+       transition:transform 0.3s;"></i>
+  </a>
+  <div class="mega-menu">
+    <div class="mega-menu-inner">
+      <a href="tours.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)">
+          <i class="ph-fill ph-bus"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Educational Tours</span>
+          <span class="mega-desc">Curated experiential learning trips across India</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="skills.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">
+          <i class="ph-fill ph-lightbulb"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Skill Development</span>
+          <span class="mega-desc">Personality, leadership, coding & financial literacy</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="teachers.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+          <i class="ph-fill ph-chalkboard-teacher"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Teacher Upliftment</span>
+          <span class="mega-desc">Professional development & modern teaching techniques</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="parents.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#059669,#34D399)">
+          <i class="ph-fill ph-users-three"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Parent Workshops</span>
+          <span class="mega-desc">Engaging sessions for involved and informed parenting</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="blog.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#D97706,#FCD34D)">
+          <i class="ph-fill ph-article"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Blog & Resources</span>
+          <span class="mega-desc">Insights on education, parenting & school growth</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+    </div>
+  </div>
+</div>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="index.html#contact" class="nav-cta">Partner With Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Quick Links Bar -->
+  <div class="quick-links-bar">
+    <div class="container">
+      <a href="#glance">At a Glance</a>
+      <a href="#advantage">Our Advantage</a>
+      <a href="#registration">Registration Process</a>
+      <a href="#syllabus">Syllabus</a>
+      <a href="#sample-papers">Sample Papers</a>
+      <a href="#inquiry" class="ql-cta">Register Now</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-science reveal visible" id="glance">
+      <div class="container hero-science-inner">
+        <div class="hero-science-content">
+          <div class="breadcrumb">Home → Olympiads → General Knowledge</div>
+          <div class="tag-pill">GK Olympiad</div>
+          <h1>International General Knowledge <span>Olympiad</span></h1>
+          <p class="description">A national-level GK competition for students of Classes 4–12, testing awareness of Current Affairs, History, Geography, Science & Technology and World Affairs.</p>
+          <div style="display:flex;flex-wrap:nowrap;gap:8px;margin-bottom:28px;align-items:center;">
+  <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);color:white;padding:6px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;border:1px solid rgba(255,255,255,0.3);">
+    <i class="ph ph-books" style="font-size:13px;"></i>
+    Classes 4–12
+  </span>
+  <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);color:white;padding:6px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;border:1px solid rgba(255,255,255,0.3);">
+    <i class="ph ph-clock" style="font-size:13px;"></i>
+    1 Hour Duration
+  </span>
+  <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);color:white;padding:6px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;border:1px solid rgba(255,255,255,0.3);">
+    <i class="ph ph-file-text" style="font-size:13px;"></i>
+    MCQ Format
+  </span>
+  <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);color:white;padding:6px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;border:1px solid rgba(255,255,255,0.3);">
+    <i class="ph ph-trophy" style="font-size:13px;"></i>
+    Certificates & Awards
+  </span>
+</div>
+          <div class="actions">
+            <a href="#inquiry" class="btn btn-primary">Register Your School</a>
+            <a href="#" class="btn btn-ghost">Download Brochure</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-icon-wrapper">
+            <i class="ph-fill ph-globe hero-main-icon"></i>
+
+            <div class="floating-card card-1">
+              <strong>9,000+</strong>
+              <span>Students Participated</span>
+            </div>
+
+            <div class="floating-card card-2">
+              <strong>5</strong>
+              <span>Award Categories</span>
+            </div>
+
+            <div class="floating-card card-3">
+              <strong>55+</strong>
+              <span>Schools Registered</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- At a Glance Section -->
+    <section class="at-glance reveal" id="glance-details">
+      <div class="container">
+        <h2>Exam At a Glance</h2>
+        <div class="glance-grid">
+          <div class="glance-card">
+            <i class="ph-fill ph-graduation-cap"></i>
+            <label>ELIGIBILITY</label>
+            <span class="value">Classes 4 to 12</span>
+            <span class="sub">Open to all students across India</span>
+          </div>
+          <div class="glance-card">
+            <i class="ph-fill ph-clock"></i>
+            <label>TIMINGS</label>
+            <span class="value">As per school schedule</span>
+            <span class="sub">Conducted during school hours</span>
+          </div>
+          <div class="glance-card">
+            <i class="ph-fill ph-timer"></i>
+            <label>DURATION</label>
+            <span class="value">1 Hour (60 minutes)</span>
+            <span class="sub">Timed examination</span>
+          </div>
+          <div class="glance-card">
+            <i class="ph-fill ph-monitor"></i>
+            <label>EXAMINATION MODE</label>
+            <span class="value">Offline (Pen & Paper)</span>
+            <span class="sub">Conducted at school premises</span>
+          </div>
+          <div class="glance-card">
+            <i class="ph-fill ph-list-checks"></i>
+            <label>QUESTION FORMAT</label>
+            <span class="value">MCQs Only</span>
+            <span class="sub">35 questions for Class 4–5, 50 questions for Class 6–12</span>
+          </div>
+          <div class="glance-card">
+            <i class="ph-fill ph-user-check"></i>
+            <label>SUPERVISION</label>
+            <span class="value">School Supervised</span>
+            <span class="sub">Invigilated by school teachers</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Advantage Section -->
+    <section class="advantage reveal" id="advantage">
+      <div class="container">
+        <div class="advantage-grid">
+          <div class="advantage-content">
+            <h2>Why Choose Our GK Olympiad?</h2>
+            <div class="advantage-list">
+              <div class="advantage-item">
+                <i class="ph-fill ph-check-circle"></i>
+                <div>
+                  <h4>CBSE, ICSE & State Board Aligned</h4>
+                  <p>Questions designed as per all major curricula</p>
+                </div>
+              </div>
+              <div class="advantage-item">
+                <i class="ph-fill ph-check-circle"></i>
+                <div>
+                  <h4>Detailed Performance Report</h4>
+                  <p>Individual scorecards with topic-wise analysis</p>
+                </div>
+              </div>
+              <div class="advantage-item">
+                <i class="ph-fill ph-check-circle"></i>
+                <div>
+                  <h4>National Ranking</h4>
+                  <p>Students receive national rank among all participants</p>
+                </div>
+              </div>
+              <div class="advantage-item">
+                <i class="ph-fill ph-check-circle"></i>
+                <div>
+                  <h4>Zero Travel Required</h4>
+                  <p>Exam conducted within school premises</p>
+                </div>
+              </div>
+              <div class="advantage-item">
+                <i class="ph-fill ph-check-circle"></i>
+                <div>
+                  <h4>Practice Material Provided</h4>
+                  <p>Sample papers and preparation guides sent in advance</p>
+                </div>
+              </div>
+              <div class="advantage-item">
+                <i class="ph-fill ph-check-circle"></i>
+                <div>
+                  <h4>Medals & Certificates for All</h4>
+                  <p>Participation certificates + medals for top performers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="advantage-card">
+            <i class="ph-fill ph-globe"></i>
+            <h3>GK Olympiad 2025</h3>
+            <span class="badge">Registration Open</span>
+            <div class="stat-row">
+              <div class="stat-row-item">
+                <i class="ph-fill ph-calendar-blank"></i>
+                <span>Exam Date: November 2025</span>
+              </div>
+              <div class="stat-row-item">
+                <i class="ph-fill ph-map-pin"></i>
+                <span>Mode: At School</span>
+              </div>
+              <div class="stat-row-item">
+                <i class="ph-fill ph-clock"></i>
+                <span>Duration: 60 Minutes</span>
+              </div>
+              <div class="stat-row-item">
+                <i class="ph-fill ph-chart-bar"></i>
+                <span>Result: Within 30 Days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Syllabus Section -->
+    <section class="syllabus reveal" id="syllabus">
+      <div class="container">
+        <div class="syllabus-grid">
+          <div class="syllabus-info">
+            <i class="ph-fill ph-globe"></i>
+            <h3>Syllabus & Format</h3>
+            <p>Questions are carefully designed as per the latest curriculum patterns for all major boards in India.</p>
+            <div class="format-list">
+              <div class="format-item">
+                <i class="ph-fill ph-check-circle"></i>
+                <span>MCQ Format — Multiple Choice Questions only</span>
+              </div>
+              <div class="format-item">
+                <i class="ph-fill ph-check-circle"></i>
+                <span>1 Hour Duration — 60 minutes, auto-submit</span>
+              </div>
+              <div class="format-item">
+                <i class="ph-fill ph-check-circle"></i>
+                <span>All Boards Covered — CBSE, ICSE, State Boards</span>
+              </div>
+            </div>
+          </div>
+          <div class="syllabus-right">
+            <h3>Select your class to view syllabus</h3>
+            <p class="subtitle">Click any class — syllabus details expand below</p>
+            <div class="class-grid" id="classGrid">
+              <button class="class-btn active" data-class="4">
+                <span class="class-num">4</span>
+                <span class="class-label">Class</span>
+              </button>
+              <button class="class-btn" data-class="5">
+                <span class="class-num">5</span>
+                <span class="class-label">Class</span>
+              </button>
+              <button class="class-btn" data-class="6">
+                <span class="class-num">6</span>
+                <span class="class-label">Class</span>
+              </button>
+              <button class="class-btn" data-class="7">
+                <span class="class-num">7</span>
+                <span class="class-label">Class</span>
+              </button>
+              <button class="class-btn" data-class="8">
+                <span class="class-num">8</span>
+                <span class="class-label">Class</span>
+              </button>
+              <button class="class-btn" data-class="9">
+                <span class="class-num">9</span>
+                <span class="class-label">Class</span>
+              </button>
+              <button class="class-btn" data-class="10">
+                <span class="class-num">10</span>
+                <span class="class-label">Class</span>
+              </button>
+              <button class="class-btn" data-class="11">
+                <span class="class-num">11</span>
+                <span class="class-label">Class</span>
+              </button>
+              <button class="class-btn" data-class="12">
+                <span class="class-num">12</span>
+                <span class="class-label">Class</span>
+              </button>
+            </div>
+            <div class="syllabus-content" id="syllabusContent">
+              <h4>Class 4 Syllabus</h4>
+              <div class="subject-block">
+                <div class="subject-title physics"><i class="ph-fill ph-map-pin"></i> India & World</div>
+                <p>Basic Geography, Indian States & Capitals</p>
+              </div>
+              <div class="subject-block">
+                <div class="subject-title chemistry"><i class="ph-fill ph-flag"></i> History</div>
+                <p>Freedom Fighters, National Symbols</p>
+              </div>
+              <div class="subject-block">
+                <div class="subject-title biology"><i class="ph-fill ph-lightbulb"></i> Science & Tech</div>
+                <p>Inventions, Famous Scientists</p>
+              </div>
+              <a href="#inquiry" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;background:#F97316;color:white;padding:10px 24px;border-radius:20px;text-decoration:none;font-size:13px;font-weight:600;">
+                <i class="ph-fill ph-file-pdf"></i>
+                Download Full Syllabus PDF
+              </a>
+              <p style="font-size:12px;color:#94A3B8;margin-top:8px;">Full syllabus PDF sent after school registration</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration Process Section -->
+    <section class="registration reveal" id="registration">
+      <div class="container">
+        <h2>How to Register</h2>
+        <div class="steps-row">
+          <div class="step-item">
+            <div class="step-icon"><i class="ph-fill ph-buildings"></i></div>
+            <span class="step-badge">1</span>
+            <h4>School Registers</h4>
+            <p>Principal or coordinator fills the school registration form below</p>
+          </div>
+          <div class="step-item">
+            <div class="step-icon"><i class="ph-fill ph-users"></i></div>
+            <span class="step-badge">2</span>
+            <h4>Student Enrollment</h4>
+            <p>School submits student list with class and subject selection</p>
+          </div>
+          <div class="step-item">
+            <div class="step-icon"><i class="ph-fill ph-exam"></i></div>
+            <span class="step-badge">3</span>
+            <h4>Receive Study Material</h4>
+            <p>Practice papers and guidelines sent to school 4 weeks before exam</p>
+          </div>
+          <div class="step-item">
+            <div class="step-icon"><i class="ph-fill ph-trophy"></i></div>
+            <span class="step-badge">4</span>
+            <h4>Exam & Results</h4>
+            <p>Exam conducted at school, results and certificates within 30 days</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sample Papers Section -->
+    <section class="sample-papers reveal" id="sample-papers">
+      <div class="container">
+        <h2>Sample Papers</h2>
+        <p class="subtitle">Practice with previous year papers to prepare better</p>
+        <div class="sample-grid">
+          <div class="sample-card">
+            <i class="ph-fill ph-file-pdf"></i>
+            <h4>Class 4-5 Sample Paper</h4>
+            <p class="desc">GK Olympiad Practice Paper 2024</p>
+            <p class="meta">15 Questions | 30 Minutes</p>
+            <a href="#inquiry" class="btn btn-primary">Download PDF</a>
+          </div>
+          <div class="sample-card">
+            <i class="ph-fill ph-file-pdf"></i>
+            <h4>Class 6-8 Sample Paper</h4>
+            <p class="desc">GK Olympiad Practice Paper 2024</p>
+            <p class="meta">25 Questions | 45 Minutes</p>
+            <a href="#inquiry" class="btn btn-primary">Download PDF</a>
+          </div>
+          <div class="sample-card">
+            <i class="ph-fill ph-file-pdf"></i>
+            <h4>Class 9-12 Sample Paper</h4>
+            <p class="desc">GK Olympiad Practice Paper 2024</p>
+            <p class="meta">50 Questions | 60 Minutes</p>
+            <a href="#inquiry" class="btn btn-primary">Download PDF</a>
+          </div>
+        </div>
+        <p class="sample-note">Sample papers available after school registration. Fill the inquiry form below to receive them.</p>
+      </div>
+    </section>
+
+    <!-- Inquiry Form Section -->
+    <section class="inquiry reveal" id="inquiry">
+      <div class="container">
+        <div class="inquiry-card" id="inquiryCard">
+          <i class="ph-fill ph-buildings"></i>
+          <h3>Register Your School for GK Olympiad</h3>
+          <p class="subtitle">Fill this form and our team will contact you within 24 hours</p>
+          <form id="registrationForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>School Name <span class="req">*</span></label>
+                <input type="text" name="schoolName" required placeholder="Enter school name">
+              </div>
+              <div class="form-group">
+                <label>Principal / Coordinator Name <span class="req">*</span></label>
+                <input type="text" name="coordinatorName" required placeholder="Enter name">
+              </div>
+              <div class="form-group">
+                <label>Email Address <span class="req">*</span></label>
+                <input type="email" name="email" required placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label>Phone Number <span class="req">*</span></label>
+                <input type="tel" name="phone" required placeholder="Enter phone number">
+              </div>
+              <div class="form-group">
+                <label>City <span class="req">*</span></label>
+                <input type="text" name="city" required placeholder="Enter city">
+              </div>
+              <div class="form-group">
+                <label>State</label>
+                <select name="state">
+                  <option value="">Select state</option>
+                  <option value="delhi">Delhi</option>
+                  <option value="maharashtra">Maharashtra</option>
+                  <option value="karnataka">Karnataka</option>
+                  <option value="tamil-nadu">Tamil Nadu</option>
+                  <option value="gujarat">Gujarat</option>
+                  <option value="rajasthan">Rajasthan</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Total Students</label>
+                <select name="totalStudents">
+                  <option value="">Select range</option>
+                  <option value="under-100">Under 100</option>
+                  <option value="100-300">100-300</option>
+                  <option value="300-500">300-500</option>
+                  <option value="500+">500+</option>
+                </select>
+              </div>
+              <div class="form-group full">
+                <label>Classes Interested In</label>
+                <div class="checkbox-group">
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="classes" value="4-6">
+                    Class 4-6
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="classes" value="7-9">
+                    Class 7-9
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="classes" value="10-12">
+                    Class 10-12
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>How did you hear about us?</label>
+                <select name="hearAbout">
+                  <option value="">Select source</option>
+                  <option value="social-media">Social Media</option>
+                  <option value="another-school">Another School</option>
+                  <option value="google-search">Google Search</option>
+                  <option value="representative">Our Representative</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Message / Any Questions</label>
+                <textarea name="message" rows="3" placeholder="Any questions or details you'd like to share"></textarea>
+              </div>
+            </div>
+            <button type="submit" class="submit-btn">Submit Registration →</button>
+          </form>
+          <div class="success-card" id="successCard">
+            <i class="ph-fill ph-check-circle"></i>
+            <h3>Thank You! Registration Received</h3>
+            <p>Our team will contact you within 24 hours to discuss the GK Olympiad program for your school.</p>
+            <p>Meanwhile you can reach us at: <strong>info@awesomeeducation.in</strong></p>
+            <div class="contact-info"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo" aria-label="Awesome Education home">
+            <img src="logo.png" 
+     alt="Awesome Education Logo"
+     style="height:40px;width:auto;
+     object-fit:contain;
+     filter:brightness(0) invert(1);">
+            <span>
+              <span class="logo-title">Awesome Education</span>
+              <span class="logo-subtitle">Beyond Academics. Real Growth.</span>
+            </span>
+          </a>
+          <p>Awesome Education by Awesome Ideas & Events Pvt. Ltd. helps schools build a complete ecosystem for academic excellence, life skills, parent engagement and measurable institutional growth.</p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="#" class="social-link" aria-label="YouTube"><i class="ph-fill ph-youtube-logo"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3>Programs</h3>
+          <ul class="footer-list">
+            <li><a href="olympiad.html">Olympiad Programs</a></li>
+            <li><a href="tours.html">Educational Tours</a></li>
+            <li><a href="skills.html">Skill Development</a></li>
+            <li><a href="parents.html">Parent Workshops</a></li>
+            <li><a href="teachers.html">Teacher Upliftment</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Company</h3>
+          <ul class="footer-list">
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#team">Our Team</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul class="contact-list">
+            <li><span><i class="ph ph-map-pin"></i> Delhi, India</span></li>
+            <li><a href="tel:+911234567890"><i class="ph ph-phone"></i> +91 12345-67890</a></li>
+            <li><a href="mailto:info@awesomeeducation.in"><i class="ph ph-envelope"></i> info@awesomeeducation.in</a></li>
+            <li><a href="https://awesomeeducation.in"><i class="ph ph-globe"></i> awesomeeducation.in</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2025 Awesome Education | Awesome Ideas & Events Pvt. Ltd.</span>
+        <span>Made with care for India's Schools</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    // Navbar scroll shadow
+    const navbar = document.getElementById("navbar");
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navMenu = document.getElementById("navMenu");
+    const navLinks = document.querySelectorAll(".nav-menu a");
+
+    const setNavbarShadow = () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", setNavbarShadow, { passive: true });
+    setNavbarShadow();
+
+    // Mobile menu toggle
+    mobileToggle.addEventListener("click", () => {
+      const isOpen = navMenu.classList.toggle("active");
+      document.body.classList.toggle("nav-open", isOpen);
+      mobileToggle.setAttribute("aria-expanded", String(isOpen));
+      mobileToggle.innerHTML = isOpen ? '<i class="ph ph-x"></i>' : '<i class="ph ph-list"></i>';
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+        document.body.classList.remove("nav-open");
+        mobileToggle.setAttribute("aria-expanded", "false");
+        mobileToggle.innerHTML = '<i class="ph ph-list"></i>';
+      });
+    });
+
+    // Dropdown logic
+    document.querySelectorAll('.nav-dropdown')
+      .forEach(dropdown => {
+        let hideTimer;
+        const menu = dropdown.querySelector('.mega-menu');
+        const caret = dropdown.querySelector('.ph-caret-down');
+
+        dropdown.addEventListener('mouseenter', () => {
+          document.querySelectorAll('.nav-dropdown')
+            .forEach(other => {
+              if (other !== dropdown) {
+                const otherMenu = other.querySelector('.mega-menu');
+                const otherCaret = other.querySelector('.ph-caret-down');
+                if (otherMenu) {
+                  otherMenu.style.opacity = '0';
+                  otherMenu.style.visibility = 'hidden';
+                  otherMenu.style.transform =
+                    'translateX(-50%) translateY(-8px)';
+                  otherMenu.style.pointerEvents = 'none';
+                }
+                if (otherCaret) {
+                  otherCaret.style.transform = 'rotate(0deg)';
+                }
+              }
+            });
+
+          clearTimeout(hideTimer);
+          if (menu) {
+            menu.style.opacity = '1';
+            menu.style.visibility = 'visible';
+            menu.style.transform = 'translateX(-50%) translateY(0)';
+            menu.style.pointerEvents = 'all';
+          }
+          if (caret) caret.style.transform = 'rotate(180deg)';
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+          hideTimer = setTimeout(() => {
+            if (menu) {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.transform =
+                'translateX(-50%) translateY(-8px)';
+              menu.style.pointerEvents = 'none';
+            }
+            if (caret) caret.style.transform = 'rotate(0deg)';
+          }, 150);
+        });
+
+        if (menu) {
+          menu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimer);
+          });
+          menu.addEventListener('mouseleave', () => {
+            hideTimer = setTimeout(() => {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.transform =
+                'translateX(-50%) translateY(-8px)';
+              menu.style.pointerEvents = 'none';
+              if (caret) caret.style.transform = 'rotate(0deg)';
+            }, 150);
+          });
+        }
+      });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown')
+          .forEach(dropdown => {
+            const menu = dropdown.querySelector('.mega-menu');
+            const caret = dropdown.querySelector('.ph-caret-down');
+            if (menu) {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.pointerEvents = 'none';
+            }
+            if (caret) caret.style.transform = 'rotate(0deg)';
+          });
+      }
+    });
+
+    // Reveal animation
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.14
+    });
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    // Quick links active state
+    const quickLinks = document.querySelectorAll('.quick-link');
+    const sections = document.querySelectorAll('section[id]');
+
+    const quickLinksObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          quickLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    sections.forEach(section => {
+      quickLinksObserver.observe(section);
+    });
+
+    // Syllabus class selector
+    const classBtns = document.querySelectorAll('.class-btn');
+    const syllabusContent = document.getElementById('syllabusContent');
+
+    const syllabusData = {
+      4: {
+        title: 'Class 4 Syllabus',
+        physics: 'Basic Geography, Indian States & Capitals',
+        chemistry: 'Freedom Fighters, National Symbols',
+        biology: 'Inventions, Famous Scientists'
+      },
+      5: {
+        title: 'Class 5 Syllabus',
+        physics: 'World Countries & Capitals',
+        chemistry: 'Ancient Indian Civilizations',
+        biology: 'Important Events & Days'
+      },
+      6: {
+        title: 'Class 6 Syllabus',
+        physics: 'Physical Features of India & World',
+        chemistry: 'Medieval India, World History basics',
+        biology: 'Space Exploration, Technology'
+      },
+      7: {
+        title: 'Class 7 Syllabus',
+        physics: 'Climate, Natural Resources',
+        chemistry: 'Mughal Empire, Colonial India',
+        biology: 'Sports, Awards, Politics'
+      },
+      8: {
+        title: 'Class 8 Syllabus',
+        physics: 'World Physical & Political Geography',
+        chemistry: 'Modern India, World Wars',
+        biology: 'Recent Discoveries, Space Missions'
+      },
+      9: {
+        title: 'Class 9 Syllabus',
+        physics: 'Constitution, Government, Economy',
+        chemistry: 'Independence Movement, World History',
+        biology: 'National & International Events'
+      },
+      10: {
+        title: 'Class 10 Syllabus',
+        physics: 'Economy, Foreign Policy, Defence',
+        chemistry: 'Post-Independence India, Cold War',
+        biology: 'Sports, Science, Politics, Awards'
+      },
+      11: {
+        title: 'Class 11 Syllabus',
+        physics: 'Advanced Geography, Geopolitics',
+        chemistry: 'Modern World History',
+        biology: 'In-depth analysis of major events'
+      },
+      12: {
+        title: 'Class 12 Syllabus',
+        physics: 'International Relations, Economics',
+        chemistry: 'Contemporary World Affairs',
+        biology: 'Comprehensive national & global events'
+      }
+    };
+
+    classBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const classNum = btn.dataset.class;
+
+        // Update active button
+        classBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Update content
+        const data = syllabusData[classNum];
+        if (data) {
+          syllabusContent.innerHTML = `
+            <h4>${data.title}</h4>
+            <div class="subject-block">
+              <div class="subject-title physics"><i class="ph-fill ph-map-pin"></i> India & World</div>
+              <p>${data.physics}</p>
+            </div>
+            <div class="subject-block">
+              <div class="subject-title chemistry"><i class="ph-fill ph-flag"></i> History</div>
+              <p>${data.chemistry}</p>
+            </div>
+            <div class="subject-block">
+              <div class="subject-title biology"><i class="ph-fill ph-lightbulb"></i> Science & Tech</div>
+              <p>${data.biology}</p>
+            </div>
+            <a href="#inquiry" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;background:#F97316;color:white;padding:10px 24px;border-radius:20px;text-decoration:none;font-size:13px;font-weight:600;">
+              <i class="ph-fill ph-file-pdf"></i>
+              Download Full Syllabus PDF
+            </a>
+            <p style="font-size:12px;color:#94A3B8;margin-top:8px;">Full syllabus PDF sent after school registration</p>
+          `;
+        }
+      });
+    });
+
+    // Form submission
+    const form = document.getElementById('registrationForm');
+    const successCard = document.getElementById('successCard');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Simple validation check
+      const requiredFields = form.querySelectorAll('[required]');
+      let isValid = true;
+
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          isValid = false;
+          field.style.borderColor = 'var(--red)';
+        } else {
+          field.style.borderColor = '#E2E8F0';
+        }
+      });
+
+      if (isValid) {
+        form.style.display = 'none';
+        successCard.classList.add('show');
+      }
+    });
+
+    // Update quick links bar position on scroll
+    const quickLinksBar = document.getElementById('quickLinksBar');
+
+    const updateQuickLinksPosition = () => {
+      const navbarHeight = 76;
+      if (window.scrollY > navbarHeight) {
+        quickLinksBar.style.top = '0';
+      } else {
+        quickLinksBar.style.top = '76px';
+      }
+    };
+
+    window.addEventListener('scroll', updateQuickLinksPosition, { passive: true });
+    updateQuickLinksPosition();
+  </script>
+
+  <script>
+    /* Smooth exit on every internal link click */
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      // Only internal pages, not anchors
+      if (href && !href.startsWith('#') &&
+          !href.startsWith('http') &&
+          !href.startsWith('mailto') &&
+          !href.startsWith('tel')) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.body.classList.add('page-transitioning');
+          setTimeout(() => {
+            window.location.href = href;
+          }, 300);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

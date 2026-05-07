@@ -1,0 +1,888 @@
+<!-- FILE: gallery.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Awesome Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D1B3E;
+      --blue: #1A3A6B;
+      --orange: #F97316;
+      --orange-light: #FB923C;
+      --yellow: #FCD34D;
+      --white: #FFFFFF;
+      --light: #F0F4FF;
+      --gray: #64748B;
+      --light-gray: #F8FAFF;
+      --cyan: #0891B2;
+      --green: #059669;
+      --red: #DC2626;
+      --shadow: 0 18px 50px rgba(13, 27, 62, 0.12);
+      --dot-pattern: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.8' fill='%23FFFFFF'/%3E%3C/svg%3E");
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      color: var(--gray);
+      background: var(--white);
+      overflow-x: hidden;
+      animation: pageFadeIn 0.5s ease forwards;
+    }
+
+    body.nav-open {
+      overflow: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Nunito", sans-serif;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.08;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, a, .gallery-card, .video-card {
+      transition: all 0.3s ease;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 13px 26px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      box-shadow: 0 14px 34px rgba(249, 115, 22, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(249, 115, 22, 0.35);
+    }
+
+    .btn-white {
+      color: var(--orange);
+      background: var(--white);
+      box-shadow: 0 16px 38px rgba(13, 27, 62, 0.18);
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--orange);
+      background: rgba(249, 115, 22, 0.1);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-transitioning {
+      animation: pageFadeOut 0.3s ease forwards;
+    }
+    @keyframes pageFadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+
+    /* Navbar Styles (copied from index.html) */
+    .topbar { background: var(--navy); color: rgba(255, 255, 255, 0.8); font-size: 13px; }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; min-height: 40px; gap: 16px; }
+    .topbar-links { display: flex; gap: 20px; align-items: center; }
+    .topbar a:hover { color: var(--orange); }
+
+    .navbar { position: sticky; top: 0; z-index: 1000; background: var(--white); transition: box-shadow 0.3s; }
+    .navbar.scrolled { box-shadow: 0 12px 32px rgba(13, 27, 62, 0.1); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; min-height: 76px; gap: 24px; }
+    .logo { display: inline-flex; align-items: center; gap: 12px; }
+    .logo-mark { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; color: var(--white); background: var(--navy); font-family: "Nunito", sans-serif; font-size: 18px; font-weight: 900; box-shadow: 0 12px 24px rgba(13, 27, 62, 0.2); }
+    .logo-title { display: block; color: var(--navy); font-family: "Nunito", sans-serif; font-size: 18px; font-weight: 900; line-height: 1.1; }
+    .logo-subtitle { display: block; margin-top: 3px; color: var(--orange); font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .nav-menu { display: flex; align-items: center; gap: 8px; }
+    .nav-link { padding: 10px 14px; border-radius: 999px; color: var(--blue); font-size: 14px; font-weight: 600; }
+    .nav-link:hover { color: var(--navy); background: var(--light); transform: translateY(-1px); }
+    .nav-cta { margin-left: 8px; padding: 12px 22px; border-radius: 25px; color: var(--white); background: var(--orange); font-size: 14px; font-weight: 700; box-shadow: 0 12px 26px rgba(249, 115, 22, 0.22); }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 18px 36px rgba(249, 115, 22, 0.32); background: var(--orange-light); }
+    .mobile-toggle { display: none; width: 44px; height: 44px; border-radius: 12px; color: var(--navy); background: var(--light); font-size: 26px; align-items: center; justify-content: center; }
+
+    /* Mega Menu (copied from index.html) */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { display: flex; align-items: center; padding: 10px 14px; border-radius: 999px; color: var(--blue); font-size: 14px; font-weight: 600; }
+    .nav-dropdown-trigger:hover { color: var(--navy); background: var(--light); transform: translateY(-1px); }
+    .mega-menu { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-8px); width: 420px; background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(13,27,62,0.15); border: 1px solid #EEF2FF; opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); z-index: 9999; pointer-events: none; }
+    .mega-menu::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px; background: white; border-left: 1px solid #EEF2FF; border-top: 1px solid #EEF2FF; }
+    .nav-dropdown.dropdown-open .mega-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: all; }
+    .mega-menu-inner { padding: 12px; }
+    .mega-item { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 12px; text-decoration: none; transition: all 0.2s; cursor: pointer; }
+    .mega-item:hover { background: #F0F4FF; }
+    .mega-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; color: white; }
+    .mega-text { flex: 1; }
+    .mega-title { display: block; font-size: 14px; font-weight: 700; color: #0D1B3E; font-family: 'Nunito', sans-serif; }
+    .mega-desc { display: block; font-size: 12px; color: #64748B; margin-top: 2px; line-height: 1.4; }
+    .mega-arrow { font-size: 16px; color: #CBD5E1; transition: all 0.2s; flex-shrink: 0; }
+    .mega-item + .mega-item { border-top: 1px solid #F8FAFF; }
+
+    /* SECTION 1 — HERO */
+    .gallery-hero {
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, #0D1B3E, #1A3A6B);
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--dot-pattern);
+      opacity: 0.05;
+      pointer-events: none;
+    }
+    .gallery-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    .gallery-hero h1 {
+      color: var(--white);
+      font-size: 52px;
+      margin-top: 12px;
+      margin-bottom: 16px;
+    }
+    .gallery-hero h1 span {
+      color: var(--orange-light);
+    }
+    .gallery-hero p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 18px;
+    }
+
+    /* SECTION 2 — FILTER BAR */
+    .filter-bar {
+      background: var(--white);
+      padding: 24px 0;
+      position: sticky;
+      top: 76px;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .filter-pills {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .filter-pill {
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      background: var(--light-gray);
+      color: var(--navy);
+    }
+    .filter-pill:hover {
+      border-color: var(--orange);
+    }
+    .filter-pill.active {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    /* SECTION 3 — MASONRY GALLERY */
+    .gallery-section {
+      background: var(--light-gray);
+      padding: 80px 0;
+    }
+    .gallery-section h2 {
+      text-align: center;
+      margin-bottom: 48px;
+      font-size: 38px;
+    }
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 16px;
+    }
+    .gallery-card {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(13,27,62,0.08);
+      background: var(--white);
+    }
+    .gallery-card:hover {
+      transform: scale(1.02);
+    }
+    .card-placeholder {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-placeholder i {
+      font-size: 48px;
+      color: var(--white);
+    }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13, 27, 62, 0.9), transparent 70%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .gallery-card:hover .card-overlay {
+      opacity: 1;
+    }
+    .card-overlay h3 {
+      color: var(--white);
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .card-overlay p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+    }
+    .card-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--white);
+      background: rgba(0,0,0,0.5);
+    }
+
+    /* SECTION 4 — VIDEO HIGHLIGHTS */
+    .video-section {
+      background: var(--white);
+      padding: 80px 0;
+    }
+    .video-section h2 {
+      text-align: center;
+      margin-bottom: 48px;
+      font-size: 38px;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .video-card {
+      text-align: center;
+    }
+    .video-thumb {
+      height: 220px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(13,27,62,0.1);
+    }
+    .play-btn {
+      width: 60px;
+      height: 60px;
+      background: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--orange);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .video-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .video-link {
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .video-link:hover {
+      text-decoration: underline;
+    }
+
+    /* SECTION 5 — STATS STRIP */
+    .stats-strip {
+      background: var(--orange);
+      padding: 40px 0;
+      color: var(--white);
+    }
+    .stats-strip-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+    }
+    .stat-strip-item {
+      font-weight: 800;
+      font-size: 18px;
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+    .stat-strip-item:last-child {
+      border-right: 0;
+    }
+
+    /* SECTION 6 — SUBMIT PHOTO CTA */
+    .submit-cta {
+      background: linear-gradient(135deg, #0D1B3E, #1A3A6B);
+      padding: 80px 0;
+      text-align: center;
+      color: var(--white);
+    }
+    .submit-cta i {
+      font-size: 48px;
+      color: var(--orange);
+      margin-bottom: 24px;
+    }
+    .submit-cta h2 {
+      color: var(--white);
+      margin-bottom: 16px;
+      font-size: 38px;
+    }
+    .submit-cta p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Footer Styles (copied from index.html) */
+    .footer { padding: 70px 0 0; background: var(--navy); color: rgba(255, 255, 255, 0.6); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 50px; padding-bottom: 52px; }
+    .footer .logo-title { color: var(--white); }
+    .footer-brand p { max-width: 390px; margin: 20px 0 24px; font-size: 13px; line-height: 1.8; }
+    .social-links { display: flex; gap: 10px; }
+    .social-link { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; color: var(--white); background: rgba(255, 255, 255, 0.1); font-size: 19px; }
+    .social-link:hover { transform: translateY(-2px); background: var(--orange); }
+    .footer h3 { margin-bottom: 20px; color: var(--white); font-size: 18px; }
+    .footer-list { list-style: none; display: grid; gap: 11px; }
+    .footer-list a { display: inline-flex; color: rgba(255, 255, 255, 0.6); font-size: 13px; line-height: 1.5; }
+    .footer-list a::before { content: "→"; margin-right: 8px; color: var(--orange); }
+    .footer-list a:hover { color: var(--orange); transform: translateX(3px); }
+    .contact-list { list-style: none; display: grid; gap: 13px; }
+    .contact-list a, .contact-list span { display: flex; align-items: flex-start; gap: 10px; color: rgba(255, 255, 255, 0.6); font-size: 13px; line-height: 1.6; }
+    .contact-list i { margin-top: 2px; color: var(--orange); font-size: 17px; }
+    .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 20px 0; }
+    .footer-bottom-inner { display: flex; justify-content: space-between; gap: 16px; color: rgba(255, 255, 255, 0.5); font-size: 13px; }
+
+    @media (max-width: 1024px) {
+      .masonry-grid { column-count: 2; }
+      .video-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 860px) {
+      .mobile-toggle { display: inline-flex; }
+      .nav-menu { position: fixed; left: 20px; right: 20px; top: 116px; z-index: 1001; display: grid; gap: 8px; padding: 18px; border-radius: 18px; background: var(--white); box-shadow: 0 24px 70px rgba(13, 27, 62, 0.2); opacity: 0; transform: translateY(-12px); pointer-events: none; }
+      .nav-menu.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+      .nav-link, .nav-cta { width: 100%; justify-content: center; text-align: center; }
+      .nav-cta { margin-left: 0; }
+      .mega-menu { position: static; width: 100%; margin-top: 8px; transform: none; display: none; opacity: 1; visibility: visible; pointer-events: all; }
+      .mega-menu::before { display: none; }
+      .nav-dropdown:hover .mega-menu { display: block; }
+      .filter-bar { top: 70px; }
+    }
+    @media (max-width: 700px) {
+      .gallery-hero h1 { font-size: 40px; }
+      .masonry-grid { column-count: 1; }
+      .video-grid { grid-template-columns: 1fr; }
+      .stats-strip-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .stat-strip-item { border-right: 0; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  
+    .logo-text span:first-child {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .logo-text span:last-child {
+      display: block;
+      font-size: 11px;
+      color: var(--orange);
+      font-weight: 600;
+    }
+    .nav-cta {
+      white-space: nowrap;
+    }</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div>📍 Delhi, India | Serving Schools Across the Nation</div>
+      <div class="topbar-links">
+        <a href="mailto:info@awesomeeducation.in">info@awesomeeducation.in</a>
+        <a href="tel:+911234567890">+91 12345-67890</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">
+  <img src="logo.png" 
+       alt="Awesome Education Logo"
+       style="height:48px;width:auto;
+       object-fit:contain;">
+  <div class="logo-text">
+    <span>Awesome Education</span>
+    <span>Beyond Academics. Real Growth.</span>
+  </div>
+</a>
+      <button class="mobile-toggle" id="mobileToggle">
+        <i class="ph ph-list"></i>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <div class="nav-dropdown">
+          <a href="olympiad.html" class="nav-dropdown-trigger">
+            Olympiads
+            <i class="ph ph-caret-down" style="font-size:12px;margin-left:4px;transition:transform 0.3s;"></i>
+          </a>
+          <div class="mega-menu">
+            <div class="mega-menu-inner">
+              <a href="science-olympiad.html#glance" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#0D1B3E,#1A3A6B)"><i class="ph-fill ph-flask"></i></div>
+                <div class="mega-text"><span class="mega-title">Science</span><span class="mega-desc">National science olympiad competitions</span></div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="mathematics-olympiad.html#glance" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)"><i class="ph-fill ph-calculator"></i></div>
+                <div class="mega-text"><span class="mega-title">Mathematics</span><span class="mega-desc">National math olympiad competitions</span></div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="english-olympiad.html#glance" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)"><i class="ph-fill ph-book-open"></i></div>
+                <div class="mega-text"><span class="mega-title">English</span><span class="mega-desc">National English olympiad competitions</span></div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <a href="olympiad.html" class="nav-dropdown-trigger">Programs
+            <i class="ph ph-caret-down" style="font-size:12px;margin-left:4px;transition:transform 0.3s;"></i>
+          </a>
+          <div class="mega-menu">
+            <div class="mega-menu-inner">
+              <a href="tours.html" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)"><i class="ph-fill ph-bus"></i></div>
+                <div class="mega-text"><span class="mega-title">Educational Tours</span><span class="mega-desc">Curated experiential learning trips</span></div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="skills.html" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)"><i class="ph-fill ph-lightbulb"></i></div>
+                <div class="mega-text"><span class="mega-title">Skill Development</span><span class="mega-desc">Personality, leadership, coding</span></div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="index.html#contact" class="nav-cta">Partner With Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="gallery-hero reveal">
+      <div class="gallery-hero-content">
+        <span class="section-tag" style="background: var(--orange); color: white;">Our Memories</span>
+        <h1>Gallery & <span>Highlights</span></h1>
+        <p>Moments from our olympiads, tours, workshops and school events across India</p>
+      </div>
+    </section>
+
+    <div class="filter-bar reveal">
+      <div class="container">
+        <div class="filter-pills">
+          <button class="filter-pill active" data-filter="all">All</button>
+          <button class="filter-pill" data-filter="olympiads">Olympiads</button>
+          <button class="filter-pill" data-filter="tours">Educational Tours</button>
+          <button class="filter-pill" data-filter="workshops">Workshops</button>
+          <button class="filter-pill" data-filter="skill-programs">Skill Programs</button>
+          <button class="filter-pill" data-filter="school-events">School Events</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="gallery-section">
+      <div class="container">
+        <h2 class="reveal">Featured Moments</h2>
+        <div class="masonry-grid reveal" id="galleryGrid">
+          <!-- JS generated cards -->
+        </div>
+      </div>
+    </section>
+
+    <section class="video-section">
+      <div class="container">
+        <h2 class="reveal">Video Highlights</h2>
+        <div class="video-grid">
+          <div class="video-card reveal">
+            <div class="video-thumb" style="background: linear-gradient(135deg, #0D1B3E, #1A3A6B);">
+              <div class="play-btn"><i class="ph-fill ph-play"></i></div>
+            </div>
+            <h3>Science Olympiad 2024 Highlights</h3>
+            <a href="#" class="video-link">Watch Video →</a>
+          </div>
+          <div class="video-card reveal">
+            <div class="video-thumb" style="background: linear-gradient(135deg, #F97316, #FB923C);">
+              <div class="play-btn"><i class="ph-fill ph-play"></i></div>
+            </div>
+            <h3>Rajasthan Tour Recap</h3>
+            <a href="#" class="video-link">Watch Video →</a>
+          </div>
+          <div class="video-card reveal">
+            <div class="video-thumb" style="background: linear-gradient(135deg, #059669, #34D399);">
+              <div class="play-btn"><i class="ph-fill ph-play"></i></div>
+            </div>
+            <h3>Annual Awards Night 2024</h3>
+            <a href="#" class="video-link">Watch Video →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-strip reveal">
+      <div class="container">
+        <div class="stats-strip-grid">
+          <div class="stat-strip-item">500+ Photos</div>
+          <div class="stat-strip-item">50+ Events Covered</div>
+          <div class="stat-strip-item">200+ Schools</div>
+          <div class="stat-strip-item">3 Years of Memories</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="submit-cta reveal">
+      <div class="container">
+        <i class="ph-fill ph-camera"></i>
+        <h2>Share Your Awesome Education Moment</h2>
+        <p>Are you a school partner? Send us your event photos and we'll feature them in our gallery</p>
+        <a href="index.html#contact" class="btn btn-primary">Submit Photos →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="logo.png" 
+     alt="Awesome Education Logo"
+     style="height:40px;width:auto;
+     object-fit:contain;
+     filter:brightness(0) invert(1);">
+            <span>
+              <span class="logo-title">Awesome Education</span>
+              <span class="logo-subtitle">Beyond Academics. Real Growth.</span>
+            </span>
+          </a>
+          <p>Awesome Education by Awesome Ideas & Events Pvt. Ltd. helps schools build a complete ecosystem for academic excellence, life skills, parent engagement and measurable institutional growth.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph-fill ph-linkedin-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph-fill ph-youtube-logo"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3>Programs</h3>
+          <ul class="footer-list">
+            <li><a href="olympiad.html">Olympiad Programs</a></li>
+            <li><a href="tours.html">Educational Tours</a></li>
+            <li><a href="skills.html">Skill Development</a></li>
+            <li><a href="parents.html">Parent Workshops</a></li>
+            <li><a href="teachers.html">Teacher Upliftment</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Company</h3>
+          <ul class="footer-list">
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#team">Our Team</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul class="contact-list">
+            <li><span><i class="ph ph-map-pin"></i> Delhi, India</span></li>
+            <li><a href="tel:+911234567890"><i class="ph ph-phone"></i> +91 12345-67890</a></li>
+            <li><a href="mailto:info@awesomeeducation.in"><i class="ph ph-envelope"></i> info@awesomeeducation.in</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2025 Awesome Education | Awesome Ideas & Events Pvt. Ltd.</span>
+        <span>Made with care for India's Schools</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    const galleryData = [
+      {title:"Science Olympiad 2024", category:"olympiads", caption:"Students competing at national level", gradient:"linear-gradient(135deg,#0D1B3E,#1A3A6B)", icon:"ph-trophy", height:"260px"},
+      {title:"Rajasthan Heritage Tour", category:"tours", caption:"Exploring the forts of Jaipur", gradient:"linear-gradient(135deg,#F97316,#FB923C)", icon:"ph-bus", height:"200px"},
+      {title:"Parent Workshop Mumbai", category:"workshops", caption:"200 parents attended the summit", gradient:"linear-gradient(135deg,#059669,#34D399)", icon:"ph-users-three", height:"300px"},
+      {title:"Leadership Bootcamp", category:"skill-programs", caption:"Students learning team building", gradient:"linear-gradient(135deg,#0891B2,#06B6D4)", icon:"ph-crown", height:"220px"},
+      {title:"Mathematics Olympiad", category:"olympiads", caption:"Top scorers from 50+ schools", gradient:"linear-gradient(135deg,#7C3AED,#A78BFA)", icon:"ph-calculator", height:"240px"},
+      {title:"Bangalore Tech Tour", category:"tours", caption:"Visiting top tech companies", gradient:"linear-gradient(135deg,#0D1B3E,#1A3A6B)", icon:"ph-rocket", height:"280px"},
+      {title:"Teacher Training Day", category:"workshops", caption:"300 teachers uplifted this year", gradient:"linear-gradient(135deg,#DC2626,#F87171)", icon:"ph-chalkboard-teacher", height:"200px"},
+      {title:"Coding Workshop", category:"skill-programs", caption:"Kids building their first apps", gradient:"linear-gradient(135deg,#D97706,#FCD34D)", icon:"ph-code", height:"260px"},
+      {title:"Annual Awards Ceremony", category:"school-events", caption:"Celebrating excellence across India", gradient:"linear-gradient(135deg,#F97316,#FB923C)", icon:"ph-star", height:"300px"},
+      {title:"English Olympiad Finals", category:"olympiads", caption:"National rank holders felicitated", gradient:"linear-gradient(135deg,#059669,#34D399)", icon:"ph-book-open", height:"220px"},
+      {title:"Mysore Heritage Tour", category:"tours", caption:"Royal palace and cultural visit", gradient:"linear-gradient(135deg,#7C3AED,#A78BFA)", icon:"ph-castle", height:"240px"},
+      {title:"Chess Tournament", category:"skill-programs", caption:"Inter-school chess championship", gradient:"linear-gradient(135deg,#0891B2,#06B6D4)", icon:"ph-crown", height:"200px"}
+    ];
+
+    const galleryGrid = document.getElementById('galleryGrid');
+    const filterPills = document.querySelectorAll('.filter-pill');
+
+    function renderGallery(filter = 'all') {
+      galleryGrid.innerHTML = '';
+      const filteredData = filter === 'all' ? galleryData : galleryData.filter(item => item.category === filter);
+      
+      filteredData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'gallery-card';
+        card.dataset.category = item.category;
+        card.innerHTML = `
+          <div class="card-placeholder" style="background: ${item.gradient}; height: ${item.height}">
+            <i class="${item.icon}"></i>
+          </div>
+          <div class="card-badge">${item.category.replace('-', ' ')}</div>
+          <div class="card-overlay">
+            <h3>${item.title}</h3>
+            <p>${item.caption}</p>
+          </div>
+        `;
+        galleryGrid.appendChild(card);
+      });
+    }
+
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        renderGallery(pill.dataset.filter);
+      });
+    });
+
+    // Initial render
+    renderGallery();
+
+    // Navbar logic
+    const navbar = document.getElementById("navbar");
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navMenu = document.getElementById("navMenu");
+    window.addEventListener("scroll", () => navbar.classList.toggle("scrolled", window.scrollY > 50));
+    mobileToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+      mobileToggle.innerHTML = navMenu.classList.contains("active") ? '<i class="ph ph-x"></i>' : '<i class="ph ph-list"></i>';
+    });
+
+    /* Dropdown logic: close others and use inline styles for control */
+    document.querySelectorAll('.nav-dropdown')
+      .forEach(dropdown => {
+        let hideTimer;
+        const menu = dropdown.querySelector('.mega-menu');
+        const caret = dropdown.querySelector('.ph-caret-down');
+
+        dropdown.addEventListener('mouseenter', () => {
+          // Close ALL other dropdowns first
+          document.querySelectorAll('.nav-dropdown')
+            .forEach(other => {
+              if (other !== dropdown) {
+                const otherMenu = other.querySelector('.mega-menu');
+                const otherCaret = other.querySelector('.ph-caret-down');
+                if (otherMenu) {
+                  otherMenu.style.opacity = '0';
+                  otherMenu.style.visibility = 'hidden';
+                  otherMenu.style.transform = 
+                    'translateX(-50%) translateY(-8px)';
+                  otherMenu.style.pointerEvents = 'none';
+                }
+                if (otherCaret) {
+                  otherCaret.style.transform = 'rotate(0deg)';
+                }
+              }
+            });
+
+          // Open this dropdown
+          clearTimeout(hideTimer);
+          if (menu) {
+            menu.style.opacity = '1';
+            menu.style.visibility = 'visible';
+            menu.style.transform = 'translateX(-50%) translateY(0)';
+            menu.style.pointerEvents = 'all';
+          }
+          if (caret) caret.style.transform = 'rotate(180deg)';
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+          hideTimer = setTimeout(() => {
+            if (menu) {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.transform = 
+                'translateX(-50%) translateY(-8px)';
+              menu.style.pointerEvents = 'none';
+            }
+            if (caret) caret.style.transform = 'rotate(0deg)';
+          }, 150);
+        });
+
+        if (menu) {
+          menu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimer);
+          });
+          menu.addEventListener('mouseleave', () => {
+            hideTimer = setTimeout(() => {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.transform = 
+                'translateX(-50%) translateY(-8px)';
+              menu.style.pointerEvents = 'none';
+              if (caret) caret.style.transform = 'rotate(0deg)';
+            }, 150);
+          });
+        }
+      });
+
+    // Close all dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown')
+          .forEach(dropdown => {
+            const menu = dropdown.querySelector('.mega-menu');
+            const caret = dropdown.querySelector('.ph-caret-down');
+            if (menu) {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.pointerEvents = 'none';
+            }
+            if (caret) caret.style.transform = 'rotate(0deg)';
+          });
+      }
+    });
+
+    // Reveal logic
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+    // Page transitions
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('tel')) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.body.classList.add('page-transitioning');
+          setTimeout(() => window.location.href = href, 300);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

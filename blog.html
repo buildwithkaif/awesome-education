@@ -1,0 +1,485 @@
+﻿<!-- FILE: blog.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog & Resources | Awesome Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#0D1B3E;--blue:#1A3A6B;--orange:#F97316;--orange-light:#FB923C;--white:#FFFFFF;--light:#F0F4FF;--gray:#64748B;--light-gray:#F8FAFF;--shadow:0 18px 50px rgba(13,27,62,.12);--dot-pattern:url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.8' fill='%23FFFFFF'/%3E%3C/svg%3E")}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Poppins,sans-serif;color:var(--gray);background:var(--white);overflow-x:hidden}body.nav-open{overflow:hidden}h1,h2,h3{font-family:Nunito,sans-serif;font-weight:900;color:var(--navy);line-height:1.08}a{color:inherit;text-decoration:none}button,a,.blog-card,.featured-card,.filter-pill,.social-link{transition:transform .3s ease,box-shadow .3s ease,background .3s ease,color .3s ease,border-color .3s ease}button{border:0;cursor:pointer;font-family:inherit}.container{width:min(1180px,calc(100% - 40px));margin:0 auto}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:13px 26px;border-radius:30px;font-size:14px;font-weight:700;white-space:nowrap}.btn-primary{color:var(--white);background:linear-gradient(135deg,var(--orange),var(--orange-light));box-shadow:0 14px 34px rgba(249,115,22,.28)}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(249,115,22,.35)}.section-tag{display:inline-flex;margin-bottom:16px;padding:8px 16px;border-radius:999px;color:var(--orange);background:rgba(249,115,22,.1);font-size:12px;font-weight:800;text-transform:uppercase}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+    .topbar{background:var(--navy);color:rgba(255,255,255,.8);font-size:13px}.topbar-inner{display:flex;align-items:center;justify-content:space-between;min-height:40px;gap:16px}.topbar-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.topbar a:hover{color:var(--orange)}.navbar{position:sticky;top:0;z-index:1000;background:var(--white)}.navbar.scrolled{box-shadow:0 12px 32px rgba(13,27,62,.1)}.nav-inner{display:flex;align-items:center;justify-content:space-between;min-height:76px;gap:24px}.logo{display:inline-flex;align-items:center;gap:12px;min-width:0}.logo-mark{display:grid;place-items:center;width:44px;height:44px;flex:0 0 auto;border-radius:10px;color:var(--white);background:var(--navy);font-family:Nunito,sans-serif;font-size:18px;font-weight:900;box-shadow:0 12px 24px rgba(13,27,62,.2)}.logo-title{display:block;color:var(--navy);font-family:Nunito,sans-serif;font-size:18px;font-weight:900;line-height:1.1}.logo-subtitle{display:block;margin-top:3px;color:var(--orange);font-size:11px;font-weight:700;white-space:nowrap}.nav-menu{display:flex;align-items:center;gap:8px}.nav-link{padding:10px 14px;border-radius:999px;color:var(--blue);font-size:14px;font-weight:600}.nav-link:hover{color:var(--navy);background:var(--light);transform:translateY(-1px)}.nav-cta{margin-left:8px;padding:12px 22px;border-radius:25px;color:var(--white);background:var(--orange);font-size:14px;font-weight:700;box-shadow:0 12px 26px rgba(249,115,22,.22)}.nav-cta:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(249,115,22,.32);background:var(--orange-light)}.mobile-toggle{display:none;width:44px;height:44px;border-radius:12px;color:var(--navy);background:var(--light);font-size:26px;align-items:center;justify-content:center}
+    .hero{position:relative;display:grid;place-items:center;min-height:350px;overflow:hidden;background:linear-gradient(135deg,#0D1B3E,#1A3A6B);text-align:center}.hero:before{content:"";position:absolute;inset:0;background-image:var(--dot-pattern);opacity:.04}.hero-inner{position:relative;z-index:1;max-width:850px;padding:54px 0}.hero .section-tag{color:var(--white);background:rgba(249,115,22,.22);border:1px solid rgba(249,115,22,.35)}.hero h1{margin-bottom:14px;color:var(--white);font-size:clamp(40px,6vw,52px)}.hero h1 span{color:var(--orange)}.hero p{margin:0 auto 28px;max-width:650px;color:rgba(255,255,255,.82);font-size:17px;line-height:1.7}.searchbar{display:flex;max-width:620px;margin:0 auto;padding:6px;border-radius:999px;background:var(--white);box-shadow:0 18px 42px rgba(0,0,0,.18)}.searchbar input{flex:1;min-width:0;border:0;padding:0 18px;border-radius:999px;color:var(--navy);font:inherit;outline:0}.searchbar button{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;color:var(--white);background:var(--orange);font-size:22px}.searchbar button:hover{background:var(--orange-light);transform:scale(1.04)}
+    .featured{padding:60px 0;background:var(--white)}.featured-card{display:grid;grid-template-columns:minmax(320px,.95fr) minmax(0,1.05fr);gap:42px;align-items:center;padding:26px;border:1px solid #EEF2FF;border-radius:24px;background:var(--white);box-shadow:var(--shadow)}.featured-card:hover{transform:translateY(-5px);box-shadow:0 26px 64px rgba(13,27,62,.16)}.featured-art{position:relative;display:grid;place-items:center;height:400px;overflow:hidden;border-radius:18px;background:linear-gradient(135deg,#0D1B3E,#1A3A6B);color:var(--white)}.featured-art:before,.featured-art:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.1)}.featured-art:before{width:260px;height:260px;left:-80px;top:-80px}.featured-art:after{width:330px;height:330px;right:-120px;bottom:-120px;background:rgba(249,115,22,.13)}.featured-art i{position:relative;z-index:1;font-size:80px}.featured-badge{display:inline-flex;margin-bottom:12px;padding:7px 12px;border-radius:999px;color:var(--white);background:var(--orange);font-size:12px;font-weight:800}.category{display:block;margin-bottom:12px;color:var(--orange);font-size:12px;font-weight:800;text-transform:uppercase}.featured-content h2{margin-bottom:14px;font-size:28px;font-weight:800;line-height:1.25}.meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;color:var(--gray);font-size:13px}.excerpt{display:-webkit-box;margin-bottom:24px;color:var(--gray);font-size:14px;line-height:1.8;overflow:hidden;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+    .filters{padding:30px 0;background:var(--light-gray)}.filter-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}.filter-pill{flex:0 0 auto;padding:11px 18px;border-radius:999px;color:var(--navy);background:var(--white);font-size:13px;font-weight:800;box-shadow:0 8px 20px rgba(13,27,62,.05)}.filter-pill.active{color:var(--white);background:var(--navy)}.filter-pill:hover{color:var(--white);background:var(--orange);transform:translateY(-2px)}
+    .blog-grid-section{padding:40px 0 80px;background:var(--light-gray)}.blog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}.blog-card{overflow:hidden;border:1px solid #EEF2FF;border-radius:20px;background:var(--white);box-shadow:0 10px 28px rgba(13,27,62,.05)}.blog-card:hover{transform:translateY(-7px);box-shadow:0 24px 54px rgba(13,27,62,.14)}.blog-art{position:relative;display:grid;place-items:center;height:180px;color:var(--white);overflow:hidden}.blog-art:before,.blog-art:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.12)}.blog-art:before{width:150px;height:150px;right:-54px;top:-54px}.blog-art:after{width:96px;height:96px;left:-34px;bottom:-34px}.blog-art i{position:relative;z-index:1;font-size:48px}.date-badge{position:absolute;z-index:2;left:16px;top:16px;display:grid;place-items:center;min-width:54px;padding:7px 9px;border-radius:10px;color:var(--white);background:var(--orange);box-shadow:0 10px 22px rgba(13,27,62,.18)}.date-badge strong{font-family:Nunito,sans-serif;font-size:22px;font-weight:900;line-height:1}.date-badge span{font-size:10px;font-weight:800;text-transform:uppercase}.blog-body{padding:24px}.cat-tag{display:inline-flex;margin-bottom:12px;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800}.cat-navy{color:#0D1B3E;background:rgba(13,27,62,.1)}.cat-orange{color:#F97316;background:rgba(249,115,22,.1)}.cat-teal{color:#0891B2;background:rgba(8,145,178,.1)}.cat-green{color:#059669;background:rgba(5,150,105,.1)}.cat-purple{color:#7C3AED;background:rgba(124,58,237,.1)}.cat-red{color:#DC2626;background:rgba(220,38,38,.1)}.blog-body h3{min-height:45px;margin-bottom:10px;font-size:16px;font-weight:800;line-height:1.4}.blog-body p{display:-webkit-box;min-height:43px;margin-bottom:18px;overflow:hidden;color:var(--gray);font-size:13px;line-height:1.65;-webkit-line-clamp:2;-webkit-box-orient:vertical}.author-row{display:flex;align-items:center;gap:10px;margin-bottom:16px}.avatar{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;color:var(--white);background:linear-gradient(135deg,var(--navy),var(--blue));font-family:Nunito,sans-serif;font-weight:900}.author-row strong{display:block;color:var(--navy);font-size:12px}.author-row span{display:block;color:var(--gray);font-size:11px}.read-link{color:var(--orange);font-size:13px;font-weight:800}.read-link:hover{color:var(--navy)}.grad-navy{background:linear-gradient(135deg,#0D1B3E,#1A3A6B)}.grad-orange{background:linear-gradient(135deg,#F97316,#FB923C)}.grad-teal{background:linear-gradient(135deg,#0891B2,#06B6D4)}.grad-green{background:linear-gradient(135deg,#059669,#34D399)}.grad-purple{background:linear-gradient(135deg,#7C3AED,#A78BFA)}.grad-red{background:linear-gradient(135deg,#DC2626,#F87171)}
+    .newsletter{position:relative;overflow:hidden;padding:80px 0;background:linear-gradient(135deg,#0D1B3E,#1A3A6B);text-align:center}.newsletter:before{content:"";position:absolute;inset:0;background-image:var(--dot-pattern);opacity:.04}.newsletter-content{position:relative;z-index:1;max-width:760px;margin:0 auto}.newsletter-icon{color:var(--orange);font-size:48px;margin-bottom:18px}.newsletter h2{margin-bottom:12px;color:var(--white);font-size:clamp(30px,4vw,42px)}.newsletter p{margin:0 auto 26px;max-width:600px;color:rgba(255,255,255,.78);font-size:15px;line-height:1.75}.newsletter-form{display:flex;gap:12px;max-width:580px;margin:0 auto 14px}.newsletter-form input{flex:1;min-width:0;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:0 20px;color:var(--navy);background:var(--white);font:inherit;outline:0}.newsletter-note{color:rgba(255,255,255,.48);font-size:12px}
+    .footer{padding:70px 0 0;background:var(--navy);color:rgba(255,255,255,.6)}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:50px;padding-bottom:52px}.footer .logo-title{color:var(--white)}.footer-brand p{max-width:390px;margin:20px 0 24px;font-size:13px;line-height:1.8}.social-links{display:flex;gap:10px}.social-link{display:grid;place-items:center;width:36px;height:36px;border-radius:8px;color:var(--white);background:rgba(255,255,255,.1);font-size:19px}.social-link:hover{transform:translateY(-2px);background:var(--orange)}.footer h3{margin-bottom:20px;color:var(--white);font-size:18px}.footer-list,.contact-list{list-style:none;display:grid;gap:11px}.footer-list a{display:inline-flex;color:rgba(255,255,255,.6);font-size:13px;line-height:1.5}.footer-list a:before{content:"→";margin-right:8px;color:var(--orange)}.footer-list a:hover{color:var(--orange);transform:translateX(3px)}.contact-list{gap:13px}.contact-list a,.contact-list span{display:flex;align-items:flex-start;gap:10px;color:rgba(255,255,255,.6);font-size:13px;line-height:1.6}.contact-list i{margin-top:2px;color:var(--orange);font-size:17px}.contact-list a:hover{color:var(--orange)}.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding:20px 0}.footer-bottom-inner{display:flex;justify-content:space-between;gap:16px;color:rgba(255,255,255,.5);font-size:13px}
+    @media(max-width:1024px){.featured-card{grid-template-columns:1fr}.blog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-grid{grid-template-columns:1.4fr 1fr 1fr}.footer-brand{grid-column:1/-1}}@media(max-width:860px){.topbar-inner{justify-content:center;flex-direction:column;padding:10px 0;text-align:center}.topbar-links{justify-content:center}.mobile-toggle{display:inline-flex}.nav-menu{position:fixed;left:20px;right:20px;top:116px;z-index:1001;display:grid;gap:8px;padding:18px;border-radius:18px;background:var(--white);box-shadow:0 24px 70px rgba(13,27,62,.2);opacity:0;transform:translateY(-12px);pointer-events:none}.nav-menu.active{opacity:1;transform:translateY(0);pointer-events:auto}.nav-link,.nav-cta{width:100%;justify-content:center;text-align:center}.nav-cta{margin-left:0}}@media(max-width:700px){.container{width:min(100% - 28px,1180px)}.nav-inner{min-height:70px}.logo-title{font-size:16px}.logo-subtitle{font-size:10px}.hero{min-height:420px}.searchbar{border-radius:24px;align-items:stretch}.featured-art{height:300px}.blog-grid,.footer-grid{grid-template-columns:1fr}.featured-card{padding:18px}.newsletter-form{flex-direction:column}.newsletter-form input{min-height:48px}.newsletter-form .btn{width:100%}.footer-bottom-inner{flex-direction:column;text-align:center}}@media(max-width:440px){.topbar{font-size:12px}.logo{gap:9px}.logo-mark{width:40px;height:40px}.logo-subtitle{white-space:normal}.hero h1{font-size:38px}.hero p{font-size:15px}}
+  
+/* Page transition */
+body {
+  animation: pageFadeIn 0.5s ease forwards;
+}
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Exit transition */
+.page-transitioning {
+  animation: pageFadeOut 0.3s ease forwards;
+}
+@keyframes pageFadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-10px); }
+}
+/* Dropdown wrapper */
+.nav-dropdown {
+  position: relative;
+}
+
+/* Trigger link */
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+}
+.nav-dropdown-trigger:hover {
+  color: var(--navy);
+  background: var(--light);
+  transform: translateY(-1px);
+}
+
+/* Rotate caret on hover */
+.nav-dropdown:hover .nav-dropdown-trigger 
+  .ph-caret-down {
+  transform: rotate(180deg);
+}
+
+/* Mega menu box */
+.mega-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  width: 420px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(13,27,62,0.15);
+  border: 1px solid #EEF2FF;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Arrow pointer on top of menu */
+.mega-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-left: 1px solid #EEF2FF;
+  border-top: 1px solid #EEF2FF;
+}
+
+/* Show via JS inline styles */
+.nav-dropdown.dropdown-open .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: all;
+}
+
+.mega-menu-inner {
+  padding: 12px;
+}
+
+/* Each item row */
+.mega-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.mega-item:hover {
+  background: #F0F4FF;
+}
+.mega-item:hover .mega-arrow {
+  transform: translateX(4px);
+  color: var(--orange);
+}
+
+/* Icon box */
+.mega-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px;
+  color: white;
+}
+
+/* Text block */
+.mega-text {
+  flex: 1;
+}
+.mega-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0D1B3E;
+  font-family: 'Nunito', sans-serif;
+}
+.mega-desc {
+  display: block;
+  font-size: 12px;
+  color: #64748B;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* Arrow icon */
+.mega-arrow {
+  font-size: 16px;
+  color: #CBD5E1;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+/* Divider between items */
+.mega-item + .mega-item {
+  border-top: 1px solid #F8FAFF;
+}
+
+@media (max-width: 860px) {
+  .nav-dropdown,
+  .nav-dropdown-trigger {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .mega-menu {
+    position: static;
+    width: 100%;
+    margin-top: 8px;
+    transform: none;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+  .mega-menu::before {
+    display: none;
+  }
+}
+  
+    .logo-text span:first-child {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .logo-text span:last-child {
+      display: block;
+      font-size: 11px;
+      color: var(--orange);
+      font-weight: 600;
+    }
+    .nav-cta {
+      white-space: nowrap;
+    }</style>
+</head>
+<body>
+  <div class="topbar"><div class="container topbar-inner"><div>📍 Delhi, India | Serving Schools Across the Nation</div><div class="topbar-links"><a href="mailto:info@awesomeeducation.in">info@awesomeeducation.in</a><a href="tel:+911234567890">+91 12345-67890</a></div></div></div>
+  <nav class="navbar" id="navbar" aria-label="Primary navigation"><div class="container nav-inner"><a class="logo" href="index.html">
+  <img src="logo.png" 
+       alt="Awesome Education Logo"
+       style="height:48px;width:auto;
+       object-fit:contain;">
+  <div class="logo-text">
+    <span>Awesome Education</span>
+    <span>Beyond Academics. Real Growth.</span>
+  </div>
+</a><button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation" aria-expanded="false"><i class="ph ph-list"></i></button><div class="nav-menu" id="navMenu"><a href="index.html" class="nav-link">Home</a><a href="index.html#about" class="nav-link">About</a><div class="nav-dropdown">
+  <a href="olympiad.html" class="nav-dropdown-trigger">
+    Olympiads
+    <i class="ph ph-caret-down"
+       style="font-size:12px;margin-left:4px;
+       transition:transform 0.3s;"></i>
+  </a>
+  <div class="mega-menu">
+    <div class="mega-menu-inner">
+      <a href="science-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0D1B3E,#1A3A6B)">
+          <i class="ph-fill ph-flask"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Science</span>
+          <span class="mega-desc">National science olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="mathematics-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)">
+          <i class="ph-fill ph-calculator"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Mathematics</span>
+          <span class="mega-desc">National math olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="english-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">
+          <i class="ph-fill ph-book-open"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">English</span>
+          <span class="mega-desc">National English olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="gk-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+          <i class="ph-fill ph-globe"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">General Knowledge</span>
+          <span class="mega-desc">National GK olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="reasoning-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#059669,#34D399)">
+          <i class="ph-fill ph-brain"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Reasoning</span>
+          <span class="mega-desc">National reasoning olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="computer-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#DC2626,#F87171)">
+          <i class="ph-fill ph-desktop"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Computer Science</span>
+          <span class="mega-desc">National CS olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="nav-dropdown">
+  <a href="olympiad.html" class="nav-dropdown-trigger">
+    Programs
+    <i class="ph ph-caret-down"
+       style="font-size:12px;margin-left:4px;
+       transition:transform 0.3s;"></i>
+  </a>
+  <div class="mega-menu">
+    <div class="mega-menu-inner">
+      <a href="tours.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)">
+          <i class="ph-fill ph-bus"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Educational Tours</span>
+          <span class="mega-desc">Curated experiential learning trips across India</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="skills.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">
+          <i class="ph-fill ph-lightbulb"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Skill Development</span>
+          <span class="mega-desc">Personality, leadership, coding & financial literacy</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="teachers.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+          <i class="ph-fill ph-chalkboard-teacher"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Teacher Upliftment</span>
+          <span class="mega-desc">Professional development & modern teaching techniques</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="parents.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#059669,#34D399)">
+          <i class="ph-fill ph-users-three"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Parent Workshops</span>
+          <span class="mega-desc">Engaging sessions for involved and informed parenting</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="blog.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#D97706,#FCD34D)">
+          <i class="ph-fill ph-article"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Blog & Resources</span>
+          <span class="mega-desc">Insights on education, parenting & school growth</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+    </div>
+  </div>
+</div><a href="events.html" class="nav-link">Events</a><a href="gallery.html" class="nav-link">Gallery</a><a href="blog.html" class="nav-link">Blog</a><a href="index.html#contact" class="nav-cta">Partner With Us</a></div></div></nav>
+  <main>
+    <section class="hero reveal visible" id="home"><div class="container hero-inner"><span class="section-tag">Knowledge Hub</span><h1>Our <span>Blog</span> & Resources</h1><p>Insights on education, school growth, parenting, and student development</p><form class="searchbar"><input type="search" placeholder="Search articles and resources" aria-label="Search articles"><button type="submit" aria-label="Search"><i class="ph ph-magnifying-glass"></i></button></form></div></section>
+    <section class="featured reveal"><div class="container"><article class="featured-card"><div class="featured-art"><i class="ph-fill ph-article"></i></div><div class="featured-content"><span class="featured-badge">Featured</span><span class="category">Education Trends</span><h2>How Olympiad Programs Are Changing the Way Students Approach Learning</h2><div class="meta"><span><i class="ph ph-calendar"></i> May 12, 2025</span><span><i class="ph ph-user"></i> Awesome Education Team</span></div><p class="excerpt">Olympiads are becoming more than competitions. They are helping students build discipline, analytical confidence and a love for learning that goes beyond marks. Schools using structured olympiad programs are seeing stronger participation and curiosity across classrooms.</p><a href="#" class="btn btn-primary">Read Full Article →</a></div></article></div></section>
+    <section class="filters reveal" id="blog"><div class="container"><div class="filter-row" aria-label="Blog categories"><a href="#" class="filter-pill active">All</a><a href="#" class="filter-pill">Olympiad</a><a href="#" class="filter-pill">Educational Tours</a><a href="#" class="filter-pill">Skill Development</a><a href="#" class="filter-pill">Parent Tips</a><a href="#" class="filter-pill">Teacher Resources</a><a href="#" class="filter-pill">School Events</a></div></div></section>
+    <section class="blog-grid-section reveal"><div class="container"><div class="blog-grid">
+      <article class="blog-card"><div class="blog-art grad-navy"><span class="date-badge"><strong>08</strong><span>May</span></span><i class="ph-fill ph-trophy"></i></div><div class="blog-body"><span class="cat-tag cat-navy">Olympiad</span><h3>5 Benefits of Olympiad Participation for School Students</h3><p>Olympiads can sharpen academic confidence, consistency and problem-solving habits when introduced with the right support.</p><div class="author-row"><span class="avatar">A</span><div><strong>Awesome Team</strong><span>5 min read</span></div></div><a href="#" class="read-link">Read More →</a></div></article>
+      <article class="blog-card"><div class="blog-art grad-orange"><span class="date-badge"><strong>10</strong><span>May</span></span><i class="ph-fill ph-bus"></i></div><div class="blog-body"><span class="cat-tag cat-orange">Educational Tours</span><h3>How Educational Tours Build Real-World Learning Skills</h3><p>Well-planned tours make history, science, industry and culture more memorable for students.</p><div class="author-row"><span class="avatar">E</span><div><strong>Editorial Desk</strong><span>4 min read</span></div></div><a href="#" class="read-link">Read More →</a></div></article>
+      <article class="blog-card"><div class="blog-art grad-teal"><span class="date-badge"><strong>14</strong><span>May</span></span><i class="ph-fill ph-currency-inr"></i></div><div class="blog-body"><span class="cat-tag cat-teal">Skill Development</span><h3>Teaching Financial Literacy to Kids: Where to Start</h3><p>Simple classroom activities can help students understand saving, budgeting and money decisions early.</p><div class="author-row"><span class="avatar">S</span><div><strong>Skills Team</strong><span>6 min read</span></div></div><a href="#" class="read-link">Read More →</a></div></article>
+      <article class="blog-card"><div class="blog-art grad-green"><span class="date-badge"><strong>17</strong><span>May</span></span><i class="ph-fill ph-heart"></i></div><div class="blog-body"><span class="cat-tag cat-green">Parent Tips</span><h3>How Parents Can Support Without Adding Pressure</h3><p>Supportive parenting is about presence, communication and realistic expectations during learning phases.</p><div class="author-row"><span class="avatar">P</span><div><strong>Parent Desk</strong><span>5 min read</span></div></div><a href="#" class="read-link">Read More →</a></div></article>
+      <article class="blog-card"><div class="blog-art grad-purple"><span class="date-badge"><strong>20</strong><span>May</span></span><i class="ph-fill ph-chalkboard-teacher"></i></div><div class="blog-body"><span class="cat-tag cat-purple">Teacher Resources</span><h3>Modern Classroom Techniques Every Teacher Should Know</h3><p>Active learning, formative feedback and digital tools can make classrooms more engaging.</p><div class="author-row"><span class="avatar">T</span><div><strong>Training Team</strong><span>7 min read</span></div></div><a href="#" class="read-link">Read More →</a></div></article>
+      <article class="blog-card"><div class="blog-art grad-red"><span class="date-badge"><strong>24</strong><span>May</span></span><i class="ph-fill ph-calendar-star"></i></div><div class="blog-body"><span class="cat-tag cat-red">School Events</span><h3>Why School Events Matter More Than You Think</h3><p>Events create belonging, leadership moments and shared memories that strengthen school culture.</p><div class="author-row"><span class="avatar">R</span><div><strong>Events Team</strong><span>4 min read</span></div></div><a href="#" class="read-link">Read More →</a></div></article>
+    </div></div></section>
+    <section class="newsletter reveal"><div class="container newsletter-content"><i class="ph-fill ph-envelope-simple newsletter-icon"></i><h2>Stay Updated with Education Insights</h2><p>Get practical ideas on school growth, student development, parenting, teacher training and upcoming Awesome Education programs.</p><form class="newsletter-form"><input type="email" placeholder="Enter your email address" aria-label="Email address" required><button type="submit" class="btn btn-primary">Subscribe</button></form><div class="newsletter-note">We respect your privacy. No spam, only useful education insights.</div></div></section>
+  </main>
+  <footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="logo" aria-label="Awesome Education home"><img src="logo.png" 
+     alt="Awesome Education Logo"
+     style="height:40px;width:auto;
+     object-fit:contain;
+     filter:brightness(0) invert(1);"><span><span class="logo-title">Awesome Education</span><span class="logo-subtitle">Beyond Academics. Real Growth.</span></span></a><p>Awesome Education by Awesome Ideas & Events Pvt. Ltd. helps schools build a complete ecosystem for academic excellence, life skills, parent engagement and measurable institutional growth.</p><div class="social-links"><a href="#" class="social-link" aria-label="Facebook"><i class="ph-fill ph-facebook-logo"></i></a><a href="#" class="social-link" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a><a href="#" class="social-link" aria-label="Twitter"><i class="ph-fill ph-twitter-logo"></i></a><a href="#" class="social-link" aria-label="YouTube"><i class="ph-fill ph-youtube-logo"></i></a></div></div><div><h3>Programs</h3><ul class="footer-list"><li><a href="olympiad.html">Olympiad Programs</a></li><li><a href="tours.html">Educational Tours</a></li><li><a href="skills.html">Skill Development</a></li><li><a href="parents.html">Parent Workshops</a></li><li><a href="teachers.html">Teacher Upliftment</a></li><li><a href="blog.html">Blog</a></li></ul></div><div><h3>Company</h3><ul class="footer-list"><li><a href="index.html#about">About Us</a></li><li><a href="index.html#team">Our Team</a></li><li><a href="index.html#events">Events</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="index.html#contact">Contact</a></li></ul></div><div><h3>Contact</h3><ul class="contact-list"><li><span><i class="ph ph-map-pin"></i> Delhi, India</span></li><li><a href="tel:+911234567890"><i class="ph ph-phone"></i> +91 12345-67890</a></li><li><a href="mailto:info@awesomeeducation.in"><i class="ph ph-envelope"></i> info@awesomeeducation.in</a></li><li><a href="https://awesomeeducation.in"><i class="ph ph-globe"></i> awesomeeducation.in</a></li></ul></div></div></div><div class="footer-bottom"><div class="container footer-bottom-inner"><span>© 2025 Awesome Education | Awesome Ideas & Events Pvt. Ltd.</span><span>Made with care for India's Schools</span></div></div></footer>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    const navbar=document.getElementById("navbar"),mobileToggle=document.getElementById("mobileToggle"),navMenu=document.getElementById("navMenu"),navLinks=document.querySelectorAll(".nav-menu a");const setNavbarShadow=()=>navbar.classList.toggle("scrolled",window.scrollY>50);window.addEventListener("scroll",setNavbarShadow,{passive:true});setNavbarShadow();mobileToggle.addEventListener("click",()=>{const e=navMenu.classList.toggle("active");document.body.classList.toggle("nav-open",e);mobileToggle.setAttribute("aria-expanded",String(e));mobileToggle.innerHTML=e?'<i class="ph ph-x"></i>':'<i class="ph ph-list"></i>'});navLinks.forEach(e=>e.addEventListener("click",()=>{navMenu.classList.remove("active");document.body.classList.remove("nav-open");mobileToggle.setAttribute("aria-expanded","false");mobileToggle.innerHTML='<i class="ph ph-list"></i>'}));const revealObserver=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.classList.add("visible"),revealObserver.unobserve(e.target))})},{threshold:.14});document.querySelectorAll(".reveal").forEach(e=>revealObserver.observe(e));document.querySelectorAll("form").forEach(e=>e.addEventListener("submit",t=>t.preventDefault()));
+  </script>
+<script>
+  /* Smooth exit on every internal link click */
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    // Only internal pages, not anchors
+    if (href && !href.startsWith('#') &&
+        !href.startsWith('http') &&
+        !href.startsWith('mailto') &&
+        !href.startsWith('tel')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.classList.add('page-transitioning');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 300);
+      });
+    }
+  });
+</script>
+<script>
+document.querySelectorAll('.nav-dropdown')
+  .forEach(dropdown => {
+    let hideTimer;
+    const menu = dropdown.querySelector('.mega-menu');
+    const caret = dropdown.querySelector('.ph-caret-down');
+
+    dropdown.addEventListener('mouseenter', () => {
+      // Close ALL other dropdowns first
+      document.querySelectorAll('.nav-dropdown')
+        .forEach(other => {
+          if (other !== dropdown) {
+            const otherMenu = other.querySelector('.mega-menu');
+            const otherCaret = other.querySelector('.ph-caret-down');
+            if (otherMenu) {
+              otherMenu.style.opacity = '0';
+              otherMenu.style.visibility = 'hidden';
+              otherMenu.style.transform = 
+                'translateX(-50%) translateY(-8px)';
+              otherMenu.style.pointerEvents = 'none';
+            }
+            if (otherCaret) {
+              otherCaret.style.transform = 'rotate(0deg)';
+            }
+          }
+        });
+
+      // Open this dropdown
+      clearTimeout(hideTimer);
+      if (menu) {
+        menu.style.opacity = '1';
+        menu.style.visibility = 'visible';
+        menu.style.transform = 'translateX(-50%) translateY(0)';
+        menu.style.pointerEvents = 'all';
+      }
+      if (caret) caret.style.transform = 'rotate(180deg)';
+    });
+
+    dropdown.addEventListener('mouseleave', () => {
+      hideTimer = setTimeout(() => {
+        if (menu) {
+          menu.style.opacity = '0';
+          menu.style.visibility = 'hidden';
+          menu.style.transform = 
+            'translateX(-50%) translateY(-8px)';
+          menu.style.pointerEvents = 'none';
+        }
+        if (caret) caret.style.transform = 'rotate(0deg)';
+      }, 150);
+    });
+
+    if (menu) {
+      menu.addEventListener('mouseenter', () => {
+        clearTimeout(hideTimer);
+      });
+      menu.addEventListener('mouseleave', () => {
+        hideTimer = setTimeout(() => {
+          menu.style.opacity = '0';
+          menu.style.visibility = 'hidden';
+          menu.style.transform = 
+            'translateX(-50%) translateY(-8px)';
+          menu.style.pointerEvents = 'none';
+          if (caret) caret.style.transform = 'rotate(0deg)';
+        }, 150);
+      });
+    }
+  });
+
+// Close all dropdowns when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.nav-dropdown')) {
+    document.querySelectorAll('.nav-dropdown')
+      .forEach(dropdown => {
+        const menu = dropdown.querySelector('.mega-menu');
+        const caret = dropdown.querySelector('.ph-caret-down');
+        if (menu) {
+          menu.style.opacity = '0';
+          menu.style.visibility = 'hidden';
+          menu.style.pointerEvents = 'none';
+        }
+        if (caret) caret.style.transform = 'rotate(0deg)';
+      });
+  }
+});
+</script></body>
+</html>

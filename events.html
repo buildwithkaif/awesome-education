@@ -1,0 +1,2151 @@
+﻿<!-- FILE: events.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events | Awesome Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D1B3E;
+      --blue: #1A3A6B;
+      --orange: #F97316;
+      --orange-light: #FB923C;
+      --orange-dark: #EA580C;
+      --yellow: #FCD34D;
+      --white: #FFFFFF;
+      --light: #F0F4FF;
+      --gray: #64748B;
+      --light-gray: #F8FAFF;
+      --cyan: #0891B2;
+      --green: #059669;
+      --purple: #7C3AED;
+      --red: #DC2626;
+      --shadow: 0 18px 50px rgba(13, 27, 62, 0.12);
+      --dot-pattern: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.8' fill='%23FFFFFF'/%3E%3C/svg%3E");
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      color: var(--gray);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    body.nav-open {
+      overflow: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Nunito", sans-serif;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.08;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a,
+    .event-card,
+    .filter-pill,
+    .past-event-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 13px 26px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      box-shadow: 0 14px 34px rgba(249, 115, 22, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(249, 115, 22, 0.35);
+    }
+
+    .btn-ghost {
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--white);
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--orange);
+      background: rgba(249, 115, 22, 0.1);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .text-orange {
+      color: var(--orange);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .topbar {
+      background: var(--navy);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 40px;
+      gap: 16px;
+    }
+
+    .topbar-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .topbar a:hover {
+      color: var(--orange);
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--white);
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 12px 32px rgba(13, 27, 62, 0.1);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 auto;
+      border-radius: 10px;
+      color: var(--white);
+      background: var(--navy);
+      font-family: "Nunito", sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(13, 27, 62, 0.2);
+    }
+
+    .logo-title {
+      display: block;
+      color: var(--navy);
+      font-family: "Nunito", sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .logo-subtitle {
+      display: block;
+      margin-top: 3px;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-link:hover {
+      color: var(--navy);
+      background: var(--light);
+      transform: translateY(-1px);
+    }
+
+    .nav-cta {
+      margin-left: 8px;
+      padding: 12px 22px;
+      border-radius: 25px;
+      color: var(--white);
+      background: var(--orange);
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 12px 26px rgba(249, 115, 22, 0.22);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(249, 115, 22, 0.32);
+      background: var(--orange-light);
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      color: var(--navy);
+      background: var(--light);
+      font-size: 26px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hero Section */
+    .events-hero {
+      position: relative;
+      height: 450px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+    }
+
+    .events-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--dot-pattern);
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .events-hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+      height: 100%;
+      padding: 80px 0;
+    }
+
+    .events-hero-content {
+      max-width: 640px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .events-hero .section-tag {
+      margin-bottom: 20px;
+    }
+
+    .events-hero h1 {
+      margin-bottom: 18px;
+      color: var(--white);
+      font-size: clamp(36px, 5vw, 52px);
+      letter-spacing: 0;
+    }
+
+    .events-hero p {
+      max-width: 540px;
+      margin-bottom: 28px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .calendar-visual {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calendar-visual::before {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.25) 0%, rgba(249, 115, 22, 0.08) 50%, transparent 70%);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .calendar-visual::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(249, 115, 22, 0.15);
+      top: 20px;
+      right: -20px;
+    }
+
+    .calendar-icon {
+      position: relative;
+      z-index: 1;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 40px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      font-size: 80px;
+      box-shadow: 0 30px 60px rgba(249, 115, 22, 0.35);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+      }
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      position: sticky;
+      top: 76px;
+      z-index: 100;
+      background: var(--white);
+      padding: 24px 0;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .filter-bar.hidden {
+      transform: translateY(-100%);
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .filter-pill {
+      padding: 12px 24px;
+      border-radius: 999px;
+      color: var(--navy);
+      background: var(--light-gray);
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    .filter-pill.active {
+      color: var(--white);
+      background: var(--navy);
+      box-shadow: 0 10px 26px rgba(13, 27, 62, 0.2);
+    }
+
+    /* Featured Event */
+    .featured-event {
+      padding: 80px 0;
+      background: var(--light-gray);
+    }
+
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 40px;
+      border-radius: 24px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .featured-visual {
+      position: relative;
+      height: 400px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      overflow: hidden;
+    }
+
+    .featured-visual::before {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      top: -60px;
+      right: -60px;
+    }
+
+    .featured-visual::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      bottom: -40px;
+      left: -40px;
+    }
+
+    .featured-visual i {
+      font-size: 80px;
+      color: var(--white);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--orange);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .featured-badge-alt {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      color: var(--orange);
+      background: rgba(249, 115, 22, 0.1);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .featured-date {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--gray);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .featured-content h2 {
+      margin-bottom: 16px;
+      font-size: clamp(26px, 3vw, 32px);
+    }
+
+    .featured-content > p {
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--gray);
+    }
+
+    .featured-details {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .detail-row i {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      color: var(--orange);
+      background: rgba(249, 115, 22, 0.1);
+      font-size: 18px;
+    }
+
+    .featured-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn-dark {
+      color: var(--white);
+      background: var(--navy);
+      box-shadow: 0 14px 34px rgba(13, 27, 62, 0.28);
+    }
+
+    .btn-dark:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(13, 27, 62, 0.35);
+    }
+
+    /* Events Grid */
+    .all-events {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .all-events h2 {
+      margin-bottom: 50px;
+      text-align: center;
+      font-size: clamp(28px, 4vw, 38px);
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .event-card {
+      overflow: hidden;
+      border: 1px solid #EEF2FF;
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: 0 10px 28px rgba(13, 27, 62, 0.04);
+    }
+
+    .event-card.hidden {
+      display: none;
+    }
+
+    .event-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 52px rgba(13, 27, 62, 0.14);
+    }
+
+    .event-image {
+      position: relative;
+      display: grid;
+      place-items: center;
+      height: 180px;
+      overflow: hidden;
+      color: var(--white);
+    }
+
+    .event-image::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      right: -60px;
+      top: -75px;
+    }
+
+    .event-image i {
+      position: relative;
+      z-index: 1;
+      font-size: 64px;
+    }
+
+    .event-navy {
+      background: linear-gradient(135deg, #0D1B3E, #1A3A6B);
+    }
+
+    .event-orange {
+      background: linear-gradient(135deg, #F97316, #FB923C);
+    }
+
+    .event-green {
+      background: linear-gradient(135deg, #059669, #34D399);
+    }
+
+    .event-cyan {
+      background: linear-gradient(135deg, #0891B2, #06B6D4);
+    }
+
+    .event-purple {
+      background: linear-gradient(135deg, #7C3AED, #A78BFA);
+    }
+
+    .event-red {
+      background: linear-gradient(135deg, #DC2626, #F87171);
+    }
+
+    .date-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      min-width: 58px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: var(--white);
+      background: var(--orange);
+      box-shadow: 0 10px 22px rgba(13, 27, 62, 0.18);
+    }
+
+    .date-badge strong {
+      font-family: "Nunito", sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .date-badge span {
+      margin-top: 2px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .event-body {
+      padding: 26px;
+    }
+
+    .event-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: var(--orange);
+      background: rgba(249, 115, 22, 0.08);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .event-body h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .event-body p {
+      margin-bottom: 18px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .event-meta {
+      display: grid;
+      gap: 8px;
+      color: var(--gray);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .event-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .event-meta i {
+      color: var(--orange);
+      font-size: 16px;
+    }
+
+    .event-footer {
+      padding: 0 26px 26px;
+    }
+
+    .register-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .register-link:hover {
+      gap: 10px;
+    }
+
+    /* Past Events */
+    .past-events {
+      padding: 80px 0;
+      background: var(--light-gray);
+    }
+
+    .past-events h2 {
+      margin-bottom: 40px;
+      text-align: center;
+      font-size: clamp(28px, 4vw, 38px);
+    }
+
+    .past-events-row {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .past-events-row::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .past-events-row::-webkit-scrollbar-track {
+      background: var(--light);
+      border-radius: 3px;
+    }
+
+    .past-events-row::-webkit-scrollbar-thumb {
+      background: var(--gray);
+      border-radius: 3px;
+    }
+
+    .past-event-card {
+      flex: 0 0 280px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 10px 28px rgba(13, 27, 62, 0.04);
+      scroll-snap-align: start;
+      opacity: 0.85;
+    }
+
+    .past-event-card:hover {
+      opacity: 1;
+      transform: translateY(-4px);
+    }
+
+    .past-event-image {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 48px;
+    }
+
+    .past-event-body {
+      padding: 20px;
+    }
+
+    .past-event-body h3 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .past-event-body span {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--gray);
+      font-size: 13px;
+    }
+
+    .past-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .past-link:hover {
+      color: var(--orange);
+      gap: 10px;
+    }
+
+    /* Register CTA */
+    .register-cta {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      text-align: center;
+    }
+
+    .register-cta i {
+      display: block;
+      margin-bottom: 20px;
+      font-size: 48px;
+      color: var(--white);
+    }
+
+    .register-cta h2 {
+      margin-bottom: 14px;
+      color: var(--white);
+      font-size: clamp(28px, 4vw, 38px);
+    }
+
+    .register-cta p {
+      margin-bottom: 28px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+    }
+
+    .cta-form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      max-width: 500px;
+      margin: 0 auto 16px;
+    }
+
+    .cta-form input {
+      flex: 1;
+      min-width: 220px;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 30px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .cta-form input::placeholder {
+      color: var(--gray);
+    }
+
+    .btn-orange-dark {
+      color: var(--white);
+      background: var(--orange-dark);
+      box-shadow: 0 14px 34px rgba(13, 27, 62, 0.28);
+    }
+
+    .btn-orange-dark:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(234, 88, 12, 0.35);
+    }
+
+    .privacy-note {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 70px 0 0;
+      background: var(--navy);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      gap: 50px;
+      padding-bottom: 52px;
+    }
+
+    .footer .logo-title {
+      color: var(--white);
+    }
+
+    .footer-brand p {
+      max-width: 390px;
+      margin: 20px 0 24px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-link {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 19px;
+    }
+
+    .social-link:hover {
+      transform: translateY(-2px);
+      background: var(--orange);
+    }
+
+    .footer h3 {
+      margin-bottom: 20px;
+      color: var(--white);
+      font-size: 18px;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: grid;
+      gap: 11px;
+    }
+
+    .footer-list a {
+      display: inline-flex;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .footer-list a::before {
+      content: "→";
+      margin-right: 8px;
+      color: var(--orange);
+    }
+
+    .footer-list a:hover {
+      color: var(--orange);
+      transform: translateX(3px);
+    }
+
+    .contact-list {
+      list-style: none;
+      display: grid;
+      gap: 13px;
+    }
+
+    .contact-list a,
+    .contact-list span {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .contact-list i {
+      margin-top: 2px;
+      color: var(--orange);
+      font-size: 17px;
+    }
+
+    .contact-list a:hover {
+      color: var(--orange);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px 0;
+    }
+
+    .footer-bottom-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px;
+    }
+
+    /* Page transition */
+    body {
+      animation: pageFadeIn 0.5s ease forwards;
+    }
+
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-transitioning {
+      animation: pageFadeOut 0.3s ease forwards;
+    }
+
+    @keyframes pageFadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+
+    /* Dropdown */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-dropdown-trigger:hover {
+      color: var(--navy);
+      background: var(--light);
+      transform: translateY(-1px);
+    }
+
+    .mega-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      width: 420px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(13,27,62,0.15);
+      border: 1px solid #EEF2FF;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .mega-menu::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-left: 1px solid #EEF2FF;
+      border-top: 1px solid #EEF2FF;
+    }
+
+    .nav-dropdown:hover .mega-menu,
+    .nav-dropdown.dropdown-open .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: all;
+    }
+
+    .mega-menu-inner {
+      padding: 12px;
+    }
+
+    .mega-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .mega-item:hover {
+      background: #F0F4FF;
+    }
+
+    .mega-item:hover .mega-arrow {
+      transform: translateX(4px);
+      color: var(--orange);
+    }
+
+    .mega-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+      color: white;
+    }
+
+    .mega-text {
+      flex: 1;
+    }
+
+    .mega-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0D1B3E;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .mega-desc {
+      display: block;
+      font-size: 12px;
+      color: #64748B;
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+
+    .mega-arrow {
+      font-size: 16px;
+      color: #CBD5E1;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .mega-item + .mega-item {
+      border-top: 1px solid #F8FAFF;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .events-hero-inner,
+      .featured-card {
+        grid-template-columns: 1fr;
+      }
+
+      .events-hero-inner {
+        padding: 60px 0;
+        text-align: center;
+      }
+
+      .events-hero-content {
+        max-width: 100%;
+      }
+
+      .events-hero p {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .events-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar-inner {
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      .topbar-links {
+        justify-content: center;
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        top: 116px;
+        z-index: 1001;
+        display: grid;
+        gap: 8px;
+        padding: 18px;
+        border-radius: 18px;
+        background: var(--white);
+        box-shadow: 0 24px 70px rgba(13, 27, 62, 0.2);
+        opacity: 0;
+        transform: translateY(-12px);
+        pointer-events: none;
+      }
+
+      .nav-menu.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .nav-link,
+      .nav-cta {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .nav-cta {
+        margin-left: 0;
+      }
+
+      .events-hero {
+        height: auto;
+        min-height: 400px;
+      }
+
+      .events-hero-inner {
+        min-height: auto;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .filter-bar {
+        position: relative;
+        top: 0;
+      }
+
+      .nav-dropdown,
+      .nav-dropdown-trigger {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .mega-menu {
+        position: static;
+        width: 100%;
+        margin-top: 8px;
+        transform: none;
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+      }
+
+      .mega-menu::before {
+        display: none;
+      }
+
+      .nav-dropdown:hover .mega-menu {
+        display: block;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav-inner {
+        min-height: 70px;
+      }
+
+      .logo-title {
+        font-size: 16px;
+      }
+
+      .logo-subtitle {
+        font-size: 10px;
+      }
+
+      .events-hero-inner {
+        padding: 54px 0 62px;
+      }
+
+      .featured-card {
+        padding: 28px;
+      }
+
+      .featured-visual {
+        height: 280px;
+      }
+
+      .featured-actions {
+        flex-direction: column;
+      }
+
+      .featured-actions .btn {
+        width: 100%;
+      }
+
+      .cta-form {
+        flex-direction: column;
+      }
+
+      .cta-form input {
+        min-width: 100%;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .topbar {
+        font-size: 12px;
+      }
+
+      .logo {
+        gap: 9px;
+      }
+
+      .logo-mark {
+        width: 40px;
+        height: 40px;
+      }
+
+      .logo-subtitle {
+        white-space: normal;
+      }
+
+      .events-hero h1 {
+        font-size: 34px;
+      }
+
+      .events-hero p {
+        font-size: 15px;
+      }
+
+      .filter-pill {
+        padding: 10px 18px;
+        font-size: 12px;
+      }
+    }
+  
+    .logo-text span:first-child {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .logo-text span:last-child {
+      display: block;
+      font-size: 11px;
+      color: var(--orange);
+      font-weight: 600;
+    }
+    .nav-cta {
+      white-space: nowrap;
+    }</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div>📍 Delhi, India | Serving Schools Across the Nation</div>
+      <div class="topbar-links">
+        <a href="mailto:info@awesomeeducation.in">info@awesomeeducation.in</a>
+        <a href="tel:+911234567890">+91 12345-67890</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar" id="navbar" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">
+  <img src="logo.png" 
+       alt="Awesome Education Logo"
+       style="height:48px;width:auto;
+       object-fit:contain;">
+  <div class="logo-text">
+    <span>Awesome Education</span>
+    <span>Beyond Academics. Real Growth.</span>
+  </div>
+</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation" aria-expanded="false">
+        <i class="ph ph-list"></i>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <div class="nav-dropdown">
+          <a href="olympiad.html" class="nav-dropdown-trigger">
+            Olympiads
+            <i class="ph ph-caret-down" style="font-size:12px;margin-left:4px;transition:transform 0.3s;"></i>
+          </a>
+          <div class="mega-menu">
+            <div class="mega-menu-inner">
+              <a href="science-olympiad.html#glance" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#0D1B3E,#1A3A6B)">
+                  <i class="ph-fill ph-flask"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">Science</span>
+                  <span class="mega-desc">National science olympiad competitions</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="mathematics-olympiad.html#glance" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)">
+                  <i class="ph-fill ph-calculator"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">Mathematics</span>
+                  <span class="mega-desc">National math olympiad competitions</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="english-olympiad.html#glance" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">
+                  <i class="ph-fill ph-book-open"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">English</span>
+                  <span class="mega-desc">National English olympiad competitions</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="gk-olympiad.html#glance" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+                  <i class="ph-fill ph-globe"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">General Knowledge</span>
+                  <span class="mega-desc">National GK olympiad competitions</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="reasoning-olympiad.html#glance" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#059669,#34D399)">
+                  <i class="ph-fill ph-brain"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">Reasoning</span>
+                  <span class="mega-desc">National reasoning olympiad competitions</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="computer-olympiad.html#glance" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#DC2626,#F87171)">
+                  <i class="ph-fill ph-desktop"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">Computer Science</span>
+                  <span class="mega-desc">National CS olympiad competitions</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <a href="olympiad.html" class="nav-dropdown-trigger">
+            Programs
+            <i class="ph ph-caret-down" style="font-size:12px;margin-left:4px;transition:transform 0.3s;"></i>
+          </a>
+          <div class="mega-menu">
+            <div class="mega-menu-inner">
+              <a href="tours.html" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)">
+                  <i class="ph-fill ph-bus"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">Educational Tours</span>
+                  <span class="mega-desc">Curated experiential learning trips across India</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="skills.html" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">
+                  <i class="ph-fill ph-lightbulb"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">Skill Development</span>
+                  <span class="mega-desc">Personality, leadership, coding & financial literacy</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="teachers.html" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+                  <i class="ph-fill ph-chalkboard-teacher"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">Teacher Upliftment</span>
+                  <span class="mega-desc">Professional development & modern teaching techniques</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="parents.html" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#059669,#34D399)">
+                  <i class="ph-fill ph-users-three"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">Parent Workshops</span>
+                  <span class="mega-desc">Engaging sessions for involved and informed parenting</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+              <a href="blog.html" class="mega-item">
+                <div class="mega-icon" style="background:linear-gradient(135deg,#D97706,#FCD34D)">
+                  <i class="ph-fill ph-article"></i>
+                </div>
+                <div class="mega-text">
+                  <span class="mega-title">Blog & Resources</span>
+                  <span class="mega-desc">Insights on education, parenting & school growth</span>
+                </div>
+                <i class="ph ph-arrow-right mega-arrow"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="index.html#contact" class="nav-cta">Partner With Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- SECTION 1: HERO BANNER -->
+    <section class="events-hero reveal visible">
+      <div class="container events-hero-inner">
+        <div class="events-hero-content">
+          <div class="breadcrumb">Home → Events</div>
+          <span class="section-tag">What's Happening</span>
+          <h1>Upcoming <span class="text-orange">Events</span> & Programs</h1>
+          <p>Stay updated with our latest olympiads, tours, workshops and school programs happening across India</p>
+          <div class="hero-actions">
+            <a href="#" class="btn btn-primary">Register Now</a>
+            <a href="#past-events" class="btn btn-ghost">View Past Events</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="calendar-visual">
+            <div class="calendar-icon">
+              <i class="ph-fill ph-calendar"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: FILTER BAR -->
+    <section class="filter-bar" id="filterBar">
+      <div class="container">
+        <div class="filter-pills">
+          <button class="filter-pill active" data-filter="all">All Events</button>
+          <button class="filter-pill" data-filter="olympiad">Olympiad</button>
+          <button class="filter-pill" data-filter="tours">Educational Tours</button>
+          <button class="filter-pill" data-filter="workshops">Workshops</button>
+          <button class="filter-pill" data-filter="skill-programs">Skill Programs</button>
+          <button class="filter-pill" data-filter="school-events">School Events</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: FEATURED EVENT -->
+    <section class="featured-event reveal">
+      <div class="container">
+        <div class="featured-card">
+          <div class="featured-visual">
+            <span class="featured-badge">Featured Event</span>
+            <i class="ph-fill ph-trophy"></i>
+          </div>
+          <div class="featured-content">
+            <span class="featured-badge-alt">Featured</span>
+            <span class="featured-date">May 15, 2025</span>
+            <h2>National Science Olympiad 2025</h2>
+            <p>The National Science Olympiad is a prestigious competition designed to identify and nurture scientific talent among students across India. Participants will compete in Physics, Chemistry, and Biology, with questions testing conceptual understanding, analytical skills, and practical application. Top performers will receive recognition, certificates, and scholarships for advanced scientific studies.</p>
+            <div class="featured-details">
+              <div class="detail-row">
+                <i class="ph ph-map-pin"></i>
+                <span>Location: Delhi, India</span>
+              </div>
+              <div class="detail-row">
+                <i class="ph ph-clock"></i>
+                <span>Time: 9:00 AM onwards</span>
+              </div>
+              <div class="detail-row">
+                <i class="ph ph-users"></i>
+                <span>Participants: 500+ Students</span>
+              </div>
+              <div class="detail-row">
+                <i class="ph ph-buildings"></i>
+                <span>Venue: Multiple Schools</span>
+              </div>
+            </div>
+            <div class="featured-actions">
+              <a href="#" class="btn btn-primary">Register Now</a>
+              <a href="#" class="btn btn-dark">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: ALL EVENTS GRID -->
+    <section class="all-events reveal">
+      <div class="container">
+        <h2>All Upcoming Events</h2>
+        <div class="events-grid">
+          <!-- Card 1: Olympiad -->
+          <article class="event-card" data-category="olympiad">
+            <div class="event-image event-navy">
+              <span class="date-badge"><strong>15</strong><span>May</span></span>
+              <i class="ph-fill ph-trophy"></i>
+            </div>
+            <div class="event-body">
+              <span class="event-tag">Olympiad</span>
+              <h3>National Science Olympiad 2025</h3>
+              <div class="event-meta">
+                <span><i class="ph ph-map-pin"></i> Delhi</span>
+                <span><i class="ph ph-clock"></i> 9:00 AM</span>
+                <span><i class="ph ph-users"></i> 500+ Students</span>
+              </div>
+            </div>
+            <div class="event-footer">
+              <a href="#" class="register-link">Register →</a>
+            </div>
+          </article>
+
+          <!-- Card 2: Tours -->
+          <article class="event-card" data-category="tours">
+            <div class="event-image event-orange">
+              <span class="date-badge"><strong>22</strong><span>May</span></span>
+              <i class="ph-fill ph-bus"></i>
+            </div>
+            <div class="event-body">
+              <span class="event-tag">Educational Tour</span>
+              <h3>Heritage India Tour — Rajasthan</h3>
+              <div class="event-meta">
+                <span><i class="ph ph-map-pin"></i> Rajasthan</span>
+                <span><i class="ph ph-clock"></i> 5 Days</span>
+                <span><i class="ph ph-users"></i> 40 Students</span>
+              </div>
+            </div>
+            <div class="event-footer">
+              <a href="#" class="register-link">Register →</a>
+            </div>
+          </article>
+
+          <!-- Card 3: Workshops -->
+          <article class="event-card" data-category="workshops">
+            <div class="event-image event-green">
+              <span class="date-badge"><strong>01</strong><span>Jun</span></span>
+              <i class="ph-fill ph-users-three"></i>
+            </div>
+            <div class="event-body">
+              <span class="event-tag">Workshop</span>
+              <h3>Parent-Teacher Growth Summit</h3>
+              <div class="event-meta">
+                <span><i class="ph ph-map-pin"></i> Mumbai</span>
+                <span><i class="ph ph-clock"></i> 10:00 AM</span>
+                <span><i class="ph ph-users"></i> 200 Seats</span>
+              </div>
+            </div>
+            <div class="event-footer">
+              <a href="#" class="register-link">Register →</a>
+            </div>
+          </article>
+
+          <!-- Card 4: Skill Programs -->
+          <article class="event-card" data-category="skill-programs">
+            <div class="event-image event-cyan">
+              <span class="date-badge"><strong>10</strong><span>Jun</span></span>
+              <i class="ph-fill ph-lightbulb"></i>
+            </div>
+            <div class="event-body">
+              <span class="event-tag">Skill Program</span>
+              <h3>Leadership Bootcamp for Students</h3>
+              <div class="event-meta">
+                <span><i class="ph ph-map-pin"></i> Bangalore</span>
+                <span><i class="ph ph-clock"></i> 2 Days</span>
+                <span><i class="ph ph-users"></i> 100 Students</span>
+              </div>
+            </div>
+            <div class="event-footer">
+              <a href="#" class="register-link">Register →</a>
+            </div>
+          </article>
+
+          <!-- Card 5: Olympiad -->
+          <article class="event-card" data-category="olympiad">
+            <div class="event-image event-purple">
+              <span class="date-badge"><strong>20</strong><span>Jun</span></span>
+              <i class="ph-fill ph-calculator"></i>
+            </div>
+            <div class="event-body">
+              <span class="event-tag">Olympiad</span>
+              <h3>Mathematics Olympiad 2025</h3>
+              <div class="event-meta">
+                <span><i class="ph ph-map-pin"></i> Chennai</span>
+                <span><i class="ph ph-clock"></i> 10:00 AM</span>
+                <span><i class="ph ph-users"></i> 300 Students</span>
+              </div>
+            </div>
+            <div class="event-footer">
+              <a href="#" class="register-link">Register →</a>
+            </div>
+          </article>
+
+          <!-- Card 6: School Events -->
+          <article class="event-card" data-category="school-events">
+            <div class="event-image event-red">
+              <span class="date-badge"><strong>05</strong><span>Jul</span></span>
+              <i class="ph-fill ph-star"></i>
+            </div>
+            <div class="event-body">
+              <span class="event-tag">School Event</span>
+              <h3>Annual School Excellence Awards</h3>
+              <div class="event-meta">
+                <span><i class="ph ph-map-pin"></i> Delhi</span>
+                <span><i class="ph ph-clock"></i> 11:00 AM</span>
+                <span><i class="ph ph-users"></i> All Partner Schools</span>
+              </div>
+            </div>
+            <div class="event-footer">
+              <a href="#" class="register-link">Register →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: PAST EVENTS -->
+    <section class="past-events reveal" id="past-events">
+      <div class="container">
+        <h2>Past Events & Highlights</h2>
+        <div class="past-events-row">
+          <article class="past-event-card">
+            <div class="past-event-image event-navy">
+              <i class="ph-fill ph-trophy"></i>
+            </div>
+            <div class="past-event-body">
+              <h3>National Math Olympiad 2024</h3>
+              <span>December 15, 2024</span>
+              <a href="#" class="past-link">View Highlights →</a>
+            </div>
+          </article>
+          <article class="past-event-card">
+            <div class="past-event-image event-orange">
+              <i class="ph-fill ph-bus"></i>
+            </div>
+            <div class="past-event-body">
+              <h3>Kerala Heritage Tour</h3>
+              <span>November 20, 2024</span>
+              <a href="#" class="past-link">View Highlights →</a>
+            </div>
+          </article>
+          <article class="past-event-card">
+            <div class="past-event-image event-green">
+              <i class="ph-fill ph-users-three"></i>
+            </div>
+            <div class="past-event-body">
+              <h3>Parent Summit 2024</h3>
+              <span>October 5, 2024</span>
+              <a href="#" class="past-link">View Highlights →</a>
+            </div>
+          </article>
+          <article class="past-event-card">
+            <div class="past-event-image event-cyan">
+              <i class="ph-fill ph-lightbulb"></i>
+            </div>
+            <div class="past-event-body">
+              <h3>Tech Leaders Workshop</h3>
+              <span>September 12, 2024</span>
+              <a href="#" class="past-link">View Highlights →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: REGISTER CTA -->
+    <section class="register-cta reveal">
+      <div class="container">
+        <i class="ph-fill ph-calendar-check"></i>
+        <h2>Don't Miss Our Next Event</h2>
+        <p>Be the first to know about upcoming programs, registration deadlines, and special announcements.</p>
+        <form class="cta-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+          <input type="email" placeholder="Enter your email address" required>
+          <button type="submit" class="btn btn-orange-dark">Get Notified</button>
+        </form>
+        <p class="privacy-note">We respect your privacy. Unsubscribe anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo" aria-label="Awesome Education home">
+            <img src="logo.png" 
+     alt="Awesome Education Logo"
+     style="height:40px;width:auto;
+     object-fit:contain;
+     filter:brightness(0) invert(1);">
+            <span>
+              <span class="logo-title">Awesome Education</span>
+              <span class="logo-subtitle">Beyond Academics. Real Growth.</span>
+            </span>
+          </a>
+          <p>Awesome Education by Awesome Ideas & Events Pvt. Ltd. helps schools build a complete ecosystem for academic excellence, life skills, parent engagement and measurable institutional growth.</p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="#" class="social-link" aria-label="YouTube"><i class="ph-fill ph-youtube-logo"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3>Programs</h3>
+          <ul class="footer-list">
+            <li><a href="olympiad.html">Olympiad Programs</a></li>
+            <li><a href="tours.html">Educational Tours</a></li>
+            <li><a href="skills.html">Skill Development</a></li>
+            <li><a href="parents.html">Parent Workshops</a></li>
+            <li><a href="teachers.html">Teacher Upliftment</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Company</h3>
+          <ul class="footer-list">
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#team">Our Team</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul class="contact-list">
+            <li><span><i class="ph ph-map-pin"></i> Delhi, India</span></li>
+            <li><a href="tel:+911234567890"><i class="ph ph-phone"></i> +91 12345-67890</a></li>
+            <li><a href="mailto:info@awesomeeducation.in"><i class="ph ph-envelope"></i> info@awesomeeducation.in</a></li>
+            <li><a href="https://awesomeeducation.in"><i class="ph ph-globe"></i> awesomeeducation.in</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2025 Awesome Education | Awesome Ideas & Events Pvt. Ltd.</span>
+        <span>Made with care for India's Schools</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById("navbar");
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navMenu = document.getElementById("navMenu");
+    const navLinks = document.querySelectorAll(".nav-menu a");
+
+    const setNavbarShadow = () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", setNavbarShadow, { passive: true });
+    setNavbarShadow();
+
+    // Mobile menu toggle
+    mobileToggle.addEventListener("click", () => {
+      const isOpen = navMenu.classList.toggle("active");
+      document.body.classList.toggle("nav-open", isOpen);
+      mobileToggle.setAttribute("aria-expanded", String(isOpen));
+      mobileToggle.innerHTML = isOpen ? '<i class="ph ph-x"></i>' : '<i class="ph ph-list"></i>';
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+        document.body.classList.remove("nav-open");
+        mobileToggle.setAttribute("aria-expanded", "false");
+        mobileToggle.innerHTML = '<i class="ph ph-list"></i>';
+      });
+    });
+
+    // Dropdown functionality
+    document.querySelectorAll('.nav-dropdown')
+      .forEach(dropdown => {
+        let hideTimer;
+        const menu = dropdown.querySelector('.mega-menu');
+        const caret = dropdown.querySelector('.ph-caret-down');
+
+        dropdown.addEventListener('mouseenter', () => {
+          // Close ALL other dropdowns first
+          document.querySelectorAll('.nav-dropdown')
+            .forEach(other => {
+              if (other !== dropdown) {
+                const otherMenu = other.querySelector('.mega-menu');
+                const otherCaret = other.querySelector('.ph-caret-down');
+                if (otherMenu) {
+                  otherMenu.style.opacity = '0';
+                  otherMenu.style.visibility = 'hidden';
+                  otherMenu.style.transform = 
+                    'translateX(-50%) translateY(-8px)';
+                  otherMenu.style.pointerEvents = 'none';
+                }
+                if (otherCaret) {
+                  otherCaret.style.transform = 'rotate(0deg)';
+                }
+              }
+            });
+
+          // Open this dropdown
+          clearTimeout(hideTimer);
+          if (menu) {
+            menu.style.opacity = '1';
+            menu.style.visibility = 'visible';
+            menu.style.transform = 'translateX(-50%) translateY(0)';
+            menu.style.pointerEvents = 'all';
+          }
+          if (caret) caret.style.transform = 'rotate(180deg)';
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+          hideTimer = setTimeout(() => {
+            if (menu) {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.transform = 
+                'translateX(-50%) translateY(-8px)';
+              menu.style.pointerEvents = 'none';
+            }
+            if (caret) caret.style.transform = 'rotate(0deg)';
+          }, 150);
+        });
+
+        if (menu) {
+          menu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimer);
+          });
+          menu.addEventListener('mouseleave', () => {
+            hideTimer = setTimeout(() => {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.transform = 
+                'translateX(-50%) translateY(-8px)';
+              menu.style.pointerEvents = 'none';
+              if (caret) caret.style.transform = 'rotate(0deg)';
+            }, 150);
+          });
+        }
+      });
+
+    // Close all dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown')
+          .forEach(dropdown => {
+            const menu = dropdown.querySelector('.mega-menu');
+            const caret = dropdown.querySelector('.ph-caret-down');
+            if (menu) {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.pointerEvents = 'none';
+            }
+            if (caret) caret.style.transform = 'rotate(0deg)';
+          });
+      }
+    });
+
+    // Reveal animations
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.14
+    });
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    // Filter functionality
+    const filterPills = document.querySelectorAll(".filter-pill");
+    const eventCards = document.querySelectorAll(".event-card");
+
+    filterPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const filter = pill.dataset.filter;
+
+        // Update active pill
+        filterPills.forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+
+        // Filter event cards
+        eventCards.forEach((card) => {
+          const category = card.dataset.category;
+          if (filter === "all" || category === filter) {
+            card.classList.remove("hidden");
+          } else {
+            card.classList.add("hidden");
+          }
+        });
+      });
+    });
+
+    // Sticky filter bar
+    const filterBar = document.getElementById("filterBar");
+    let lastScrollY = 0;
+    let filterBarVisible = true;
+
+    window.addEventListener("scroll", () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 200) {
+        if (filterBarVisible) {
+          filterBar.classList.add("hidden");
+          filterBarVisible = false;
+        }
+      } else {
+        if (!filterBarVisible) {
+          filterBar.classList.remove("hidden");
+          filterBarVisible = true;
+        }
+      }
+
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+  </script>
+  <script>
+    /* Smooth exit on every internal link click */
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('#') &&
+          !href.startsWith('http') &&
+          !href.startsWith('mailto') &&
+          !href.startsWith('tel')) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.body.classList.add('page-transitioning');
+          setTimeout(() => {
+            window.location.href = href;
+          }, 300);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

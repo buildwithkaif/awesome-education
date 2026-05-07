@@ -1,0 +1,1932 @@
+﻿<!-- FILE: olympiad.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olympiad Programs | Awesome Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D1B3E;
+      --blue: #1A3A6B;
+      --orange: #F97316;
+      --orange-light: #FB923C;
+      --yellow: #FCD34D;
+      --white: #FFFFFF;
+      --light: #F0F4FF;
+      --gray: #64748B;
+      --light-gray: #F8FAFF;
+      --shadow: 0 18px 50px rgba(13, 27, 62, 0.12);
+      --dot-pattern: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.8' fill='%23FFFFFF'/%3E%3C/svg%3E");
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      color: var(--gray);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    body.nav-open {
+      overflow: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Nunito", sans-serif;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.08;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a,
+    .subject-card,
+    .step-card,
+    .benefit-row,
+    .social-link {
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 13px 26px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      box-shadow: 0 14px 34px rgba(249, 115, 22, 0.28);
+    }
+
+    .btn-primary:hover,
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(249, 115, 22, 0.35);
+    }
+
+    .btn-ghost {
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--orange);
+      background: rgba(249, 115, 22, 0.1);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .section-header {
+      max-width: 720px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .section-header h2 {
+      margin-bottom: 14px;
+      font-size: clamp(30px, 4vw, 42px);
+    }
+
+    .section-header p {
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .text-orange {
+      color: var(--orange);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .topbar {
+      background: var(--navy);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 40px;
+      gap: 16px;
+    }
+
+    .topbar-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .topbar a:hover {
+      color: var(--orange);
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--white);
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 12px 32px rgba(13, 27, 62, 0.1);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 auto;
+      border-radius: 10px;
+      color: var(--white);
+      background: var(--navy);
+      font-family: "Nunito", sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(13, 27, 62, 0.2);
+    }
+
+    .logo-title {
+      display: block;
+      color: var(--navy);
+      font-family: "Nunito", sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .logo-subtitle {
+      display: block;
+      margin-top: 3px;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-link:hover {
+      color: var(--navy);
+      background: var(--light);
+      transform: translateY(-1px);
+    }
+
+    .nav-cta {
+      margin-left: 8px;
+      padding: 12px 22px;
+      border-radius: 25px;
+      color: var(--white);
+      background: var(--orange);
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 12px 26px rgba(249, 115, 22, 0.22);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(249, 115, 22, 0.32);
+      background: var(--orange-light);
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      color: var(--navy);
+      background: var(--light);
+      font-size: 26px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      height: 450px;
+      min-height: 450px;
+      background: linear-gradient(135deg, #0D1B3E, #1A3A6B);
+    }
+
+    .page-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--dot-pattern);
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .page-hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      align-items: center;
+      gap: 56px;
+      height: 450px;
+      min-height: 450px;
+      padding: 62px 0;
+    }
+
+    .breadcrumb {
+      margin-bottom: 18px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--orange);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .page-hero h1 {
+      margin-bottom: 18px;
+      color: var(--white);
+      font-size: clamp(40px, 6vw, 52px);
+    }
+
+    .page-hero p {
+      max-width: 650px;
+      margin-bottom: 28px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-trophy-wrap {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 300px;
+    }
+
+    .trophy-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .trophy-circle.one {
+      width: 290px;
+      height: 290px;
+    }
+
+    .trophy-circle.two {
+      width: 210px;
+      height: 210px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(249, 115, 22, 0.08);
+    }
+
+    .trophy-circle.three {
+      width: 96px;
+      height: 96px;
+      right: 14%;
+      top: 24px;
+      background: rgba(252, 211, 77, 0.18);
+    }
+
+    .hero-trophy {
+      position: relative;
+      z-index: 1;
+      color: var(--orange);
+      font-size: 200px;
+      filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.24));
+    }
+
+    .stats-strip {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .stats-strip-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .mini-stat {
+      padding: 28px 24px;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .mini-stat:last-child {
+      border-right: 0;
+    }
+
+    .mini-stat strong {
+      display: block;
+      color: var(--white);
+      font-family: "Nunito", sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .mini-stat span {
+      display: block;
+      margin-top: 7px;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .subjects,
+    .benefits {
+      padding: 80px 0;
+      background: var(--white);
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .subject-card {
+      padding: 30px 26px;
+      border: 1px solid #EEF2FF;
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: 0 10px 28px rgba(13, 27, 62, 0.04);
+      scroll-margin-top: 100px;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 54px rgba(13, 27, 62, 0.14);
+    }
+
+    .subject-icon {
+      display: grid;
+      place-items: center;
+      width: 70px;
+      height: 70px;
+      margin-bottom: 22px;
+      border-radius: 18px;
+      color: var(--white);
+      font-size: 35px;
+    }
+
+    .grad-navy {
+      background: linear-gradient(135deg, #1A3A6B, #0D1B3E);
+    }
+
+    .grad-orange {
+      background: linear-gradient(135deg, #F97316, #FB923C);
+    }
+
+    .grad-teal {
+      background: linear-gradient(135deg, #0891B2, #06B6D4);
+    }
+
+    .grad-purple {
+      background: linear-gradient(135deg, #7C3AED, #A78BFA);
+    }
+
+    .grad-green {
+      background: linear-gradient(135deg, #059669, #34D399);
+    }
+
+    .grad-red {
+      background: linear-gradient(135deg, #DC2626, #F87171);
+    }
+
+    .subject-card h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .subject-card p {
+      min-height: 68px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .subject-card a {
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .subject-card a:hover {
+      color: var(--navy);
+    }
+
+    .how {
+      padding: 80px 0;
+      background: var(--light-gray);
+    }
+
+    .steps-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .steps-row::before {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 38px;
+      border-top: 2px dotted rgba(249, 115, 22, 0.45);
+    }
+
+    .step-card {
+      position: relative;
+      z-index: 1;
+      padding: 0 14px;
+      text-align: center;
+    }
+
+    .step-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 18px;
+      border: 7px solid var(--light-gray);
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--orange);
+      font-family: "Nunito", sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      box-shadow: 0 14px 28px rgba(249, 115, 22, 0.24);
+    }
+
+    .step-icon {
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      border-radius: 18px;
+      color: var(--orange);
+      background: var(--white);
+      font-size: 32px;
+      box-shadow: 0 10px 26px rgba(13, 27, 62, 0.08);
+    }
+
+    .step-card h3 {
+      margin-bottom: 9px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .step-card p {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.08fr);
+      align-items: center;
+      gap: 70px;
+    }
+
+    .benefit-visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 430px;
+      overflow: hidden;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #0D1B3E, #1A3A6B);
+      box-shadow: var(--shadow);
+    }
+
+    .benefit-visual::before,
+    .benefit-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .benefit-visual::before {
+      width: 250px;
+      height: 250px;
+      left: -80px;
+      top: -70px;
+    }
+
+    .benefit-visual::after {
+      width: 330px;
+      height: 330px;
+      right: -120px;
+      bottom: -120px;
+      background: rgba(249, 115, 22, 0.12);
+    }
+
+    .benefit-visual i {
+      position: relative;
+      z-index: 1;
+      color: var(--orange);
+      font-size: 120px;
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.25));
+    }
+
+    .benefit-content h2 {
+      margin-bottom: 24px;
+      font-size: clamp(30px, 4vw, 42px);
+    }
+
+    .benefits-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .benefit-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid #EEF2FF;
+      border-radius: 14px;
+      background: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .benefit-row:hover {
+      transform: translateX(4px);
+      box-shadow: 0 14px 30px rgba(13, 27, 62, 0.08);
+    }
+
+    .benefit-row i {
+      flex: 0 0 auto;
+      color: var(--orange);
+      font-size: 22px;
+    }
+
+    .registration {
+      padding: 80px 0;
+      background: var(--light-gray);
+    }
+
+    .form-card {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 48px;
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .form-card h2 {
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 34px;
+    }
+
+    .form-card > p {
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .field label,
+    .checkbox-group legend {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #dbe3f2;
+      border-radius: 10px;
+      padding: 13px 14px;
+      color: var(--navy);
+      background: var(--white);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+    }
+
+    .checkbox-group {
+      border: 0;
+    }
+
+    .checkbox-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .checkbox-list label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 12px;
+      border: 1px solid #e6ecf7;
+      border-radius: 10px;
+      color: var(--gray);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .checkbox-list label:hover {
+      border-color: rgba(249, 115, 22, 0.5);
+      background: rgba(249, 115, 22, 0.05);
+    }
+
+    .checkbox-list input {
+      accent-color: var(--orange);
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      color: #047857;
+      background: rgba(5, 150, 105, 0.1);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .footer {
+      padding: 70px 0 0;
+      background: var(--navy);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      gap: 50px;
+      padding-bottom: 52px;
+    }
+
+    .footer .logo-title {
+      color: var(--white);
+    }
+
+    .footer-brand p {
+      max-width: 390px;
+      margin: 20px 0 24px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-link {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 19px;
+    }
+
+    .social-link:hover {
+      transform: translateY(-2px);
+      background: var(--orange);
+    }
+
+    .footer h3 {
+      margin-bottom: 20px;
+      color: var(--white);
+      font-size: 18px;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: grid;
+      gap: 11px;
+    }
+
+    .footer-list a {
+      display: inline-flex;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .footer-list a::before {
+      content: "→";
+      margin-right: 8px;
+      color: var(--orange);
+    }
+
+    .footer-list a:hover {
+      color: var(--orange);
+      transform: translateX(3px);
+    }
+
+    .contact-list {
+      list-style: none;
+      display: grid;
+      gap: 13px;
+    }
+
+    .contact-list a,
+    .contact-list span {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .contact-list i {
+      margin-top: 2px;
+      color: var(--orange);
+      font-size: 17px;
+    }
+
+    .contact-list a:hover {
+      color: var(--orange);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px 0;
+    }
+
+    .footer-bottom-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1024px) {
+      .page-hero-inner,
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-hero,
+      .page-hero-inner {
+        height: auto;
+      }
+
+      .hero-trophy-wrap {
+        min-height: 240px;
+      }
+
+      .subjects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .steps-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 44px;
+      }
+
+      .steps-row::before {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar-inner {
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      .topbar-links {
+        justify-content: center;
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        top: 116px;
+        z-index: 1001;
+        display: grid;
+        gap: 8px;
+        padding: 18px;
+        border-radius: 18px;
+        background: var(--white);
+        box-shadow: 0 24px 70px rgba(13, 27, 62, 0.2);
+        opacity: 0;
+        transform: translateY(-12px);
+        pointer-events: none;
+      }
+
+      .nav-menu.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .nav-link,
+      .nav-cta {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .nav-cta {
+        margin-left: 0;
+      }
+
+      .stats-strip-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mini-stat:nth-child(2) {
+        border-right: 0;
+      }
+
+      .mini-stat:nth-child(-n + 2) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav-inner {
+        min-height: 70px;
+      }
+
+      .logo-title {
+        font-size: 16px;
+      }
+
+      .logo-subtitle {
+        font-size: 10px;
+      }
+
+      .page-hero-inner {
+        gap: 28px;
+        padding: 52px 0;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .subjects,
+      .how,
+      .benefits,
+      .registration {
+        padding: 66px 0;
+      }
+
+      .stats-strip-grid,
+      .subjects-grid,
+      .steps-row,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-stat,
+      .mini-stat:nth-child(2),
+      .mini-stat:nth-child(-n + 2) {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      }
+
+      .mini-stat:last-child {
+        border-bottom: 0;
+      }
+
+      .hero-trophy {
+        font-size: 145px;
+      }
+
+      .trophy-circle.one {
+        width: 230px;
+        height: 230px;
+      }
+
+      .trophy-circle.two {
+        width: 165px;
+        height: 165px;
+      }
+
+      .benefit-visual {
+        min-height: 320px;
+      }
+
+      .checkbox-list {
+        grid-template-columns: 1fr;
+      }
+
+      .form-card {
+        padding: 34px 22px;
+      }
+
+      .footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .topbar {
+        font-size: 12px;
+      }
+
+      .logo {
+        gap: 9px;
+      }
+
+      .logo-mark {
+        width: 40px;
+        height: 40px;
+      }
+
+      .logo-subtitle {
+        white-space: normal;
+      }
+
+      .page-hero h1 {
+        font-size: 38px;
+      }
+
+      .page-hero p {
+        font-size: 15px;
+      }
+
+      .section-header {
+        margin-bottom: 36px;
+      }
+    }
+  
+/* Page transition */
+body {
+  animation: pageFadeIn 0.5s ease forwards;
+}
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Exit transition */
+.page-transitioning {
+  animation: pageFadeOut 0.3s ease forwards;
+}
+@keyframes pageFadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-10px); }
+}
+/* Dropdown wrapper */
+.nav-dropdown {
+  position: relative;
+}
+
+/* Trigger link */
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+}
+.nav-dropdown-trigger:hover {
+  color: var(--navy);
+  background: var(--light);
+  transform: translateY(-1px);
+}
+
+/* Rotate caret on hover */
+.nav-dropdown:hover .nav-dropdown-trigger 
+  .ph-caret-down {
+  transform: rotate(180deg);
+}
+
+/* Mega menu box */
+.mega-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  width: 420px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(13,27,62,0.15);
+  border: 1px solid #EEF2FF;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Arrow pointer on top of menu */
+.mega-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-left: 1px solid #EEF2FF;
+  border-top: 1px solid #EEF2FF;
+}
+
+/* Show via JS classes or inline styles */
+.nav-dropdown.dropdown-open .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: all;
+}
+
+.mega-menu-inner {
+  padding: 12px;
+}
+
+/* Each item row */
+.mega-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.mega-item:hover {
+  background: #F0F4FF;
+}
+.mega-item:hover .mega-arrow {
+  transform: translateX(4px);
+  color: var(--orange);
+}
+
+/* Icon box */
+.mega-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px;
+  color: white;
+}
+
+/* Text block */
+.mega-text {
+  flex: 1;
+}
+.mega-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0D1B3E;
+  font-family: 'Nunito', sans-serif;
+}
+.mega-desc {
+  display: block;
+  font-size: 12px;
+  color: #64748B;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* Arrow icon */
+.mega-arrow {
+  font-size: 16px;
+  color: #CBD5E1;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+/* Divider between items */
+.mega-item + .mega-item {
+  border-top: 1px solid #F8FAFF;
+}
+
+@media (max-width: 860px) {
+  .nav-dropdown,
+  .nav-dropdown-trigger {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .mega-menu {
+    position: static;
+    width: 100%;
+    margin-top: 8px;
+    transform: none;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+  .mega-menu::before {
+    display: none;
+  }
+  .nav-dropdown:hover .mega-menu {
+    display: block;
+    transform: none;
+  }
+}
+  
+    .logo-text span:first-child {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .logo-text span:last-child {
+      display: block;
+      font-size: 11px;
+      color: var(--orange);
+      font-weight: 600;
+    }
+    .nav-cta {
+      white-space: nowrap;
+    }</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div>📍 Delhi, India | Serving Schools Across the Nation</div>
+      <div class="topbar-links">
+        <a href="mailto:info@awesomeeducation.in">info@awesomeeducation.in</a>
+        <a href="tel:+911234567890">+91 12345-67890</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar" id="navbar" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">
+  <img src="logo.png" 
+       alt="Awesome Education Logo"
+       style="height:48px;width:auto;
+       object-fit:contain;">
+  <div class="logo-text">
+    <span>Awesome Education</span>
+    <span>Beyond Academics. Real Growth.</span>
+  </div>
+</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation" aria-expanded="false">
+        <i class="ph ph-list"></i>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <div class="nav-dropdown">
+  <a href="olympiad.html" class="nav-dropdown-trigger">
+    Olympiads
+    <i class="ph ph-caret-down"
+       style="font-size:12px;margin-left:4px;
+       transition:transform 0.3s;"></i>
+  </a>
+  <div class="mega-menu">
+    <div class="mega-menu-inner">
+      <a href="science-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0D1B3E,#1A3A6B)">
+          <i class="ph-fill ph-flask"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Science</span>
+          <span class="mega-desc">National science olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="mathematics-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)">
+          <i class="ph-fill ph-calculator"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Mathematics</span>
+          <span class="mega-desc">National math olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="english-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">
+          <i class="ph-fill ph-book-open"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">English</span>
+          <span class="mega-desc">National English olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="gk-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+          <i class="ph-fill ph-globe"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">General Knowledge</span>
+          <span class="mega-desc">National GK olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="reasoning-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#059669,#34D399)">
+          <i class="ph-fill ph-brain"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Reasoning</span>
+          <span class="mega-desc">National reasoning olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="computer-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#DC2626,#F87171)">
+          <i class="ph-fill ph-desktop"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Computer Science</span>
+          <span class="mega-desc">National CS olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+    </div>
+  </div>
+</div>
+        <div class="nav-dropdown">
+  <a href="olympiad.html" class="nav-dropdown-trigger">
+    Programs
+    <i class="ph ph-caret-down"
+       style="font-size:12px;margin-left:4px;
+       transition:transform 0.3s;"></i>
+  </a>
+  <div class="mega-menu">
+    <div class="mega-menu-inner">
+      <a href="tours.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)">
+          <i class="ph-fill ph-bus"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Educational Tours</span>
+          <span class="mega-desc">Curated experiential learning trips across India</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="skills.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">
+          <i class="ph-fill ph-lightbulb"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Skill Development</span>
+          <span class="mega-desc">Personality, leadership, coding & financial literacy</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="teachers.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+          <i class="ph-fill ph-chalkboard-teacher"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Teacher Upliftment</span>
+          <span class="mega-desc">Professional development & modern teaching techniques</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="parents.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#059669,#34D399)">
+          <i class="ph-fill ph-users-three"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Parent Workshops</span>
+          <span class="mega-desc">Engaging sessions for involved and informed parenting</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="blog.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#D97706,#FCD34D)">
+          <i class="ph-fill ph-article"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Blog & Resources</span>
+          <span class="mega-desc">Insights on education, parenting & school growth</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+    </div>
+  </div>
+</div>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="index.html#contact" class="nav-cta">Partner With Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-hero reveal visible" id="home">
+      <div class="container page-hero-inner">
+        <div>
+          <div class="breadcrumb">Home → Programs → Olympiad Programs</div>
+          <span class="hero-tag">Academic Excellence</span>
+          <h1>National <span class="text-orange">Olympiad</span> Programs</h1>
+          <p>Give your students a structured platform to compete, grow and earn recognition across Science, Mathematics, English, General Knowledge, Reasoning and Computer Science.</p>
+          <div class="hero-actions">
+            <a href="#registration-form" class="btn btn-primary">Register Your School</a>
+            <a href="#" class="btn btn-ghost">Download Brochure</a>
+          </div>
+        </div>
+        <div class="hero-trophy-wrap" aria-hidden="true">
+          <span class="trophy-circle one"></span>
+          <span class="trophy-circle two"></span>
+          <span class="trophy-circle three"></span>
+          <i class="ph-fill ph-trophy hero-trophy"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-strip reveal" aria-label="Olympiad statistics">
+      <div class="container">
+        <div class="stats-strip-grid">
+          <div class="mini-stat">
+            <strong>50+</strong>
+            <span>Schools Registered</span>
+          </div>
+          <div class="mini-stat">
+            <strong>10,000+</strong>
+            <span>Students Participated</span>
+          </div>
+          <div class="mini-stat">
+            <strong>6</strong>
+            <span>Subject Categories</span>
+          </div>
+          <div class="mini-stat">
+            <strong>3</strong>
+            <span>Rank Holders 2025</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="subjects reveal" id="subjects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Subjects</span>
+          <h2>Subjects We Cover</h2>
+          <p>Each category is designed to strengthen conceptual clarity, speed, accuracy and competitive confidence.</p>
+        </div>
+        <div class="subjects-grid">
+          <article class="subject-card" id="science">
+            <div class="subject-icon grad-navy"><i class="ph-fill ph-flask"></i></div>
+            <h3>Science</h3>
+            <p>Concept-based questions across observation, experimentation, environment and everyday scientific thinking.</p>
+            <a href="science-olympiad.html#glance">View Syllabus →</a>
+          </article>
+          <article class="subject-card" id="mathematics">
+            <div class="subject-icon grad-orange"><i class="ph-fill ph-calculator"></i></div>
+            <h3>Mathematics</h3>
+            <p>Logical numerical practice covering arithmetic, patterns, geometry, data and problem-solving skills.</p>
+            <a href="mathematics-olympiad.html#glance">View Syllabus →</a>
+          </article>
+          <article class="subject-card" id="english">
+            <div class="subject-icon grad-teal"><i class="ph-fill ph-book-open"></i></div>
+            <h3>English</h3>
+            <p>Grammar, vocabulary, comprehension and expression practice for stronger language confidence.</p>
+            <a href="english-olympiad.html#glance">View Syllabus →</a>
+          </article>
+          <article class="subject-card" id="gk">
+            <div class="subject-icon grad-purple"><i class="ph-fill ph-globe"></i></div>
+            <h3>General Knowledge</h3>
+            <p>Current awareness, India, world, culture, sports and everyday knowledge for curious learners.</p>
+            <a href="gk-olympiad.html#glance">View Syllabus →</a>
+          </article>
+          <article class="subject-card" id="reasoning">
+            <div class="subject-icon grad-green"><i class="ph-fill ph-brain"></i></div>
+            <h3>Reasoning</h3>
+            <p>Analytical puzzles, series, patterns, coding-decoding and visual logic for sharper thinking.</p>
+            <a href="reasoning-olympiad.html#glance">View Syllabus →</a>
+          </article>
+          <article class="subject-card" id="computer">
+            <div class="subject-icon grad-red"><i class="ph-fill ph-desktop"></i></div>
+            <h3>Computer Science</h3>
+            <p>Digital literacy, fundamentals, applications, computational thinking and technology awareness.</p>
+            <a href="computer-olympiad.html#glance">View Syllabus →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="how reveal">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Process</span>
+          <h2>How It Works</h2>
+          <p>A simple, school-friendly process from registration to awards, with support at every stage.</p>
+        </div>
+        <div class="steps-row">
+          <article class="step-card">
+            <span class="step-number">1</span>
+            <div class="step-icon"><i class="ph-fill ph-buildings"></i></div>
+            <h3>School Registration</h3>
+            <p>Your school registers with Awesome Education</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">2</span>
+            <div class="step-icon"><i class="ph-fill ph-student"></i></div>
+            <h3>Student Enrollment</h3>
+            <p>Students are enrolled subject-wise with practice material</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">3</span>
+            <div class="step-icon"><i class="ph-fill ph-exam"></i></div>
+            <h3>Olympiad Exam</h3>
+            <p>Conducted at school premises on a scheduled date</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">4</span>
+            <div class="step-icon"><i class="ph-fill ph-trophy"></i></div>
+            <h3>Results & Awards</h3>
+            <p>Detailed scorecards, certificates, and rank holders awarded</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits reveal">
+      <div class="container benefits-grid">
+        <div class="benefit-visual" aria-hidden="true">
+          <i class="ph-fill ph-trophy"></i>
+        </div>
+        <div class="benefit-content">
+          <h2>Why Choose Our Olympiad Program?</h2>
+          <div class="benefits-list">
+            <div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Nationally recognized certificates</div>
+            <div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Detailed performance scorecards per student</div>
+            <div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Practice material provided before exam</div>
+            <div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Conducted at your school — zero travel</div>
+            <div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Boosts student confidence and academic motivation</div>
+            <div class="benefit-row"><i class="ph-fill ph-check-circle"></i> Teachers receive class-wise performance insights</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="registration reveal" id="registration-form">
+      <div class="container">
+        <div class="form-card">
+          <h2>Register Your School</h2>
+          <p>Fill this form and our team will contact you within 24 hours</p>
+          <form id="registrationForm" class="form-grid">
+            <div class="field">
+              <label for="schoolName">School Name</label>
+              <input type="text" id="schoolName" name="schoolName" required>
+            </div>
+            <div class="field">
+              <label for="principalName">Principal Name</label>
+              <input type="text" id="principalName" name="principalName" required>
+            </div>
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="field">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" required>
+            </div>
+            <div class="field">
+              <label for="students">Number of Students</label>
+              <select id="students" name="students" required>
+                <option value="">Select range</option>
+                <option>Under 200</option>
+                <option>200-500</option>
+                <option>500+</option>
+              </select>
+            </div>
+            <fieldset class="checkbox-group">
+              <legend>Subjects Interested In</legend>
+              <div class="checkbox-list">
+                <label><input type="checkbox" name="subjects" value="Science"> Science</label>
+                <label><input type="checkbox" name="subjects" value="Math"> Math</label>
+                <label><input type="checkbox" name="subjects" value="English"> English</label>
+                <label><input type="checkbox" name="subjects" value="GK"> GK</label>
+                <label><input type="checkbox" name="subjects" value="Reasoning"> Reasoning</label>
+                <label><input type="checkbox" name="subjects" value="Computer"> Computer</label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary submit-btn">Submit Registration →</button>
+            <div class="success-message" id="successMessage">Thank you! We'll contact you within 24 hours.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo" aria-label="Awesome Education home">
+            <img src="logo.png" 
+     alt="Awesome Education Logo"
+     style="height:40px;width:auto;
+     object-fit:contain;
+     filter:brightness(0) invert(1);">
+            <span>
+              <span class="logo-title">Awesome Education</span>
+              <span class="logo-subtitle">Beyond Academics. Real Growth.</span>
+            </span>
+          </a>
+          <p>Awesome Education by Awesome Ideas & Events Pvt. Ltd. helps schools build a complete ecosystem for academic excellence, life skills, parent engagement and measurable institutional growth.</p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"><i class="ph-fill ph-linkedin-logo"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="#" class="social-link" aria-label="YouTube"><i class="ph-fill ph-youtube-logo"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3>Programs</h3>
+          <ul class="footer-list">
+            <li><a href="olympiad.html">Olympiad Programs</a></li>
+            <li><a href="tours.html">Educational Tours</a></li>
+            <li><a href="skills.html">Skill Development</a></li>
+            <li><a href="parents.html">Parent Workshops</a></li>
+            <li><a href="teachers.html">Teacher Upliftment</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Company</h3>
+          <ul class="footer-list">
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#team">Our Team</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul class="contact-list">
+            <li><span><i class="ph ph-map-pin"></i> Delhi, India</span></li>
+            <li><a href="tel:+911234567890"><i class="ph ph-phone"></i> +91 12345-67890</a></li>
+            <li><a href="mailto:info@awesomeeducation.in"><i class="ph ph-envelope"></i> info@awesomeeducation.in</a></li>
+            <li><a href="https://awesomeeducation.in"><i class="ph ph-globe"></i> awesomeeducation.in</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2025 Awesome Education | Awesome Ideas & Events Pvt. Ltd.</span>
+        <span>Made with care for India's Schools</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    const navbar = document.getElementById("navbar");
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navMenu = document.getElementById("navMenu");
+    const navLinks = document.querySelectorAll(".nav-menu a");
+    const registrationForm = document.getElementById("registrationForm");
+    const successMessage = document.getElementById("successMessage");
+
+    const setNavbarShadow = () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", setNavbarShadow, { passive: true });
+    setNavbarShadow();
+
+    mobileToggle.addEventListener("click", () => {
+      const isOpen = navMenu.classList.toggle("active");
+      document.body.classList.toggle("nav-open", isOpen);
+      mobileToggle.setAttribute("aria-expanded", String(isOpen));
+      mobileToggle.innerHTML = isOpen ? '<i class="ph ph-x"></i>' : '<i class="ph ph-list"></i>';
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+        document.body.classList.remove("nav-open");
+        mobileToggle.setAttribute("aria-expanded", "false");
+        mobileToggle.innerHTML = '<i class="ph ph-list"></i>';
+      });
+    });
+
+    /* Dropdown logic: close others and use inline styles for control */
+    document.querySelectorAll('.nav-dropdown')
+      .forEach(dropdown => {
+        let hideTimer;
+        const menu = dropdown.querySelector('.mega-menu');
+        const caret = dropdown.querySelector('.ph-caret-down');
+
+        dropdown.addEventListener('mouseenter', () => {
+          // Close ALL other dropdowns first
+          document.querySelectorAll('.nav-dropdown')
+            .forEach(other => {
+              if (other !== dropdown) {
+                const otherMenu = other.querySelector('.mega-menu');
+                const otherCaret = other.querySelector('.ph-caret-down');
+                if (otherMenu) {
+                  otherMenu.style.opacity = '0';
+                  otherMenu.style.visibility = 'hidden';
+                  otherMenu.style.transform = 
+                    'translateX(-50%) translateY(-8px)';
+                  otherMenu.style.pointerEvents = 'none';
+                }
+                if (otherCaret) {
+                  otherCaret.style.transform = 'rotate(0deg)';
+                }
+              }
+            });
+
+          // Open this dropdown
+          clearTimeout(hideTimer);
+          if (menu) {
+            menu.style.opacity = '1';
+            menu.style.visibility = 'visible';
+            menu.style.transform = 'translateX(-50%) translateY(0)';
+            menu.style.pointerEvents = 'all';
+          }
+          if (caret) caret.style.transform = 'rotate(180deg)';
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+          hideTimer = setTimeout(() => {
+            if (menu) {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.transform = 
+                'translateX(-50%) translateY(-8px)';
+              menu.style.pointerEvents = 'none';
+            }
+            if (caret) caret.style.transform = 'rotate(0deg)';
+          }, 150);
+        });
+
+        if (menu) {
+          menu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimer);
+          });
+          menu.addEventListener('mouseleave', () => {
+            hideTimer = setTimeout(() => {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.transform = 
+                'translateX(-50%) translateY(-8px)';
+              menu.style.pointerEvents = 'none';
+              if (caret) caret.style.transform = 'rotate(0deg)';
+            }, 150);
+          });
+        }
+      });
+
+    // Close all dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown')
+          .forEach(dropdown => {
+            const menu = dropdown.querySelector('.mega-menu');
+            const caret = dropdown.querySelector('.ph-caret-down');
+            if (menu) {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.pointerEvents = 'none';
+            }
+            if (caret) caret.style.transform = 'rotate(0deg)';
+          });
+      }
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.14
+    });
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    registrationForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      successMessage.classList.add("show");
+      registrationForm.reset();
+    });
+
+    /* Hash-based card highlighting */
+    const hash = window.location.hash;
+    if (hash) {
+      const targetCard = document.querySelector(hash);
+      if (targetCard && targetCard.classList.contains("subject-card")) {
+        targetCard.style.boxShadow = "0 0 0 4px rgba(249, 115, 22, 0.3), 0 24px 54px rgba(249, 115, 22, 0.3)";
+        setTimeout(() => {
+          targetCard.style.boxShadow = "";
+        }, 2000);
+      }
+    }
+  </script>
+<script>
+  /* Smooth exit on every internal link click */
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    // Only internal pages, not anchors
+    if (href && !href.startsWith('#') && 
+        !href.startsWith('http') && 
+        !href.startsWith('mailto') && 
+        !href.startsWith('tel')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.classList.add('page-transitioning');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 300);
+      });
+    }
+  });
+</script></body>
+</html>
