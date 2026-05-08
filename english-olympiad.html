@@ -7,6 +7,8 @@
   <title>English Olympiad | Awesome Education</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://unpkg.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -1256,11 +1258,11 @@
 
     /* Page transition */
     body {
-      animation: pageFadeIn 0.5s ease forwards;
+      opacity: 0;
+      animation: bodyFadeIn 0.4s ease 0.1s forwards;
     }
-    @keyframes pageFadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes bodyFadeIn {
+      to { opacity: 1; }
     }
 
     .page-transitioning {
@@ -1925,7 +1927,7 @@
     grid-template-columns: 1fr !important;
   }
 }</style>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="topbar">
@@ -2618,7 +2620,7 @@
     </div>
   </footer>
 
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
   <script>
     // Navbar scroll shadow
     const navbar = document.getElementById("navbar");

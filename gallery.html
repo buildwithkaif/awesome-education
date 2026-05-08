@@ -7,6 +7,8 @@
   <title>Gallery | Awesome Education</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://unpkg.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -42,7 +44,11 @@
       color: var(--gray);
       background: var(--white);
       overflow-x: hidden;
-      animation: pageFadeIn 0.5s ease forwards;
+      opacity: 0;
+      animation: bodyFadeIn 0.4s ease 0.1s forwards;
+    }
+    @keyframes bodyFadeIn {
+      to { opacity: 1; }
     }
 
     body.nav-open {
@@ -976,7 +982,7 @@
     </div>
   </footer>
 
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
   <script>
     const galleryData = [
       {title:"Science Olympiad 2024", category:"olympiads", caption:"Students competing at national level", gradient:"linear-gradient(135deg,#0D1B3E,#1A3A6B)", icon:"ph-trophy", height:"260px"},
