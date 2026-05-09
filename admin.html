@@ -37,6 +37,43 @@
       padding: 0;
     }
 
+    /* ================================================
+     PAGE LOADER
+  ================================================ */
+  #pageLoader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: #0D1B3E;
+  }
+  #pageLoader .loader-text {
+    color: #FFFFFF;
+    font-family: "Nunito", sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+  }
+  #pageLoader .loader-sub {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  #pageLoader .spinner {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.15);
+    border-top-color: #F97316;
+    animation: spin 0.75s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
     body {
       min-height: 100vh;
       color: var(--text);
@@ -735,6 +772,11 @@
   </style>
 </head>
 <body>
+  <div id="pageLoader">
+    <div class="spinner"></div>
+    <div class="loader-text">Awesome Education</div>
+    <div class="loader-sub">Loading...</div>
+  </div>
   <div id="toastWrap" class="toast-wrap"></div>
 
   <section id="loginScreen" class="login-screen">
@@ -1460,6 +1502,16 @@
     if (localStorage.getItem('awesomeAdminLoggedIn') === 'true') {
       showApp()
     }
+  /* Hide page loader on load */
+  window.addEventListener('load', function() {
+    var loader = document.getElementById('pageLoader');
+    if (loader) {
+      loader.style.opacity = '0';
+      setTimeout(function() {
+        loader.style.display = 'none';
+      }, 500);
+    }
+  });
   </script>
 </body>
 </html>
