@@ -2946,15 +2946,14 @@
     });
 
     // Update quick links bar position on scroll
-    const quickLinksBar = document.getElementById('quickLinksBar');
-
     const updateQuickLinksPosition = () => {
-      const navbarHeight = 76;
-      if (window.scrollY > navbarHeight) {
-        quickLinksBar.style.top = '0';
-      } else {
-        quickLinksBar.style.top = '76px';
-      }
+      const quickLinks = document.querySelector(
+        '.quick-links-bar');
+      const navbar = document.querySelector(
+        '.navbar');
+      if (!quickLinks || !navbar) return;
+      const navHeight = navbar.offsetHeight;
+      quickLinks.style.top = navHeight + 'px';
     };
 
     window.addEventListener('scroll', updateQuickLinksPosition, { passive: true });
@@ -3105,12 +3104,12 @@ async function submitForm(e) {
     showError('Something went wrong. Please try again.');
   } else {
     // Hide form, show success
-    document.getElementById('inquiryForm')
-      .style.display = 'none';
+    const inquiryForm = document.getElementById('inquiryForm');
+    if (inquiryForm) inquiryForm.style.display = 'none';
 
     // Create success div
     const successDiv = document.createElement('div');
-    successDiv.style.cssText = 
+    successDiv.style.cssText =
       'text-align:center;padding:60px 40px;';
     successDiv.innerHTML = `
   <div style="font-size:72px;margin-bottom:20px;">
@@ -3127,8 +3126,7 @@ async function submitForm(e) {
 `;
 
     // Insert after form
-    document.getElementById('inquiryForm')
-      .parentNode.appendChild(successDiv);
+    if (inquiryForm && inquiryForm.parentNode) inquiryForm.parentNode.appendChild(successDiv);
   }
 }
 
