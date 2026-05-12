@@ -296,18 +296,17 @@
     }
 
     .logo-mark {
-      display: grid;
-      place-items: center;
+      display: none;
       width: 44px;
       height: 44px;
       flex: 0 0 auto;
       border-radius: 10px;
       color: var(--white);
-      background: var(--navy);
+      background: transparent;
       font-family: "Nunito", sans-serif;
       font-size: 18px;
       font-weight: 900;
-      box-shadow: 0 12px 24px rgba(13, 27, 62, 0.2);
+      box-shadow: none;
     }
 
     .logo-title {
@@ -384,7 +383,6 @@
       background: linear-gradient(rgba(13,27,62,0.75), rgba(13,27,62,0.75)), url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1400&h=800&fit=crop&q=90');
       background-size: cover;
       background-position: center;
-      background-attachment: fixed;
     }
       content: "";
       position: absolute;
@@ -2452,9 +2450,6 @@ body {
 
   <main>
     <section class="hero reveal visible" id="home">
-      <i class="floating-shape shape-1 ph-fill ph-lightbulb"></i>
-      <i class="floating-shape shape-2 ph-fill ph-lightbulb"></i>
-      <i class="floating-shape shape-3 ph-fill ph-lightbulb"></i>
       <div class="container hero-inner">
         <div class="hero-content">
           <div class="hero-badge"><i class="ph-fill ph-graduation-cap"></i> India's Complete School Ecosystem</div>
