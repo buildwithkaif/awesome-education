@@ -29,6 +29,15 @@
       --dot-pattern: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.8' fill='%23FFFFFF'/%3E%3C/svg%3E");
     }
 
+    [data-theme="dark"] {
+      --navy: #E2E8F0;
+      --blue: #94A3B8;
+      --white: #1E293B;
+      --light: #0F172A;
+      --gray: #94A3B8;
+      --light-gray: #0F172A;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -277,6 +286,22 @@
 
     .navbar.scrolled {
       box-shadow: 0 12px 32px rgba(13, 27, 62, 0.1);
+    }
+
+    [data-theme="dark"] .navbar.scrolled {
+      background: rgba(30, 41, 59, 0.98);
+    }
+
+    .theme-toggle:hover {
+      background: var(--orange) !important;
+    }
+
+    .theme-toggle:hover i {
+      color: white !important;
+    }
+
+    [data-theme="dark"] .theme-toggle i {
+      color: var(--white);
     }
 
     .nav-inner {
@@ -2306,7 +2331,7 @@ body {
   <span></span>
 </button><div class="nav-menu nav-links" id="navMenu">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="index.html#about" class="nav-link">About</a>
+        <a href="about.html" class="nav-link">About</a>
         <div class="nav-dropdown">
   <a href="olympiad.html" class="nav-dropdown-trigger">
     Olympiads
@@ -2445,6 +2470,9 @@ body {
         <a href="gallery.html" class="nav-link">Gallery</a>
         <a href="blog.html" class="nav-link">Blog</a>
         <a href="index.html#contact" class="nav-cta">Partner With Us</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" style="background:var(--light);border:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-left:8px;transition:all 0.3s;">
+          <i class="ph ph-moon" style="font-size:20px;color:var(--navy);"></i>
+        </button>
       </div>
     </div>
   </nav>
@@ -2974,6 +3002,34 @@ body {
         mobileToggle.innerHTML = '<i class="ph ph-list"></i>';
       });
     });
+
+    // Theme Toggle
+    const themeToggle = document.getElementById("themeToggle");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      updateThemeIcon(savedTheme);
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+        updateThemeIcon(newTheme);
+      });
+    }
+
+    function updateThemeIcon(theme) {
+      if (!themeToggle) return;
+      const icon = themeToggle.querySelector("i");
+      if (theme === "dark") {
+        icon.className = "ph ph-sun";
+      } else {
+        icon.className = "ph ph-moon";
+      }
+    }
 
     /* Dropdown logic: close others and use inline styles for control */
     document.querySelectorAll('.nav-dropdown')

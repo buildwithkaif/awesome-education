@@ -1,0 +1,742 @@
+<!-- FILE: about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Awesome Education</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D1B3E;
+      --blue: #1A3A6B;
+      --orange: #F97316;
+      --orange-light: #FB923C;
+      --yellow: #FCD34D;
+      --white: #FFFFFF;
+      --light: #F0F4FF;
+      --gray: #64748B;
+      --light-gray: #F8FAFF;
+      --cyan: #0891B2;
+      --green: #059669;
+      --red: #DC2626;
+      --shadow: 0 18px 50px rgba(13, 27, 62, 0.12);
+      --dot-pattern: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.8' fill='%23FFFFFF'/%3E%3C/svg%3E");
+    }
+
+    [data-theme="dark"] {
+      --navy: #E2E8F0;
+      --blue: #94A3B8;
+      --white: #1E293B;
+      --light: #0F172A;
+      --gray: #94A3B8;
+      --light-gray: #0F172A;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      color: var(--gray);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Nunito", sans-serif;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.08;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 13px 26px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      box-shadow: 0 14px 34px rgba(249, 115, 22, 0.28);
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 0;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      padding: 12px 0;
+    }
+
+    [data-theme="dark"] .navbar.scrolled {
+      background: rgba(30, 41, 59, 0.98);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text span:first-child {
+      font-family: "Nunito", sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      color: var(--navy);
+      line-height: 1.1;
+    }
+
+    [data-theme="dark"] .logo-text span:first-child {
+      color: var(--white);
+    }
+
+    .logo-text span:last-child {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    [data-theme="dark"] .nav-link {
+      color: var(--white);
+    }
+
+    .nav-link:hover {
+      color: var(--orange);
+    }
+
+    .nav-link.active {
+      color: var(--orange);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      background: var(--light);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background: var(--orange);
+      color: white;
+    }
+
+    .theme-toggle i {
+      font-size: 20px;
+      color: var(--navy);
+    }
+
+    [data-theme="dark"] .theme-toggle i {
+      color: var(--white);
+    }
+
+    /* Hero Section */
+    .hero-about {
+      padding: 160px 0 80px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    [data-theme="dark"] .hero-about {
+      background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+    }
+
+    .hero-about::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--dot-pattern);
+      opacity: 0.3;
+    }
+
+    .hero-about .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-about h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .hero-about h1 span {
+      color: var(--orange);
+    }
+
+    .hero-about p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 600px;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 80px 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-content h2 {
+      font-size: 36px;
+      margin-bottom: 24px;
+    }
+
+    .about-content p {
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: var(--gray);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 24px;
+      background: var(--light);
+      border-radius: 16px;
+    }
+
+    [data-theme="dark"] .stat-item {
+      background: var(--light-gray);
+    }
+
+    .stat-item strong {
+      display: block;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--orange);
+      font-family: "Nunito", sans-serif;
+    }
+
+    .stat-item span {
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    .about-image {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Mission Vision */
+    .mission-section {
+      padding: 80px 0;
+      background: var(--light);
+    }
+
+    [data-theme="dark"] .mission-section {
+      background: var(--light-gray);
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .mission-card {
+      background: var(--white);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    [data-theme="dark"] .mission-card {
+      background: var(--white);
+    }
+
+    .mission-card h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mission-card h3 i {
+      color: var(--orange);
+      font-size: 28px;
+    }
+
+    .mission-card p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--gray);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 80px 0;
+    }
+
+    .contact-section h2 {
+      font-size: 36px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .contact-card {
+      background: var(--light);
+      padding: 32px 24px;
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    [data-theme="dark"] .contact-card {
+      background: var(--light-gray);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card i {
+      font-size: 36px;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .contact-card h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p, .contact-card a {
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    .contact-card a:hover {
+      color: var(--orange);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--navy);
+      padding: 60px 0 24px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    [data-theme="dark"] .footer {
+      background: #0F172A;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand p {
+      margin: 16px 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .footer h3 {
+      color: var(--white);
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .footer-list {
+      list-style: none;
+    }
+
+    .footer-list li {
+      margin-bottom: 12px;
+    }
+
+    .footer-list a {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      transition: color 0.2s;
+    }
+
+    .footer-list a:hover {
+      color: var(--orange);
+    }
+
+    .contact-list {
+      list-style: none;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+
+    .contact-list i {
+      color: var(--orange);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--orange);
+    }
+
+    .social-link i {
+      font-size: 18px;
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .about-grid, .mission-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">
+        <img src="logo.png" alt="Awesome Education Logo" style="height:44px;width:auto;display:block;object-fit:contain;background:transparent;">
+        <div class="logo-text">
+          <span>Awesome Education</span>
+          <span>Beyond Academics. Real Growth.</span>
+        </div>
+      </a>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="olympiad.html" class="nav-link">Olympiads</a>
+        <a href="tours.html" class="nav-link">Tours</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="ph ph-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-about">
+    <div class="container">
+      <h1>About <span>Awesome Education</span></h1>
+      <p>We are on a mission to transform Indian education by building a complete ecosystem that nurtures academic excellence, life skills, and holistic development for students, teachers, and schools.</p>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <h2>Who We Are</h2>
+          <p>Awesome Education is a pioneering educational initiative powered by <strong>Awesome Ideas & Events Pvt. Ltd.</strong> We believe that true education goes beyond textbooks—it encompasses mental growth, personality development, practical skills, and real-world readiness.</p>
+          <p>Founded with a vision to bridge the gap between traditional academics and modern skill requirements, we partner with schools across India to deliver structured, engaging, and measurable educational programs that benefit students, teachers, and parents alike.</p>
+          <p>Our comprehensive approach covers Olympiads, Educational Tours, Skill Development Programs, Parent Engagement Workshops, and Teacher Upliftment initiatives—all designed to create a complete growth ecosystem for forward-thinking educational institutions.</p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <strong>200+</strong>
+              <span>Schools Partnered</span>
+            </div>
+            <div class="stat-item">
+              <strong>50K+</strong>
+              <span>Students Impacted</span>
+            </div>
+            <div class="stat-item">
+              <strong>8+</strong>
+              <span>Programs Offered</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=500&fit=crop&q=80" alt="Students learning">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission-section">
+    <div class="container">
+      <div class="mission-grid">
+        <div class="mission-card">
+          <h3><i class="ph-fill ph-target"></i> Our Mission</h3>
+          <p>To empower Indian schools with a complete educational ecosystem that combines academic excellence with practical skill development, ensuring every student receives the guidance, resources, and opportunities needed to thrive in the modern world.</p>
+        </div>
+        <div class="mission-card">
+          <h3><i class="ph-fill ph-eye"></i> Our Vision</h3>
+          <p>To become India's most trusted educational partner, transforming schools into hubs of holistic development where students are equipped with knowledge, skills, and confidence to succeed in academics and beyond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <i class="ph-fill ph-map-pin"></i>
+          <h4>Visit Us</h4>
+          <p>Delhi, India</p>
+        </div>
+        <div class="contact-card">
+          <i class="ph-fill ph-phone"></i>
+          <h4>Call Us</h4>
+          <a href="tel:+919911467077">+91 9911467077</a>
+        </div>
+        <div class="contact-card">
+          <i class="ph-fill ph-envelope"></i>
+          <h4>Email Us</h4>
+          <a href="mailto:info@awesomeeducation.in">info@awesomeeducation.in</a>
+        </div>
+        <div class="contact-card">
+          <i class="ph-fill ph-globe"></i>
+          <h4>Website</h4>
+          <a href="https://awesomeeducation.in">awesomeeducation.in</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="logo.png" alt="Awesome Education Logo" style="height:44px;width:auto;object-fit:contain;background:transparent;mix-blend-mode:multiply;">
+            <span style="display:flex;flex-direction:column;">
+              <span class="logo-title" style="font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:#fff;line-height:1.1;">Awesome Education</span>
+              <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.6);letter-spacing:0.5px;">Beyond Academics. Real Growth.</span>
+            </span>
+          </a>
+          <p>Awesome Education by Awesome Ideas & Events Pvt. Ltd. helps schools build a complete ecosystem for academic excellence, life skills, parent engagement and measurable institutional growth.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph-fill ph-linkedin-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph-fill ph-youtube-logo"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3>Programs</h3>
+          <ul class="footer-list">
+            <li><a href="olympiad.html">Olympiad Programs</a></li>
+            <li><a href="tours.html">Educational Tours</a></li>
+            <li><a href="skills.html">Skill Development</a></li>
+            <li><a href="parents.html">Parent Workshops</a></li>
+            <li><a href="teachers.html">Teacher Upliftment</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Company</h3>
+          <ul class="footer-list">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#team">Our Team</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul class="contact-list">
+            <li><i class="ph ph-map-pin"></i> Delhi, India</li>
+            <li><a href="tel:+919911467077"><i class="ph ph-phone"></i> +91 9911467077</a></li>
+            <li><a href="mailto:info@awesomeeducation.in"><i class="ph ph-envelope"></i> info@awesomeeducation.in</a></li>
+            <li><a href="https://awesomeeducation.in"><i class="ph ph-globe"></i> awesomeeducation.in</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Awesome Education | Awesome Ideas & Events Pvt. Ltd.</span>
+      <span>Made with care for India's Schools</span>
+    </div>
+  </footer>
+
+  <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById("navbar");
+    const setNavbarShadow = () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 50);
+    };
+    window.addEventListener("scroll", setNavbarShadow, { passive: true });
+    setNavbarShadow();
+
+    // Theme Toggle
+    const themeToggle = document.getElementById("themeToggle");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      updateThemeIcon(savedTheme);
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+      const icon = themeToggle.querySelector("i");
+      if (theme === "dark") {
+        icon.className = "ph ph-sun";
+      } else {
+        icon.className = "ph ph-moon";
+      }
+    }
+  </script>
+</body>
+</html>
