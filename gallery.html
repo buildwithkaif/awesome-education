@@ -1027,18 +1027,18 @@
   <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
   <script>
     const galleryData = [
-      {title:"Science Olympiad 2024", category:"olympiads", caption:"Students competing at national level", gradient:"linear-gradient(135deg,#0D1B3E,#1A3A6B)", icon:"ph-trophy", height:"260px"},
-      {title:"Rajasthan Heritage Tour", category:"tours", caption:"Exploring the forts of Jaipur", gradient:"linear-gradient(135deg,#F97316,#FB923C)", icon:"ph-bus", height:"200px"},
-      {title:"Parent Workshop Mumbai", category:"workshops", caption:"200 parents attended the summit", gradient:"linear-gradient(135deg,#059669,#34D399)", icon:"ph-users-three", height:"300px"},
-      {title:"Leadership Bootcamp", category:"skill-programs", caption:"Students learning team building", gradient:"linear-gradient(135deg,#0891B2,#06B6D4)", icon:"ph-crown", height:"220px"},
-      {title:"Mathematics Olympiad", category:"olympiads", caption:"Top scorers from 50+ schools", gradient:"linear-gradient(135deg,#7C3AED,#A78BFA)", icon:"ph-calculator", height:"240px"},
-      {title:"Bangalore Tech Tour", category:"tours", caption:"Visiting top tech companies", gradient:"linear-gradient(135deg,#0D1B3E,#1A3A6B)", icon:"ph-rocket", height:"280px"},
-      {title:"Teacher Training Day", category:"workshops", caption:"300 teachers uplifted this year", gradient:"linear-gradient(135deg,#DC2626,#F87171)", icon:"ph-chalkboard-teacher", height:"200px"},
-      {title:"Coding Workshop", category:"skill-programs", caption:"Kids building their first apps", gradient:"linear-gradient(135deg,#D97706,#FCD34D)", icon:"ph-code", height:"260px"},
-      {title:"Annual Awards Ceremony", category:"school-events", caption:"Celebrating excellence across India", gradient:"linear-gradient(135deg,#F97316,#FB923C)", icon:"ph-star", height:"300px"},
-      {title:"English Olympiad Finals", category:"olympiads", caption:"National rank holders felicitated", gradient:"linear-gradient(135deg,#059669,#34D399)", icon:"ph-book-open", height:"220px"},
-      {title:"Mysore Heritage Tour", category:"tours", caption:"Royal palace and cultural visit", gradient:"linear-gradient(135deg,#7C3AED,#A78BFA)", icon:"ph-castle", height:"240px"},
-      {title:"Chess Tournament", category:"skill-programs", caption:"Inter-school chess championship", gradient:"linear-gradient(135deg,#0891B2,#06B6D4)", icon:"ph-crown", height:"200px"}
+      {title:"Science Olympiad 2024", category:"olympiads", caption:"Students competing at national level", img:"https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop&q=90", height:"260px"},
+      {title:"Rajasthan Heritage Tour", category:"tours", caption:"Exploring the forts of Jaipur", img:"https://images.unsplash.com/photo-1576495199011-eb94736d05d6?w=400&h=500&fit=crop&q=90", height:"200px"},
+      {title:"Parent Workshop Mumbai", category:"workshops", caption:"200 parents attended the summit", img:"https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=350&fit=crop&q=90", height:"300px"},
+      {title:"Leadership Bootcamp", category:"skill-programs", caption:"Students learning team building", img:"https://images.unsplash.com/photo-1596495578065-6e0763fa1178?w=400&h=280&fit=crop&q=90", height:"220px"},
+      {title:"Mathematics Olympiad", category:"olympiads", caption:"Top scorers from 50+ schools", img:"https://images.unsplash.com/photo-1532094349884-543559c44d8d?w=400&h=400&fit=crop&q=90", height:"240px"},
+      {title:"Bangalore Tech Tour", category:"tours", caption:"Visiting top tech companies", img:"https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=400&h=320&fit=crop&q=90", height:"280px"},
+      {title:"Teacher Training Day", category:"workshops", caption:"300 teachers uplifted this year", img:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=260&fit=crop&q=90", height:"200px"},
+      {title:"Coding Workshop", category:"skill-programs", caption:"Kids building their first apps", img:"https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=380&fit=crop&q=90", height:"260px"},
+      {title:"Annual Awards Ceremony", category:"school-events", caption:"Celebrating excellence across India", img:"https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400&h=300&fit=crop&q=90", height:"300px"},
+      {title:"English Olympiad Finals", category:"olympiads", caption:"National rank holders felicitated", img:"https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=400&h=340&fit=crop&q=90", height:"220px"},
+      {title:"Mysore Heritage Tour", category:"tours", caption:"Royal palace and cultural visit", img:"https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=280&fit=crop&q=90", height:"240px"},
+      {title:"Chess Tournament", category:"skill-programs", caption:"Inter-school chess championship", img:"https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&h=360&fit=crop&q=90", height:"200px"}
     ];
 
     const galleryGrid = document.getElementById('galleryGrid');
@@ -1047,15 +1047,13 @@
     function renderGallery(filter = 'all') {
       galleryGrid.innerHTML = '';
       const filteredData = filter === 'all' ? galleryData : galleryData.filter(item => item.category === filter);
-      
+
       filteredData.forEach(item => {
         const card = document.createElement('div');
         card.className = 'gallery-card';
         card.dataset.category = item.category;
         card.innerHTML = `
-          <div class="card-placeholder" style="background: ${item.gradient}; height: ${item.height}">
-            <i class="${item.icon}"></i>
-          </div>
+          <img src="${item.img}" alt="${item.title}" style="width:100%;height:${item.height};object-fit:cover;border-radius:12px 12px 0 0;">
           <div class="card-badge">${item.category.replace('-', ' ')}</div>
           <div class="card-overlay">
             <h3>${item.title}</h3>

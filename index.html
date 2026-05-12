@@ -384,9 +384,8 @@
       background: linear-gradient(rgba(13,27,62,0.75), rgba(13,27,62,0.75)), url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1400&h=800&fit=crop&q=90');
       background-size: cover;
       background-position: center;
+      background-attachment: fixed;
     }
-
-    .hero::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -2543,7 +2542,7 @@ body {
       <div class="container about-grid">
         <div class="about-visual-wrap">
           <div class="about-visual">
-            <img src="https://images.unsplash.com/photo-1613896527026-f195d5c818ed?w=600&h=500&fit=crop&q=90" alt="About Awesome Education" style="width:100%;height:100%;object-fit:cover;border-radius:20px;">
+            <img src="https://images.unsplash.com/photo-1576495199011-eb94736d05d6?w=600&h=500&fit=crop&q=90" alt="About Awesome Education" style="width:100%;height:100%;object-fit:cover;border-radius:20px;">
           </div>
           <div class="floating-badge">
             <strong>10+</strong>
@@ -2771,105 +2770,104 @@ body {
           <h2>Meet The People Behind <span class="text-orange">Real Growth</span></h2>
           <p>Passionate educators and professionals dedicated to transforming school ecosystems across India</p>
         </div>
-        <div class="team-grid">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px;">
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=300&h=300&fit=crop&q=90" alt="Team Member" style="width:100%;height:220px;object-fit:cover;object-position:top center;border-radius:0;"></div>
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=400&fit=crop&q=90" alt="Ananya Sharma" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
             <div class="team-body">
-              <h3>Faculty Member 1</h3>
-              <span class="team-role">Olympiad Coordinator</span>
-              <p>Dedicated professional bringing years of expertise to transform school experiences.</p>
+              <h3>Ananya Sharma</h3>
+              <span class="team-role">Founder & CEO</span>
+              <p>Education reformer with 15+ years transforming school ecosystems across India.</p>
               <div class="team-social">
                 <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:info@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
+                <a href="mailto:ananya@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
               </div>
             </div>
           </article>
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&h=300&fit=crop&q=90" alt="Team Member" style="width:100%;height:220px;object-fit:cover;object-position:top center;border-radius:0;"></div>
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=400&fit=crop&q=90" alt="Vikram Patel" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
             <div class="team-body">
-              <h3>Faculty Member 2</h3>
-              <span class="team-role">Tour Program Head</span>
-              <p>Dedicated professional bringing years of expertise to transform school experiences.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:info@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
-            </div>
-          </article>
-          <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=300&h=300&fit=crop&q=90" alt="Team Member" style="width:100%;height:220px;object-fit:cover;object-position:top center;border-radius:0;"></div>
-            <div class="team-body">
-              <h3>Faculty Member 3</h3>
-              <span class="team-role">Skill Development Lead</span>
-              <p>Dedicated professional bringing years of expertise to transform school experiences.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:info@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
-            </div>
-          </article>
-          <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=300&h=300&fit=crop&q=90" alt="Team Member" style="width:120px;height:120px;object-fit:cover;border-radius:50%;"></div>
-            <div class="team-body">
-              <h3>Faculty Member 4</h3>
-              <span class="team-role">Parent Engagement Expert</span>
-              <p>Dedicated professional bringing years of expertise to transform school experiences.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:info@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
-            </div>
-          </article>
-          <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&q=90" alt="Team Member" style="width:100%;height:220px;object-fit:cover;object-position:top center;border-radius:0;"></div>
-            <div class="team-body">
-              <h3>Faculty Member 5</h3>
-              <span class="team-role">Teacher Training Head</span>
-              <p>Dedicated professional bringing years of expertise to transform school experiences.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:info@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
-            </div>
-          </article>
-          <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&q=90" alt="Team Member" style="width:100%;height:220px;object-fit:cover;object-position:top center;border-radius:0;"></div>
-            <div class="team-body">
-              <h3>Faculty Member 6</h3>
+              <h3>Vikram Patel</h3>
               <span class="team-role">Academic Director</span>
-              <p>Dedicated professional bringing years of expertise to transform school experiences.</p>
+              <p>PhD in Educational Psychology, passionate about innovative teaching methods.</p>
               <div class="team-social">
                 <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:info@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
+                <a href="mailto:vikram@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
               </div>
             </div>
           </article>
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&q=90" alt="Team Member" style="width:100%;height:220px;object-fit:cover;object-position:top center;border-radius:0;"></div>
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=400&fit=crop&q=90" alt="Priya Krishnan" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
             <div class="team-body">
-              <h3>Faculty Member 7</h3>
-              <span class="team-role">Operations Manager</span>
-              <p>Dedicated professional bringing years of expertise to transform school experiences.</p>
+              <h3>Priya Krishnan</h3>
+              <span class="team-role">Operations Head</span>
+              <p>Expert in scaling educational programs across 500+ schools in India.</p>
               <div class="team-social">
                 <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:info@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
+                <a href="mailto:priya@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
               </div>
             </div>
           </article>
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&q=90" alt="Team Member" style="width:100%;height:220px;object-fit:cover;object-position:top center;border-radius:0;"></div>
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=400&fit=crop&q=90" alt="Arjun Mehta" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
             <div class="team-body">
-              <h3>Faculty Member 8</h3>
-              <span class="team-role">Student Wellness Lead</span>
-              <p>Dedicated professional bringing years of expertise to transform school experiences.</p>
+              <h3>Arjun Mehta</h3>
+              <span class="team-role">Technology Lead</span>
+              <p>Building digital solutions that enhance learning experiences for students.</p>
               <div class="team-social">
                 <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:info@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
+                <a href="mailto:arjun@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
+              </div>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=400&fit=crop&q=90" alt="Sneha Reddy" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <div class="team-body">
+              <h3>Sneha Reddy</h3>
+              <span class="team-role">Curriculum Designer</span>
+              <p>Creating engaging learning modules aligned with CBSE and state boards.</p>
+              <div class="team-social">
+                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="mailto:sneha@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
+              </div>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&q=90" alt="Rahul Gupta" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <div class="team-body">
+              <h3>Rahul Gupta</h3>
+              <span class="team-role">Partnerships Manager</span>
+              <p>Building collaborations with schools and educational institutions nationwide.</p>
+              <div class="team-social">
+                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="mailto:rahul@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
+              </div>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=300&h=400&fit=crop&q=90" alt="Kavitha Nair" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <div class="team-body">
+              <h3>Kavitha Nair</h3>
+              <span class="team-role">Teacher Training Lead</span>
+              <p>Empowering educators with modern pedagogical techniques and skills.</p>
+              <div class="team-social">
+                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="mailto:kavitha@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
+              </div>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop&q=90" alt="Sanjay Verma" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <div class="team-body">
+              <h3>Sanjay Verma</h3>
+              <span class="team-role">Content Strategist</span>
+              <p>Developing impactful educational content that resonates with students.</p>
+              <div class="team-social">
+                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="mailto:sanjay@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
               </div>
             </div>
           </article>
         </div>
-        <p class="team-note">Faculty profiles and photos coming soon.<br>Our team is growing!</p>
       </div>
     </section>
 
