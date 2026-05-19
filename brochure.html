@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program Brochure | Awesome Education</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D1B3E;
+      --blue: #1A3A6B;
+      --orange: #F97316;
+      --white: #FFFFFF;
+      --light: #F8FAFF;
+      --gray: #64748B;
+      --border: #E2E8F0;
+      --shadow: 0 18px 50px rgba(13, 27, 62, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      color: var(--gray);
+      background: var(--light);
+      font-family: "Poppins", sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      background: var(--white);
+      box-shadow: 0 10px 28px rgba(13, 27, 62, 0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 20px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo strong {
+      display: block;
+      color: var(--navy);
+      font-family: "Nunito", sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .logo span {
+      display: block;
+      margin-top: 3px;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .nav-link {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 360px;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      background-image: linear-gradient(rgba(13, 27, 62, 0.72), rgba(13, 27, 62, 0.72)), url('home-hero.jpg');
+      background-position: center;
+      background-size: cover;
+    }
+
+    .hero h1,
+    .card h2 {
+      color: var(--navy);
+      font-family: "Nunito", sans-serif;
+      font-weight: 900;
+      line-height: 1.08;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      color: var(--white);
+      font-size: clamp(38px, 6vw, 58px);
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin-top: 16px;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .brochure {
+      padding: 64px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      min-height: 220px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--white);
+      box-shadow: 0 10px 30px rgba(13, 27, 62, 0.06);
+    }
+
+    .card h2 {
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: var(--orange);
+      box-shadow: 0 14px 30px rgba(249, 115, 22, 0.22);
+    }
+
+    .btn-light {
+      color: var(--navy);
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    footer {
+      padding: 22px 0;
+      color: rgba(255, 255, 255, 0.72);
+      background: var(--navy);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html" aria-label="Awesome Education home">
+        <img src="logo.png" alt="Awesome Education Logo">
+        <span>
+          <strong>Awesome Education</strong>
+          <span>Beyond Academics. Real Growth.</span>
+        </span>
+      </a>
+      <a class="nav-link" href="olympiad.html">Back to Olympiads</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Awesome Education Program Brochure</h1>
+        <p>Explore our Olympiad programs, educational tours, skill development, parent workshops, and teacher upliftment offerings in one place.</p>
+      </div>
+    </section>
+
+    <section class="brochure">
+      <div class="container">
+        <div class="grid">
+          <article class="card">
+            <h2>Olympiads</h2>
+            <p>Subject-wise competitions for Mathematics, Science, English, General Knowledge, Reasoning, and Computer Science with school-level participation support.</p>
+          </article>
+          <article class="card">
+            <h2>School Programs</h2>
+            <p>Educational tours, skill development modules, and structured events designed to extend learning beyond the classroom.</p>
+          </article>
+          <article class="card">
+            <h2>Community Growth</h2>
+            <p>Parent workshops and teacher upliftment sessions that help schools build a complete academic and personal growth ecosystem.</p>
+          </article>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:info@awesomeeducation.in?subject=Awesome%20Education%20Brochure%20Request">Request PDF Brochure</a>
+          <a class="btn btn-light" href="index.html#contact">Contact Team</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">&copy; 2025 Awesome Education | Awesome Ideas & Events Pvt. Ltd.</div>
+  </footer>
+</body>
+</html>

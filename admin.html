@@ -967,7 +967,6 @@
     const db = createClient(SUPABASE_URL, SUPABASE_KEY)
 
     const ADMIN_EMAIL = 'admin@awesomeeducation.in'
-    const DEFAULT_PASSWORD = 'awesome2025'
     const state = {
       events: [],
       team: [],
@@ -985,10 +984,6 @@
     const sidebarOverlay = document.getElementById('sidebarOverlay')
     const pageHeading = document.getElementById('pageHeading')
     const pageSubtitle = document.getElementById('pageSubtitle')
-
-    function getAdminPassword() {
-      return localStorage.getItem('awesomeAdminPassword') || DEFAULT_PASSWORD
-    }
 
     function showToast(message, type = 'success') {
       const wrap = document.getElementById('toastWrap')
@@ -1026,7 +1021,14 @@
       return fallback
     }
 
+    async function requireAdminSession() {
+      const { data } = await db.auth.getSession()
+      const isAdmin = data.session?.user?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()
+      if (!isAdmin) throw new Error('Admin session expired. Please log in again.')
+    }
+
     async function fetchRows(table, options = {}) {
+      await requireAdminSession()
       let query = db.from(table).select('*')
       if (options.order) query = query.order(options.order, { ascending: options.ascending ?? false })
       if (options.limit) query = query.limit(options.limit)
@@ -1036,6 +1038,7 @@
     }
 
     async function countRows(table) {
+      await requireAdminSession()
       const { count, error } = await db.from(table).select('*', { count: 'exact', head: true })
       if (error) throw error
       return count || 0
@@ -1314,6 +1317,7 @@
     }
 
     async function saveRecord(table, payload) {
+      await requireAdminSession()
       const id = state.editing.id
       const request = id
         ? db.from(table).update(payload).eq('id', id)
@@ -1364,6 +1368,7 @@
     async function deleteRecord(table, id) {
       if (!confirm('Are you sure you want to delete this item?')) return
       try {
+        await requireAdminSession()
         const { error } = await db.from(table).delete().eq('id', id)
         if (error) throw error
         showToast('Deleted successfully')
@@ -1437,22 +1442,34 @@
       loadDashboard()
     }
 
-    document.getElementById('loginForm').addEventListener('submit', event => {
+    document.getElementById('loginForm').addEventListener('submit', async event => {
       event.preventDefault()
       const email = document.getElementById('loginEmail').value.trim()
       const password = document.getElementById('loginPassword').value
       const error = document.getElementById('loginError')
-      if (email === ADMIN_EMAIL && password === getAdminPassword()) {
-        localStorage.setItem('awesomeAdminLoggedIn', 'true')
+      const submitButton = event.target.querySelector('button[type="submit"]')
+      submitButton.disabled = true
+      submitButton.textContent = 'Logging in...'
+      try {
+        const { data, error: authError } = await db.auth.signInWithPassword({ email, password })
+        const isAdmin = data.user?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()
+        if (authError || !isAdmin) {
+          await db.auth.signOut()
+          error.textContent = 'Invalid credentials'
+          return
+        }
         error.textContent = ''
         showApp()
-      } else {
-        error.textContent = 'Invalid credentials'
+      } catch (authError) {
+        error.textContent = 'Unable to sign in. Please try again.'
+      } finally {
+        submitButton.disabled = false
+        submitButton.textContent = 'Login'
       }
     })
 
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      localStorage.removeItem('awesomeAdminLoggedIn')
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await db.auth.signOut()
       adminApp.classList.add('hidden')
       loginScreen.classList.remove('hidden')
       document.getElementById('loginPassword').value = ''
@@ -1482,27 +1499,40 @@
     document.getElementById('sidebarToggle').addEventListener('click', openSidebar)
     sidebarOverlay.addEventListener('click', closeSidebar)
 
-    document.getElementById('settingsForm').addEventListener('submit', event => {
+    document.getElementById('settingsForm').addEventListener('submit', async event => {
       event.preventDefault()
       const current = document.getElementById('currentPassword').value
       const next = document.getElementById('newPassword').value
       const confirmNext = document.getElementById('confirmPassword').value
-      if (current !== getAdminPassword()) {
-        showToast('Current password is incorrect', 'error')
-        return
-      }
       if (next !== confirmNext) {
         showToast('New passwords do not match', 'error')
         return
       }
-      localStorage.setItem('awesomeAdminPassword', next)
-      event.target.reset()
-      showToast('Password updated')
+      try {
+        const { data } = await db.auth.getSession()
+        const email = data.session?.user?.email || ADMIN_EMAIL
+        const { error: verifyError } = await db.auth.signInWithPassword({ email, password: current })
+        if (verifyError) {
+          showToast('Current password is incorrect', 'error')
+          return
+        }
+        const { error: updateError } = await db.auth.updateUser({ password: next })
+        if (updateError) {
+          showToast(updateError.message || 'Password update failed', 'error')
+          return
+        }
+        event.target.reset()
+        showToast('Password updated')
+      } catch (error) {
+        showToast(error.message || 'Password update failed', 'error')
+      }
     })
 
-    if (localStorage.getItem('awesomeAdminLoggedIn') === 'true') {
-      showApp()
-    }
+    db.auth.getSession().then(({ data }) => {
+      const isAdmin = data.session?.user?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()
+      if (isAdmin) showApp()
+      else db.auth.signOut()
+    })
   /* Hide page loader on load */
   window.addEventListener('load', function() {
     var loader = document.getElementById('pageLoader');
