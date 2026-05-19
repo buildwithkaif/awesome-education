@@ -29,15 +29,6 @@
       --dot-pattern: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.8' fill='%23FFFFFF'/%3E%3C/svg%3E");
     }
 
-    [data-theme="dark"] {
-      --navy: #E2E8F0;
-      --blue: #94A3B8;
-      --white: #1E293B;
-      --light: #0F172A;
-      --gray: #94A3B8;
-      --light-gray: #0F172A;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -98,35 +89,31 @@
 
     /* Navbar */
     .navbar {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
       z-index: 1000;
-      padding: 16px 0;
-      transition: all 0.3s ease;
+      background: var(--white);
     }
 
     .navbar.scrolled {
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      padding: 12px 0;
-    }
-
-    [data-theme="dark"] .navbar.scrolled {
-      background: rgba(30, 41, 59, 0.98);
+      box-shadow: 0 12px 32px rgba(13, 27, 62, 0.1);
     }
 
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      min-height: 76px;
+      gap: 24px;
     }
 
     .logo {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
+      background: transparent !important;
+      border: none !important;
     }
 
     .logo-text {
@@ -135,22 +122,20 @@
     }
 
     .logo-text span:first-child {
-      font-family: "Nunito", sans-serif;
-      font-weight: 900;
-      font-size: 20px;
+      display: block;
       color: var(--navy);
-      line-height: 1.1;
-    }
-
-    [data-theme="dark"] .logo-text span:first-child {
-      color: var(--white);
+      font-family: "Nunito", sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1;
     }
 
     .logo-text span:last-child {
+      display: block;
+      color: var(--orange);
       font-size: 11px;
       font-weight: 600;
-      color: var(--gray);
-      letter-spacing: 0.5px;
+      white-space: nowrap;
     }
 
     .nav-menu {
@@ -159,80 +144,175 @@
       gap: 8px;
     }
 
-    .nav-link {
-      padding: 10px 16px;
+    .nav-link,
+    .nav-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--blue);
       font-size: 14px;
       font-weight: 600;
+      transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active,
+    .nav-dropdown-trigger:hover {
       color: var(--navy);
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-
-    [data-theme="dark"] .nav-link {
-      color: var(--white);
-    }
-
-    .nav-link:hover {
-      color: var(--orange);
+      background: var(--light);
+      transform: translateY(-1px);
     }
 
     .nav-link.active {
       color: var(--orange);
     }
 
+    .nav-cta {
+      margin-left: 8px;
+      padding: 12px 22px;
+      border-radius: 25px;
+      color: var(--white);
+      background: var(--orange);
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 12px 26px rgba(249, 115, 22, 0.22);
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(249, 115, 22, 0.32);
+      background: var(--orange-light);
+    }
+
     .mobile-toggle {
       display: none;
-      width: 42px;
-      height: 42px;
-      border: 0;
-      border-radius: 10px;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
       color: var(--navy);
       background: var(--light);
-      font-size: 24px;
-      cursor: pointer;
+      font-size: 26px;
       align-items: center;
       justify-content: center;
     }
 
-    /* Theme Toggle */
-    .theme-toggle {
+    .hamburger {
+      border: 0;
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown:hover .nav-dropdown-trigger .ph-caret-down {
+      transform: rotate(180deg);
+    }
+
+    .mega-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      width: 420px;
+      border: 1px solid #EEF2FF;
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: 0 20px 60px rgba(13, 27, 62, 0.15);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 9999;
+    }
+
+    .mega-menu::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      transform: translateX(-50%) rotate(45deg);
+      border-left: 1px solid #EEF2FF;
+      border-top: 1px solid #EEF2FF;
+      background: var(--white);
+    }
+
+    .mega-menu-inner {
+      padding: 12px;
+    }
+
+    .mega-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+
+    .mega-item:hover {
       background: var(--light);
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    }
+
+    .mega-item:hover .mega-arrow {
+      transform: translateX(4px);
+      color: var(--orange);
+    }
+
+    .mega-icon {
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      margin-left: 8px;
-      transition: all 0.3s;
-    }
-
-    .theme-toggle:hover {
-      background: var(--orange);
-      color: white;
-    }
-
-    .theme-toggle i {
-      font-size: 20px;
-      color: var(--navy);
-    }
-
-    [data-theme="dark"] .theme-toggle i {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border-radius: 10px;
       color: var(--white);
+      font-size: 20px;
+    }
+
+    .mega-text {
+      flex: 1;
+    }
+
+    .mega-title {
+      display: block;
+      color: var(--navy);
+      font-family: "Nunito", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .mega-desc {
+      display: block;
+      margin-top: 2px;
+      color: var(--gray);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .mega-arrow {
+      flex-shrink: 0;
+      color: #CBD5E1;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+
+    .mega-item + .mega-item {
+      border-top: 1px solid var(--light-gray);
     }
 
     /* Hero Section */
     .hero-about {
       padding: 160px 0 80px;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      background-image: linear-gradient(rgba(13,27,62,0.75),rgba(13,27,62,0.75)), url('home-hero.jpg');
+      background-size: cover;
+      background-position: center;
       position: relative;
       overflow: hidden;
-    }
-
-    [data-theme="dark"] .hero-about {
-      background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
     }
 
     .hero-about::before {
@@ -302,10 +382,6 @@
       border-radius: 16px;
     }
 
-    [data-theme="dark"] .stat-item {
-      background: var(--light-gray);
-    }
-
     .stat-item strong {
       display: block;
       font-size: 32px;
@@ -337,10 +413,6 @@
       background: var(--light);
     }
 
-    [data-theme="dark"] .mission-section {
-      background: var(--light-gray);
-    }
-
     .mission-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -352,10 +424,6 @@
       padding: 40px;
       border-radius: 20px;
       box-shadow: var(--shadow);
-    }
-
-    [data-theme="dark"] .mission-card {
-      background: var(--white);
     }
 
     .mission-card h3 {
@@ -402,10 +470,6 @@
       transition: all 0.3s;
     }
 
-    [data-theme="dark"] .contact-card {
-      background: var(--light-gray);
-    }
-
     .contact-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow);
@@ -436,10 +500,6 @@
       background: var(--navy);
       padding: 60px 0 24px;
       color: rgba(255, 255, 255, 0.7);
-    }
-
-    [data-theme="dark"] .footer {
-      background: #0F172A;
     }
 
     .footer-grid {
@@ -530,6 +590,15 @@
       font-size: 13px;
     }
 
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
     /* Responsive */
     @media (max-width: 1024px) {
       .about-grid, .mission-grid {
@@ -546,38 +615,91 @@
     }
 
     @media (max-width: 768px) {
-      .nav-inner {
-        min-height: 58px;
+      .navbar .container {
+        padding: 12px 20px;
+        position: relative;
       }
 
-      .mobile-toggle {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        padding: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        gap: 4px;
+      }
+
+      .nav-links.mobile-open {
         display: flex;
       }
 
-      .nav-menu {
-        position: fixed;
-        inset: 74px 20px auto;
-        display: grid;
-        gap: 8px;
-        padding: 18px;
-        border-radius: 16px;
-        background: var(--white);
-        box-shadow: 0 18px 50px rgba(13, 27, 62, 0.18);
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-10px);
-        transition: opacity 0.2s ease, transform 0.2s ease;
-      }
-
-      .nav-menu.active {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-      }
-
-      .nav-link,
-      .theme-toggle {
+      .nav-links a,
+      .nav-dropdown,
+      .nav-dropdown-trigger {
         width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .nav-links a {
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 15px;
+      }
+
+      .nav-cta {
+        margin-top: 8px;
+        text-align: center;
+      }
+
+      .mobile-toggle {
+        display: none !important;
+      }
+
+      .hamburger {
+        display: flex !important;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 4px;
+        background: none;
+        border: none;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--navy);
+        transition: all 0.3s;
+      }
+
+      .mega-menu {
+        position: static !important;
+        width: 100% !important;
+        display: none;
+        padding-top: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: all !important;
+        transform: none !important;
+      }
+
+      .nav-dropdown:hover .mega-menu,
+      .mega-menu.mobile-open {
+        display: block;
+      }
+
+      .mega-menu::before {
+        display: none;
       }
 
       .contact-grid {
@@ -595,28 +717,168 @@
   </style>
 </head>
 <body>
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" aria-label="Primary navigation">
     <div class="container nav-inner">
       <a class="logo" href="index.html">
-        <img src="logo.png" alt="Awesome Education Logo" style="height:44px;width:auto;display:block;object-fit:contain;background:transparent;">
-        <div class="logo-text">
-          <span>Awesome Education</span>
-          <span>Beyond Academics. Real Growth.</span>
-        </div>
-      </a>
+  <img src="logo.png"
+       alt="Awesome Education Logo"
+       style="height:44px;width:auto;display:block;object-fit:contain;background:transparent;">
+  <div class="logo-text">
+    <span>Awesome Education</span>
+    <span>Beyond Academics. Real Growth.</span>
+  </div>
+</a>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation" aria-expanded="false">
         <i class="ph ph-list"></i>
       </button>
-      <div class="nav-menu">
+      <button class="hamburger"
+  id="hamburgerBtn"
+  style="display:none;"
+  onclick="toggleMobileMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button><div class="nav-menu nav-links" id="navMenu">
         <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link active">About</a>
-        <a href="olympiad.html" class="nav-link">Olympiads</a>
-        <a href="tours.html" class="nav-link">Tours</a>
-        <a href="skills.html" class="nav-link">Skills</a>
-        <a href="index.html#contact" class="nav-link">Contact</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-          <i class="ph ph-moon"></i>
-        </button>
+        <div class="nav-dropdown">
+  <a href="olympiad.html" class="nav-dropdown-trigger">
+    Olympiads
+    <i class="ph ph-caret-down"
+       style="font-size:12px;margin-left:4px;
+       transition:transform 0.3s;"></i>
+  </a>
+  <div class="mega-menu">
+    <div class="mega-menu-inner">
+      <a href="science-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0D1B3E,#1A3A6B)">
+          <i class="ph-fill ph-flask"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Science</span>
+          <span class="mega-desc">National science olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="mathematics-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)">
+          <i class="ph-fill ph-calculator"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Mathematics</span>
+          <span class="mega-desc">National math olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="english-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">
+          <i class="ph-fill ph-book-open"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">English</span>
+          <span class="mega-desc">National English olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="gk-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+          <i class="ph-fill ph-globe"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">General Knowledge</span>
+          <span class="mega-desc">National GK olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="reasoning-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#059669,#34D399)">
+          <i class="ph-fill ph-brain"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Reasoning</span>
+          <span class="mega-desc">National reasoning olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="computer-olympiad.html#glance" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#DC2626,#F87171)">
+          <i class="ph-fill ph-desktop"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Computer Science</span>
+          <span class="mega-desc">National CS olympiad competitions</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+    </div>
+  </div>
+</div>
+        <div class="nav-dropdown">
+  <a href="olympiad.html" class="nav-dropdown-trigger">
+    Programs
+    <i class="ph ph-caret-down"
+       style="font-size:12px;margin-left:4px;
+       transition:transform 0.3s;"></i>
+  </a>
+  <div class="mega-menu">
+    <div class="mega-menu-inner">
+      <a href="tours.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#F97316,#FB923C)">
+          <i class="ph-fill ph-bus"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Educational Tours</span>
+          <span class="mega-desc">Curated experiential learning trips across India</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="skills.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#0891B2,#06B6D4)">
+          <i class="ph-fill "></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Skill Development</span>
+          <span class="mega-desc">Personality, leadership, coding & financial literacy</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="teachers.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+          <i class="ph-fill ph-chalkboard-teacher"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Teacher Upliftment</span>
+          <span class="mega-desc">Professional development & modern teaching techniques</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="parents.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#059669,#34D399)">
+          <i class="ph-fill ph-users-three"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Parent Workshops</span>
+          <span class="mega-desc">Engaging sessions for involved and informed parenting</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+      <a href="blog.html" class="mega-item">
+        <div class="mega-icon" style="background:linear-gradient(135deg,#D97706,#FCD34D)">
+          <i class="ph-fill ph-article"></i>
+        </div>
+        <div class="mega-text">
+          <span class="mega-title">Blog & Resources</span>
+          <span class="mega-desc">Insights on education, parenting & school growth</span>
+        </div>
+        <i class="ph ph-arrow-right mega-arrow"></i>
+      </a>
+    </div>
+  </div>
+</div>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="index.html#contact" class="nav-cta">Partner With Us</a>
       </div>
     </div>
   </nav>
@@ -652,7 +914,7 @@
           </div>
         </div>
         <div class="about-image">
-          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=500&fit=crop&q=80" alt="Students learning">
+          <img src="https://images.unsplash.com/photo-1523240795612–9a054b0db644?w=600&h=500&fit=crop&q=80" alt="Students learning">
         </div>
       </div>
     </div>
@@ -760,41 +1022,17 @@
 
   <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
   <script>
-    // Navbar scroll effect
     const navbar = document.getElementById("navbar");
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navMenu = document.getElementById("navMenu");
+    const navLinks = document.querySelectorAll(".nav-menu a");
+
     const setNavbarShadow = () => {
       navbar.classList.toggle("scrolled", window.scrollY > 50);
     };
+
     window.addEventListener("scroll", setNavbarShadow, { passive: true });
     setNavbarShadow();
-
-    // Theme Toggle
-    const themeToggle = document.getElementById("themeToggle");
-    const mobileToggle = document.getElementById("mobileToggle");
-    const navMenu = document.querySelector(".nav-menu");
-    const navLinks = document.querySelectorAll(".nav-menu a");
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      document.documentElement.setAttribute("data-theme", savedTheme);
-      updateThemeIcon(savedTheme);
-    }
-
-    themeToggle.addEventListener("click", () => {
-      const currentTheme = document.documentElement.getAttribute("data-theme");
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", newTheme);
-      localStorage.setItem("theme", newTheme);
-      updateThemeIcon(newTheme);
-    });
-
-    function updateThemeIcon(theme) {
-      const icon = themeToggle.querySelector("i");
-      if (theme === "dark") {
-        icon.className = "ph ph-sun";
-      } else {
-        icon.className = "ph ph-moon";
-      }
-    }
 
     mobileToggle.addEventListener("click", () => {
       const isOpen = navMenu.classList.toggle("active");
@@ -811,6 +1049,121 @@
         mobileToggle.innerHTML = '<i class="ph ph-list"></i>';
       });
     });
+
+    document.querySelectorAll('.nav-dropdown')
+      .forEach(dropdown => {
+        let hideTimer;
+        const menu = dropdown.querySelector('.mega-menu');
+        const caret = dropdown.querySelector('.ph-caret-down');
+
+        dropdown.addEventListener('mouseenter', () => {
+          document.querySelectorAll('.nav-dropdown')
+            .forEach(other => {
+              if (other !== dropdown) {
+                const otherMenu = other.querySelector('.mega-menu');
+                const otherCaret = other.querySelector('.ph-caret-down');
+                if (otherMenu) {
+                  otherMenu.style.opacity = '0';
+                  otherMenu.style.visibility = 'hidden';
+                  otherMenu.style.transform =
+                    'translateX(-50%) translateY(-8px)';
+                  otherMenu.style.pointerEvents = 'none';
+                }
+                if (otherCaret) {
+                  otherCaret.style.transform = 'rotate(0deg)';
+                }
+              }
+            });
+
+          clearTimeout(hideTimer);
+          if (menu) {
+            menu.style.opacity = '1';
+            menu.style.visibility = 'visible';
+            menu.style.transform = 'translateX(-50%) translateY(0)';
+            menu.style.pointerEvents = 'all';
+          }
+          if (caret) caret.style.transform = 'rotate(180deg)';
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+          hideTimer = setTimeout(() => {
+            if (menu) {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.transform =
+                'translateX(-50%) translateY(-8px)';
+              menu.style.pointerEvents = 'none';
+            }
+            if (caret) caret.style.transform = 'rotate(0deg)';
+          }, 150);
+        });
+
+        if (menu) {
+          menu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimer);
+          });
+          menu.addEventListener('mouseleave', () => {
+            hideTimer = setTimeout(() => {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.transform =
+                'translateX(-50%) translateY(-8px)';
+              menu.style.pointerEvents = 'none';
+              if (caret) caret.style.transform = 'rotate(0deg)';
+            }, 150);
+          });
+        }
+      });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown')
+          .forEach(dropdown => {
+            const menu = dropdown.querySelector('.mega-menu');
+            const caret = dropdown.querySelector('.ph-caret-down');
+            if (menu) {
+              menu.style.opacity = '0';
+              menu.style.visibility = 'hidden';
+              menu.style.pointerEvents = 'none';
+            }
+            if (caret) caret.style.transform = 'rotate(0deg)';
+          });
+      }
+    });
+
+    function toggleMobileMenu() {
+      const nav = document.querySelector('.nav-links');
+      const btn = document.getElementById('hamburgerBtn');
+      if (!nav || !btn) return;
+      nav.classList.toggle('mobile-open');
+    }
+
+    document.querySelectorAll('.nav-links a')
+      .forEach(link => {
+        link.addEventListener('click', () => {
+          const nav = document.querySelector('.nav-links');
+          if (nav) nav.classList.remove('mobile-open');
+        });
+      });
+
+    function checkMobile() {
+      const btn = document.getElementById('hamburgerBtn');
+      const nav = document.querySelector('.nav-links');
+      if (!btn || !nav) return;
+      if (window.innerWidth <= 768) {
+        btn.style.display = 'flex';
+      } else {
+        btn.style.display = 'none';
+        nav.classList.remove('mobile-open');
+      }
+    }
+
+    window.addEventListener('resize', checkMobile);
+    checkMobile();
+
+    document.body.style.opacity = '0';
+    document.body.style.animation =
+      'fadeIn 0.5s ease forwards';
   </script>
 </body>
 </html>
