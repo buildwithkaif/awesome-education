@@ -882,16 +882,23 @@ async function submitForm(e) {
   const baseMessage = getFormValue(form, ['message']);
   const message = [baseMessage, ...extra].filter(Boolean).join('\n\n');
 
+  const name = getFormValue(form, ['name', 'coordinatorName', 'principalName', 'contactPerson', 'parentName', 'schoolName']);
+  const email = getFormValue(form, ['email']);
+  const phone = getFormValue(form, ['phone', 'mobile']);
+  const school = getFormValue(form, ['school', 'schoolName']);
+  const city = getFormValue(form, ['city']) || FORM_SERVICE_NAME;
+  const service = FORM_SERVICE_NAME;
+
   const { error } = await db
     .from('inquiries')
     .insert([{
-      name: getFormValue(form, ['name', 'coordinatorName', 'principalName', 'contactPerson', 'parentName', 'schoolName']),
-      email: getFormValue(form, ['email']),
-      phone: getFormValue(form, ['phone', 'mobile']),
-      school: getFormValue(form, ['school', 'schoolName']),
-      city: getFormValue(form, ['city']) || FORM_SERVICE_NAME,
-      service: FORM_SERVICE_NAME,
-      message: message,
+      name,
+      email,
+      phone,
+      school,
+      city,
+      service,
+      message,
     }]);
 
   if (error) {
@@ -899,6 +906,14 @@ async function submitForm(e) {
     btn.disabled = false;
     showError('Something went wrong. Please try again.');
   } else {
+    const waMessage = encodeURIComponent(`🎓
+Name: ${name}
+School: ${school}
+Phone: ${phone}
+Service: ${service}
+Sent from Awesome Education Website`);
+    window.open(`https://wa.me/919911467077?text=${waMessage}`, '_blank');
+
     // Hide form, show success
     document.getElementById('inquiryForm')
       .style.display = 'none';
