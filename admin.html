@@ -1459,11 +1459,10 @@
       if (!data) return;
       data.forEach(photo => {
         const slot = document.querySelector(
-          \`[data-section="${section}"]
-          [data-slot="${photo.slot_index}"]\`);
+          `[data-section="${section}"][data-slot="${photo.slot_index}"]`);
         if (slot) {
           slot.style.backgroundImage = 
-            \`url(${photo.photo_url})\`;
+            `url(${photo.photo_url})`;
           slot.style.backgroundSize = 'cover';
         }
       });
