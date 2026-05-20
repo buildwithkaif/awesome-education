@@ -1070,7 +1070,7 @@
           countRows('team'),
           countRows('testimonials'),
           countRows('inquiries'),
-          countRows('photos')
+          countRows('gallery')
         ])
         document.getElementById('eventsCount').textContent = eventsCount
         document.getElementById('teamCount').textContent = teamCount
@@ -1389,7 +1389,7 @@
     async function loadGallery() {
       showLoading('galleryTable')
       try {
-        state.gallery = await fetchRows('photos', { order: 'created_at' })
+        state.gallery = await fetchRows('gallery', { order: 'uploaded_at' })
         renderGallery()
       } catch (error) {
         showToast(error.message || 'Failed to load gallery', 'error')
@@ -1404,17 +1404,17 @@
       }
       document.getElementById('galleryTable').innerHTML = `
         <table>
-          <thead><tr><th>Preview</th><th>Section</th><th>Slot</th><th>URL</th><th>Actions</th></tr></thead>
+          <thead><tr><th>Preview</th><th>Title</th><th>Category</th><th>URL</th><th>Actions</th></tr></thead>
           <tbody>
             ${state.gallery.map(row => `
               <tr>
                 <td><div style="width:60px;height:40px;background:url(${row.photo_url}) center/cover;border-radius:4px;border:1px solid #eee;"></div></td>
-                <td><span class="badge">${escapeHtml(row.section)}</span></td>
-                <td><strong>${row.slot_index}</strong></td>
+                <td><strong>${escapeHtml(row.title)}</strong></td>
+                <td><span class="badge">${escapeHtml(row.category)}</span></td>
                 <td><small style="color:var(--gray)">${escapeHtml(row.photo_url)}</small></td>
                 <td><div class="actions">
                   <button class="action-btn btn-blue" onclick="openGalleryModal(${row.id})">Edit</button>
-                  <button class="action-btn btn-red" onclick="deleteRecord('photos', ${row.id})">Delete</button>
+                  <button class="action-btn btn-red" onclick="deleteRecord('gallery', ${row.id})">Delete</button>
                 </div></td>
               </tr>
             `).join('')}
@@ -1425,15 +1425,15 @@
 
     function openGalleryModal(id = null) {
       const row = id ? state.gallery.find(item => item.id === id) : {}
-      state.editing = { type: 'photos', id }
-      const sections = ['index', 'about', 'blog', 'events', 'gallery', 'olympiad', 'science-olympiad', 'mathematics-olympiad', 'english-olympiad', 'tours', 'skills', 'parents', 'teachers', 'gk-olympiad', 'reasoning-olympiad']
+      state.editing = { type: 'gallery', id }
+      const categories = ['olympiads', 'tours', 'workshops', 'skill-programs', 'school-events']
       openModal(id ? 'Edit Photo' : 'Add Photo', `
         <form id="galleryForm">
           <div class="form-grid">
-            <div class="field"><label>Section</label><select name="section" required>
-              ${sections.map(s => `<option value="${s}" ${row?.section === s ? 'selected' : ''}>${s}</option>`).join('')}
+            <div class="field"><label>Title</label><input name="title" required value="${escapeHtml(row?.title)}" placeholder="e.g., Science Olympiad 2024"></div>
+            <div class="field"><label>Category</label><select name="category" required>
+              ${categories.map(c => `<option value="${c}" ${row?.category === c ? 'selected' : ''}>${c}</option>`).join('')}
             </select></div>
-            <div class="field"><label>Slot Index</label><input name="slot_index" type="number" min="0" required value="${row?.slot_index ?? 0}"></div>
             <div class="field full"><label>Photo URL</label><input name="photo_url" required value="${escapeHtml(row?.photo_url)}" placeholder="https://images.unsplash.com/..."></div>
           </div>
           <div class="form-actions"><button type="button" class="btn btn-muted" onclick="closeModal()">Cancel</button><button class="btn btn-primary" type="submit">Save Photo</button></div>
@@ -1445,7 +1445,7 @@
     async function saveGallery(event) {
       event.preventDefault()
       try {
-        await saveRecord('photos', formPayload(event.target))
+        await saveRecord('gallery', formPayload(event.target))
         closeModal()
         showToast('Photo saved successfully')
         await loadGallery()
@@ -1458,8 +1458,9 @@
     function updateSlots(section, data) {
       if (!data) return;
       data.forEach(photo => {
+        // Use slot_index if available, otherwise fallback to title matching
         const slot = document.querySelector(
-          `[data-section="${section}"][data-slot="${photo.slot_index}"]`);
+          `[data-section="${section}"][data-slot="${photo.slot_index || photo.title}"]`);
         if (slot) {
           slot.style.backgroundImage = 
             `url(${photo.photo_url})`;
