@@ -2001,6 +2001,35 @@ body {
   border-top: 1px solid #F8FAFF;
 }
 
+.team-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.team-tab {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 2px solid #EEF2FF;
+  background: white;
+  color: #64748B;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.2s;
+}
+.team-tab.active {
+  background: #0D1B3E;
+  color: white;
+  border-color: #0D1B3E;
+}
+.team-tab:hover {
+  border-color: #F97316;
+  color: #F97316;
+}
+
 @media (max-width: 860px) {
   .nav-dropdown,
   .nav-dropdown-trigger {
@@ -2792,104 +2821,411 @@ body {
       <div class="container">
         <div class="section-header">
           <span class="section-tag">Our Team</span>
-          <h2>Meet The People Behind <span class="text-orange">Real Growth</span></h2>
-          <p>Passionate educators and professionals dedicated to transforming school ecosystems across India</p>
+          <h2>Meet Our Team</h2>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px;">
+
+        <div class="team-tabs">
+          <button class="team-tab active" onclick="showTeam('mentors')">Our Mentors</button>
+          <button class="team-tab" onclick="showTeam('leadership')">Executive Leadership</button>
+          <button class="team-tab" onclick="showTeam('management')">Management Team</button>
+          <button class="team-tab" onclick="showTeam('faculty')">Faculty & Trainers</button>
+          <button class="team-tab" onclick="showTeam('support')">Student Support</button>
+          <button class="team-tab" onclick="showTeam('media')">Media & Creative</button>
+          <button class="team-tab" onclick="showTeam('admin')">Administration</button>
+        </div>
+
+        <!-- MENTORS -->
+        <div id="team-mentors" class="team-grid">
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=400&fit=crop&q=90" alt="Ananya Sharma" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=400&fit=crop&q=90" alt="Team Member 1" style="width:100%;height:220px;object-fit:cover;object-position:top;">
             <div class="team-body">
-              <h3>Ananya Sharma</h3>
-              <span class="team-role">Founder & CEO</span>
-              <p>Education reformer with 15+ years transforming school ecosystems across India.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:ananya@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
+              <h3>Team Member 1</h3>
+              <span class="team-role">Academic Mentor</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
             </div>
           </article>
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1560250097–0b93528c311a?w=300&h=400&fit=crop&q=90" alt="Vikram Patel" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=400&fit=crop&q=90" alt="Team Member 2" style="width:100%;height:220px;object-fit:cover;object-position:top;">
             <div class="team-body">
-              <h3>Vikram Patel</h3>
-              <span class="team-role">Academic Director</span>
-              <p>PhD in Educational Psychology, passionate about innovative teaching methods.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:vikram@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
+              <h3>Team Member 2</h3>
+              <span class="team-role">Academic Mentor</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
             </div>
           </article>
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1573497019940–1c28c88b4f3e?w=300&h=400&fit=crop&q=90" alt="Priya Krishnan" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=400&fit=crop&q=90" alt="Team Member 3" style="width:100%;height:220px;object-fit:cover;object-position:top;">
             <div class="team-body">
-              <h3>Priya Krishnan</h3>
-              <span class="team-role">Operations Head</span>
-              <p>Expert in scaling educational programs across 500+ schools in India.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:priya@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
+              <h3>Team Member 3</h3>
+              <span class="team-role">Academic Mentor</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
             </div>
           </article>
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=400&fit=crop&q=90" alt="Arjun Mehta" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=400&fit=crop&q=90" alt="Team Member 4" style="width:100%;height:220px;object-fit:cover;object-position:top;">
             <div class="team-body">
-              <h3>Arjun Mehta</h3>
-              <span class="team-role">Technology Lead</span>
-              <p>Building digital solutions that enhance learning experiences for students.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:arjun@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
+              <h3>Team Member 4</h3>
+              <span class="team-role">Academic Mentor</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- LEADERSHIP -->
+        <div id="team-leadership" class="team-grid" style="display:none;">
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=400&fit=crop&q=90" alt="Team Member 1" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 1</h3>
+              <span class="team-role">Executive Leader</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
             </div>
           </article>
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1580489944761–15a19d654956?w=300&h=400&fit=crop&q=90" alt="Sneha Reddy" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&q=90" alt="Team Member 2" style="width:100%;height:220px;object-fit:cover;object-position:top;">
             <div class="team-body">
-              <h3>Sneha Reddy</h3>
-              <span class="team-role">Curriculum Designer</span>
-              <p>Creating engaging learning modules aligned with CBSE and state boards.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:sneha@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
+              <h3>Team Member 2</h3>
+              <span class="team-role">Executive Leader</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
             </div>
           </article>
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1507003211169–0a1dd7228f2d?w=300&h=400&fit=crop&q=90" alt="Rahul Gupta" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <img src="https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=300&h=400&fit=crop&q=90" alt="Team Member 3" style="width:100%;height:220px;object-fit:cover;object-position:top;">
             <div class="team-body">
-              <h3>Rahul Gupta</h3>
-              <span class="team-role">Partnerships Manager</span>
-              <p>Building collaborations with schools and educational institutions nationwide.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:rahul@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
+              <h3>Team Member 3</h3>
+              <span class="team-role">Executive Leader</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
             </div>
           </article>
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1598550880863–4e8aa3d0edb4?w=300&h=400&fit=crop&q=90" alt="Kavitha Nair" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop&q=90" alt="Team Member 4" style="width:100%;height:220px;object-fit:cover;object-position:top;">
             <div class="team-body">
-              <h3>Kavitha Nair</h3>
-              <span class="team-role">Teacher Training Lead</span>
-              <p>Empowering educators with modern pedagogical techniques and skills.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:kavitha@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
+              <h3>Team Member 4</h3>
+              <span class="team-role">Executive Leader</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- MANAGEMENT -->
+        <div id="team-management" class="team-grid" style="display:none;">
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=400&fit=crop&q=90" alt="Team Member 1" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 1</h3>
+              <span class="team-role">Manager</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
             </div>
           </article>
           <article class="team-card">
-            <img src="https://images.unsplash.com/photo-1472099645785–5658abf4ff4e?w=300&h=400&fit=crop&q=90" alt="Sanjay Verma" style="width:100%;height:280px;object-fit:cover;object-position:top;border-radius:12px 12px 0 0;">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=400&fit=crop&q=90" alt="Team Member 2" style="width:100%;height:220px;object-fit:cover;object-position:top;">
             <div class="team-body">
-              <h3>Sanjay Verma</h3>
-              <span class="team-role">Content Strategist</span>
-              <p>Developing impactful educational content that resonates with students.</p>
-              <div class="team-social">
-                <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:sanjay@awesomeeducation.in" aria-label="Email"><i class="ph ph-envelope"></i></a>
-              </div>
+              <h3>Team Member 2</h3>
+              <span class="team-role">Manager</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=400&fit=crop&q=90" alt="Team Member 3" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 3</h3>
+              <span class="team-role">Manager</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=400&fit=crop&q=90" alt="Team Member 4" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 4</h3>
+              <span class="team-role">Manager</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=400&fit=crop&q=90" alt="Team Member 5" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 5</h3>
+              <span class="team-role">Manager</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&q=90" alt="Team Member 6" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 6</h3>
+              <span class="team-role">Manager</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=300&h=400&fit=crop&q=90" alt="Team Member 7" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 7</h3>
+              <span class="team-role">Manager</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop&q=90" alt="Team Member 8" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 8</h3>
+              <span class="team-role">Manager</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- FACULTY -->
+        <div id="team-faculty" class="team-grid" style="display:none;">
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=400&fit=crop&q=90" alt="Team Member 1" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 1</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=400&fit=crop&q=90" alt="Team Member 2" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 2</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=400&fit=crop&q=90" alt="Team Member 3" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 3</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=400&fit=crop&q=90" alt="Team Member 4" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 4</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=400&fit=crop&q=90" alt="Team Member 5" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 5</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&q=90" alt="Team Member 6" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 6</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=300&h=400&fit=crop&q=90" alt="Team Member 7" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 7</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop&q=90" alt="Team Member 8" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 8</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=400&fit=crop&q=90" alt="Team Member 9" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 9</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=400&fit=crop&q=90" alt="Team Member 10" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 10</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=400&fit=crop&q=90" alt="Team Member 11" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 11</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=400&fit=crop&q=90" alt="Team Member 12" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 12</h3>
+              <span class="team-role">Trainer</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- SUPPORT -->
+        <div id="team-support" class="team-grid" style="display:none;grid-template-columns:repeat(3,1fr);">
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=400&fit=crop&q=90" alt="Team Member 1" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 1</h3>
+              <span class="team-role">Support Staff</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&q=90" alt="Team Member 2" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 2</h3>
+              <span class="team-role">Support Staff</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=300&h=400&fit=crop&q=90" alt="Team Member 3" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 3</h3>
+              <span class="team-role">Support Staff</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop&q=90" alt="Team Member 4" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 4</h3>
+              <span class="team-role">Support Staff</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=400&fit=crop&q=90" alt="Team Member 5" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 5</h3>
+              <span class="team-role">Support Staff</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=400&fit=crop&q=90" alt="Team Member 6" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 6</h3>
+              <span class="team-role">Support Staff</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- MEDIA -->
+        <div id="team-media" class="team-grid" style="display:none;grid-template-columns:repeat(3,1fr);">
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=400&fit=crop&q=90" alt="Team Member 1" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 1</h3>
+              <span class="team-role">Creative Specialist</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=400&fit=crop&q=90" alt="Team Member 2" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 2</h3>
+              <span class="team-role">Creative Specialist</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=400&fit=crop&q=90" alt="Team Member 3" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 3</h3>
+              <span class="team-role">Creative Specialist</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&q=90" alt="Team Member 4" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 4</h3>
+              <span class="team-role">Creative Specialist</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=300&h=400&fit=crop&q=90" alt="Team Member 5" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 5</h3>
+              <span class="team-role">Creative Specialist</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop&q=90" alt="Team Member 6" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 6</h3>
+              <span class="team-role">Creative Specialist</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- ADMIN -->
+        <div id="team-admin" class="team-grid" style="display:none;grid-template-columns:repeat(3,1fr);">
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=400&fit=crop&q=90" alt="Team Member 1" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 1</h3>
+              <span class="team-role">Administrator</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=400&fit=crop&q=90" alt="Team Member 2" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 2</h3>
+              <span class="team-role">Administrator</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=400&fit=crop&q=90" alt="Team Member 3" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 3</h3>
+              <span class="team-role">Administrator</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=400&fit=crop&q=90" alt="Team Member 4" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 4</h3>
+              <span class="team-role">Administrator</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=400&fit=crop&q=90" alt="Team Member 5" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 5</h3>
+              <span class="team-role">Administrator</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
+            </div>
+          </article>
+          <article class="team-card">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&q=90" alt="Team Member 6" style="width:100%;height:220px;object-fit:cover;object-position:top;">
+            <div class="team-body">
+              <h3>Team Member 6</h3>
+              <span class="team-role">Administrator</span>
+              <p>Dedicated professional committed to excellence in education and student growth.</p>
             </div>
           </article>
         </div>
@@ -3376,5 +3712,15 @@ Sent from Awesome Education Website`);
 document.querySelectorAll('form#inquiryForm, form#contactForm').forEach(form => {
   form.addEventListener('submit', submitForm, true);
 });
+</script><script>
+function showTeam(section) {
+  document.querySelectorAll('[id^="team-"]')
+    .forEach(el => el.style.display = 'none');
+  document.getElementById('team-' + section)
+    .style.display = 'grid';
+  document.querySelectorAll('.team-tab')
+    .forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+}
 </script></body>
 </html>
