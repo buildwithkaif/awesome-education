@@ -1025,9 +1025,15 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
   <script>
-    const galleryData = [
+    const SUPABASE_URL = 'https://qvbyrhmbbgiknbhfpsnz.supabase.co'
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF2YnlyaG1iYmdpa25iaGZwc256Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NjA4MDQsImV4cCI6MjA5MzAzNjgwNH0.N6BlFUES1LYsrqueNTJnHgtTomyURGYF8ivchQ-ouSA'
+    const { createClient } = supabase
+    const db = createClient(SUPABASE_URL, SUPABASE_KEY)
+
+    let galleryData = [
       {title:"Science Olympiad 2024", category:"olympiads", caption:"Students competing at national level", img:"https://images.unsplash.com/photo-1580582932707–520aed937b7b?w=400&h=300&fit=crop&q=90", height:"260px"},
       {title:"Rajasthan Heritage Tour", category:"tours", caption:"Exploring the forts of Jaipur", img:"https://images.unsplash.com/photo-1576495199011-eb94736d05d6?w=400&h=500&fit=crop&q=90", height:"200px"},
       {title:"Parent Workshop Mumbai", category:"workshops", caption:"200 parents attended the summit", img:"https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=350&fit=crop&q=90", height:"300px"},
@@ -1073,8 +1079,27 @@
       });
     });
 
-    // Initial render
-    renderGallery();
+    async function fetchGallery() {
+      try {
+        const { data, error } = await db.from('gallery').select('*').order('uploaded_at', { ascending: false })
+        if (error) throw error
+        if (data && data.length > 0) {
+          galleryData = data.map(item => ({
+            title: item.title,
+            category: item.category,
+            caption: item.category.replace('-', ' '),
+            img: item.photo_url,
+            height: (Math.floor(Math.random() * 100) + 200) + 'px' // Random height for masonry effect
+          }))
+          renderGallery()
+        }
+      } catch (err) {
+        console.error('Error fetching gallery:', err)
+      }
+    }
+
+    // Initial fetch
+    fetchGallery()
 
     // Navbar logic
     const navbar = document.getElementById("navbar");
