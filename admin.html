@@ -820,6 +820,14 @@
         <button class="nav-item active" data-section="dashboard"><i class="ph ph-squares-four"></i> Dashboard</button>
         <button class="nav-item" data-section="events"><i class="ph ph-calendar"></i> Events</button>
         <button class="nav-item" data-section="team"><i class="ph ph-users"></i> Team</button>
+        <div class="nav-item" onclick="showSection('team-photos')" id="nav-team-photos">
+          <i class="ph ph-users-four"></i>
+          <span>Team Photos</span>
+        </div>
+        <div class="nav-item" onclick="showSection('events-photos')" id="nav-events-photos">
+          <i class="ph ph-calendar-check"></i>
+          <span>Event Photos</span>
+        </div>
         <button class="nav-item" data-section="testimonials"><i class="ph ph-chat-circle-dots"></i> Testimonials</button>
         <button class="nav-item" data-section="inquiries"><i class="ph ph-envelope"></i> Inquiries</button>
         <button class="nav-item" data-section="gallery"><i class="ph ph-image"></i> Gallery</button>
@@ -1430,16 +1438,90 @@
       openModal(id ? 'Edit Photo' : 'Add Photo', `
         <form id="galleryForm">
           <div class="form-grid">
-            <div class="field"><label>Title</label><input name="title" required value="${escapeHtml(row?.title)}" placeholder="e.g., Science Olympiad 2024"></div>
-            <div class="field"><label>Category</label><select name="category" required>
+            <div class="field"><label>Title</label><input id="gallery-title" name="title" required value="${escapeHtml(row?.title)}" placeholder="e.g., Science Olympiad 2024"></div>
+            <div class="field"><label>Category</label><select id="gallery-category" name="category" required>
               ${categories.map(c => `<option value="${c}" ${row?.category === c ? 'selected' : ''}>${c}</option>`).join('')}
             </select></div>
-            <div class="field full"><label>Photo URL</label><input name="photo_url" required value="${escapeHtml(row?.photo_url)}" placeholder="https://images.unsplash.com/..."></div>
+            <div class="field full">
+              <label>Photo</label>
+              <div id="upload-area" style="border: 2px dashed #0D1B3E; border-radius: 12px; padding: 40px; text-align: center; cursor: pointer; background: #F0F4FF; transition: all 0.2s;" onclick="document.getElementById('gallery-file-input').click()" ondragover="event.preventDefault(); this.style.borderColor='#F97316';" ondrop="handleGalleryDrop(event)">
+                <i class="ph ph-upload-simple" style="font-size:48px; color:#0D1B3E;display:block; margin-bottom:12px;"></i>
+                <p style="font-weight:600; color:#0D1B3E;margin-bottom:4px;">Click to upload or drag & drop</p>
+                <p style="font-size:12px; color:#64748B;">PNG, JPG up to 5MB</p>
+                <img id="upload-preview" style="display:none; width:100%;height:150px; object-fit:cover; border-radius:8px; margin-top:12px;">
+              </div>
+              <input type="file" id="gallery-file-input" accept="image/*" style="display:none" onchange="previewGalleryImage(this)">
+            </div>
           </div>
           <div class="form-actions"><button type="button" class="btn btn-muted" onclick="closeModal()">Cancel</button><button class="btn btn-primary" type="submit">Save Photo</button></div>
         </form>
       `)
-      document.getElementById('galleryForm').addEventListener('submit', saveGallery)
+      document.getElementById('galleryForm').addEventListener('submit', saveGalleryPhoto)
+    }
+
+    function previewGalleryImage(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const preview = document.getElementById('upload-preview');
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        document.getElementById('upload-area').querySelector('i').style.display = 'none';
+        document.getElementById('upload-area').querySelectorAll('p').forEach(p => p.style.display = 'none');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleGalleryDrop(event) {
+      event.preventDefault();
+      const file = event.dataTransfer.files[0];
+      if (!file) return;
+      const input = document.getElementById('gallery-file-input');
+      const dt = new DataTransfer();
+      dt.items.add(file);
+      input.files = dt.files;
+      previewGalleryImage(input);
+    }
+
+    async function uploadImage(file, folder) {
+      const fileName = `${Date.now()}-${file.name}`;
+      const { data, error } = await db.storage.from('gallery').upload(fileName, file);
+      if (error) throw error;
+      const { data: { publicUrl } } = db.storage.from('gallery').getPublicUrl(fileName);
+      return publicUrl;
+    }
+
+    async function saveGalleryPhoto(event) {
+      event.preventDefault();
+      const file = document.getElementById('gallery-file-input').files[0];
+      const title = document.getElementById('gallery-title').value;
+      const category = document.getElementById('gallery-category').value;
+
+      if (!file) {
+        showToast('Please select a photo', 'error');
+        return;
+      }
+
+      try {
+        showToast('Uploading...', 'info');
+        const url = await uploadImage(file, 'gallery');
+        await db.from('gallery').insert({
+          photo_url: url,
+          category: category,
+          title: title || 'Gallery Photo',
+          uploaded_at: new Date().toISOString()
+        });
+        closeModal();
+        loadGalleryPhotos();
+        showToast('Photo uploaded successfully!', 'success');
+      } catch(e) {
+        showToast('Upload failed: ' + e.message, 'error');
+      }
+    }
+
+    async function loadGalleryPhotos() {
+      await loadGallery();
     }
 
     async function saveGallery(event) {
