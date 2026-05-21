@@ -831,6 +831,10 @@
         <button class="nav-item" data-section="testimonials"><i class="ph ph-chat-circle-dots"></i> Testimonials</button>
         <button class="nav-item" data-section="inquiries"><i class="ph ph-envelope"></i> Inquiries</button>
         <button class="nav-item" data-section="gallery"><i class="ph ph-image"></i> Gallery</button>
+        <div class="nav-item" onclick="showSection('blog')" id="nav-blog">
+          <i class="ph ph-article"></i>
+          <span>Blog Posts</span>
+        </div>
         <button class="nav-item" data-section="settings"><i class="ph ph-gear"></i> Settings</button>
       </nav>
 
@@ -971,6 +975,77 @@
             </div>
             <button type="submit" class="btn btn-primary">Save Password</button>
           </form>
+        </div>
+      </section>
+
+      <section id="blogSection" class="section">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+          <div>
+            <h2 style="font-size:24px;font-weight:800;color:#0D1B3E;">Blog Posts</h2>
+            <p style="color:#64748B;font-size:14px;">Write and publish blog posts</p>
+          </div>
+          <button onclick="showBlogEditor()" style="background:#F97316;color:white;border:none;padding:12px 24px;border-radius:25px;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;">+ New Post</button>
+        </div>
+        <div id="blog-list"></div>
+        <div id="blog-editor" style="display:none;background:white;border-radius:20px;padding:32px;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+            <h3 style="font-size:20px;font-weight:800;color:#0D1B3E;"><span id="editor-title-label">New Post</span></h3>
+            <button onclick="hideBlogEditor()" style="background:#F0F4FF;color:#0D1B3E;border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:600;">← Back to Posts</button>
+          </div>
+          <input type="hidden" id="blog-id">
+          <div style="margin-bottom:20px;">
+            <label style="display:block;font-weight:600;color:#0D1B3E;margin-bottom:8px;font-size:14px;">Post Title *</label>
+            <input type="text" id="blog-title" placeholder="Enter blog post title..." style="width:100%;padding:12px 16px;border:2px solid #EEF2FF;border-radius:10px;font-size:16px;font-family:'Poppins',sans-serif;outline:none;" onfocus="this.style.borderColor='#F97316'" onblur="this.style.borderColor='#EEF2FF'">
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="display:block;font-weight:600;color:#0D1B3E;margin-bottom:8px;font-size:14px;">Category</label>
+            <select id="blog-category" style="width:100%;padding:12px 16px;border:2px solid #EEF2FF;border-radius:10px;font-size:14px;font-family:'Poppins',sans-serif;outline:none;background:white;">
+              <option value="Education Trends">Education Trends</option>
+              <option value="Olympiad">Olympiad</option>
+              <option value="Educational Tours">Educational Tours</option>
+              <option value="Skill Development">Skill Development</option>
+              <option value="Parent Tips">Parent Tips</option>
+              <option value="Teacher Resources">Teacher Resources</option>
+              <option value="School Events">School Events</option>
+            </select>
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="display:block;font-weight:600;color:#0D1B3E;margin-bottom:8px;font-size:14px;">Cover Image</label>
+            <div id="blog-cover-upload" style="border:2px dashed #0D1B3E;border-radius:12px;padding:30px;text-align:center;cursor:pointer;background:#F0F4FF;" onclick="document.getElementById('blog-image-input').click()" ondragover="event.preventDefault();this.style.borderColor='#F97316';" ondrop="handleBlogImageDrop(event)">
+              <i class="ph ph-image" style="font-size:40px;color:#0D1B3E;display:block;margin-bottom:8px;"></i>
+              <p style="font-weight:600;color:#0D1B3E;margin-bottom:4px;">Click or drag to upload cover image</p>
+              <p style="font-size:12px;color:#64748B;">PNG, JPG up to 5MB</p>
+            </div>
+            <img id="blog-cover-preview" style="display:none;width:100%;height:200px;object-fit:cover;border-radius:12px;margin-top:12px;">
+            <input type="file" id="blog-image-input" accept="image/*" style="display:none" onchange="previewBlogImage(this)">
+            <input type="hidden" id="blog-cover-url">
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="display:block;font-weight:600;color:#0D1B3E;margin-bottom:8px;font-size:14px;">Short Excerpt <span style="font-weight:400;color:#64748B;">(shown on blog listing page)</span></label>
+            <textarea id="blog-excerpt" placeholder="Write a short summary..." rows="2" style="width:100%;padding:12px 16px;border:2px solid #EEF2FF;border-radius:10px;font-size:14px;font-family:'Poppins',sans-serif;outline:none;resize:vertical;" onfocus="this.style.borderColor='#F97316'" onblur="this.style.borderColor='#EEF2FF'"></textarea>
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="display:block;font-weight:600;color:#0D1B3E;margin-bottom:8px;font-size:14px;">Post Content *</label>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;padding:10px;background:#F8FAFF;border:2px solid #EEF2FF;border-bottom:none;border-radius:10px 10px 0 0;">
+              <button onclick="formatText('bold')" title="Bold" style="padding:6px 12px;border:1px solid #EEF2FF;border-radius:6px;background:white;cursor:pointer;font-weight:700;">B</button>
+              <button onclick="formatText('italic')" title="Italic" style="padding:6px 12px;border:1px solid #EEF2FF;border-radius:6px;background:white;cursor:pointer;font-style:italic;">I</button>
+              <button onclick="formatText('insertUnorderedList')" title="Bullet List" style="padding:6px 12px;border:1px solid #EEF2FF;border-radius:6px;background:white;cursor:pointer;">• List</button>
+              <button onclick="formatText('insertOrderedList')" title="Numbered List" style="padding:6px 12px;border:1px solid #EEF2FF;border-radius:6px;background:white;cursor:pointer;">1. List</button>
+              <button onclick="formatHeading('h2')" style="padding:6px 12px;border:1px solid #EEF2FF;border-radius:6px;background:white;cursor:pointer;font-weight:700;">H2</button>
+              <button onclick="formatHeading('h3')" style="padding:6px 12px;border:1px solid #EEF2FF;border-radius:6px;background:white;cursor:pointer;font-weight:600;">H3</button>
+              <button onclick="insertBlogImage()" style="padding:6px 12px;border:1px solid #EEF2FF;border-radius:6px;background:white;cursor:pointer;">📷 Image</button>
+              <input type="file" id="blog-content-image" accept="image/*" style="display:none" onchange="uploadContentImage(this)">
+            </div>
+            <div id="blog-content" contenteditable="true" style="min-height:300px;padding:16px;border:2px solid #EEF2FF;border-radius:0 0 10px 10px;font-size:15px;line-height:1.8;font-family:'Poppins',sans-serif;outline:none;background:white;" onfocus="this.style.borderColor='#F97316'" onblur="this.style.borderColor='#EEF2FF'" placeholder="Start writing your blog post here..."></div>
+          </div>
+          <div style="margin-bottom:24px;">
+            <label style="display:block;font-weight:600;color:#0D1B3E;margin-bottom:8px;font-size:14px;">Author</label>
+            <input type="text" id="blog-author" value="Awesome Education" style="width:100%;padding:12px 16px;border:2px solid #EEF2FF;border-radius:10px;font-size:14px;font-family:'Poppins',sans-serif;outline:none;" onfocus="this.style.borderColor='#F97316'" onblur="this.style.borderColor='#EEF2FF'">
+          </div>
+          <div style="display:flex;gap:12px;">
+            <button onclick="saveBlogPost('draft')" style="flex:1;padding:14px;border:2px solid #0D1B3E;border-radius:25px;background:white;color:#0D1B3E;font-weight:700;cursor:pointer;font-size:14px;font-family:'Poppins',sans-serif;">Save as Draft</button>
+            <button onclick="saveBlogPost('published')" style="flex:2;padding:14px;background:#F97316;color:white;border:none;border-radius:25px;font-weight:700;cursor:pointer;font-size:14px;font-family:'Poppins',sans-serif;">Publish Post 🚀</button>
+          </div>
         </div>
       </section>
     </main>
@@ -1546,6 +1621,190 @@
       }
     }
 
+    function showBlogEditor(post = null) {
+      document.getElementById('blog-list').style.display = 'none';
+      document.getElementById('blog-editor').style.display = 'block';
+
+      if (post) {
+        document.getElementById('editor-title-label').textContent = 'Edit Post';
+        document.getElementById('blog-id').value = post.id;
+        document.getElementById('blog-title').value = post.title;
+        document.getElementById('blog-category').value = post.category;
+        document.getElementById('blog-excerpt').value = post.excerpt || '';
+        document.getElementById('blog-content').innerHTML = post.content || '';
+        document.getElementById('blog-author').value = post.author;
+        document.getElementById('blog-cover-url').value = post.cover_image || '';
+        if (post.cover_image) {
+          document.getElementById('blog-cover-preview').src = post.cover_image;
+          document.getElementById('blog-cover-preview').style.display = 'block';
+          document.getElementById('blog-cover-upload').style.display = 'none';
+        }
+      } else {
+        document.getElementById('editor-title-label').textContent = 'New Post';
+        document.getElementById('blog-id').value = '';
+        document.getElementById('blog-title').value = '';
+        document.getElementById('blog-excerpt').value = '';
+        document.getElementById('blog-content').innerHTML = '';
+        document.getElementById('blog-author').value = 'Awesome Education';
+        document.getElementById('blog-cover-url').value = '';
+        document.getElementById('blog-cover-preview').style.display = 'none';
+        document.getElementById('blog-cover-upload').style.display = 'block';
+      }
+    }
+
+    function hideBlogEditor() {
+      document.getElementById('blog-editor').style.display = 'none';
+      document.getElementById('blog-list').style.display = 'block';
+      loadBlogPosts();
+    }
+
+    function formatText(command) {
+      document.execCommand(command, false, null);
+      document.getElementById('blog-content').focus();
+    }
+
+    function formatHeading(tag) {
+      document.execCommand('formatBlock', false, tag);
+      document.getElementById('blog-content').focus();
+    }
+
+    function insertBlogImage() {
+      document.getElementById('blog-content-image').click();
+    }
+
+    async function uploadContentImage(input) {
+      const file = input.files[0];
+      if (!file) return;
+      try {
+        showToast('Uploading image...', 'info');
+        const url = await uploadImage(file, 'blog-content');
+        document.execCommand('insertHTML', false, `<img src="${url}" style="max-width:100%;border-radius:8px;margin:10px 0;">`);
+        showToast('Image inserted!', 'success');
+      } catch(e) {
+        showToast('Upload failed', 'error');
+      }
+    }
+
+    function previewBlogImage(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        document.getElementById('blog-cover-preview').src = e.target.result;
+        document.getElementById('blog-cover-preview').style.display = 'block';
+        document.getElementById('blog-cover-upload').style.display = 'none';
+        try {
+          const url = await uploadImage(file, 'blog-covers');
+          document.getElementById('blog-cover-url').value = url;
+        } catch(e) {
+          showToast('Image upload failed', 'error');
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleBlogImageDrop(event) {
+      event.preventDefault();
+      const file = event.dataTransfer.files[0];
+      if (!file) return;
+      const input = document.getElementById('blog-image-input');
+      const dt = new DataTransfer();
+      dt.items.add(file);
+      input.files = dt.files;
+      previewBlogImage(input);
+    }
+
+    async function saveBlogPost(status) {
+      const title = document.getElementById('blog-title').value.trim();
+      const content = document.getElementById('blog-content').innerHTML;
+      const excerpt = document.getElementById('blog-excerpt').value.trim();
+      const category = document.getElementById('blog-category').value;
+      const author = document.getElementById('blog-author').value.trim();
+      const coverUrl = document.getElementById('blog-cover-url').value;
+      const id = document.getElementById('blog-id').value;
+
+      if (!title) {
+        showToast('Please enter a title', 'error');
+        return;
+      }
+      if (!content || content === '<br>' || content.trim() === '') {
+        showToast('Please write some content', 'error');
+        return;
+      }
+
+      try {
+        showToast('Saving...', 'info');
+        const postData = {
+          title,
+          content,
+          excerpt: excerpt || title,
+          category,
+          author,
+          cover_image: coverUrl,
+          status,
+          updated_at: new Date().toISOString()
+        };
+
+        if (id) {
+          await db.from('blog_posts').update(postData).eq('id', id);
+        } else {
+          await db.from('blog_posts').insert(postData);
+        }
+
+        showToast(status === 'published' ? 'Post published! 🎉' : 'Draft saved!', 'success');
+
+        setTimeout(() => hideBlogEditor(), 1500);
+      } catch(e) {
+        showToast('Save failed: ' + e.message, 'error');
+      }
+    }
+
+    async function loadBlogPosts() {
+      const { data } = await db.from('blog_posts').select('*').order('created_at', { ascending: false });
+
+      const list = document.getElementById('blog-list');
+
+      if (!data || !data.length) {
+        list.innerHTML = `
+          <div style="text-align:center;padding:60px;background:white;border-radius:20px;">
+            <i class="ph ph-article" style="font-size:64px;color:#CBD5E1;display:block;margin-bottom:16px;"></i>
+            <p style="color:#64748B;font-size:16px;margin-bottom:20px;">No blog posts yet</p>
+            <button onclick="showBlogEditor()" style="background:#F97316;color:white;border:none;padding:12px 24px;border-radius:25px;font-weight:700;cursor:pointer;">Write First Post</button>
+          </div>`;
+        return;
+      }
+
+      list.innerHTML = data.map(post => `
+        <div style="background:white;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,0.05);display:flex;gap:16px;align-items:center;">
+          ${post.cover_image ? `<img src="${post.cover_image}" style="width:80px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0;">` : `<div style="width:80px;height:80px;background:#F0F4FF;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ph ph-article" style="font-size:32px;color:#CBD5E1;"></i></div>`}
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <span style="background:${post.status === 'published' ? '#DCFCE7' : '#FEF9C3'};color:${post.status === 'published' ? '#166534' : '#854D0E'};padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;">${post.status === 'published' ? '✓ Published' : '⋯ Draft'}</span>
+              <span style="font-size:12px;color:#94A3B8;">${post.category}</span>
+            </div>
+            <h3 style="font-size:16px;font-weight:700;color:#0D1B3E;margin-bottom:4px;">${post.title}</h3>
+            <p style="font-size:13px;color:#64748B;">${post.excerpt || ''}</p>
+            <p style="font-size:11px;color:#94A3B8;margin-top:4px;">By ${post.author} • ${new Date(post.created_at).toLocaleDateString('en-IN')}</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-shrink:0;">
+            <button onclick='showBlogEditor(${JSON.stringify(post)})' style="padding:8px 16px;background:#F0F4FF;color:#0D1B3E;border:none;border-radius:20px;cursor:pointer;font-weight:600;font-size:13px;">Edit</button>
+            <button onclick="deleteBlogPost('${post.id}')" style="padding:8px 16px;background:#FEE2E2;color:#DC2626;border:none;border-radius:20px;cursor:pointer;font-weight:600;font-size:13px;">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function deleteBlogPost(id) {
+      if (!confirm('Delete this post permanently?')) return;
+      try {
+        await db.from('blog_posts').delete().eq('id', id);
+        loadBlogPosts();
+        showToast('Post deleted', 'success');
+      } catch(e) {
+        showToast('Delete failed', 'error');
+      }
+    }
+
     async function saveGallery(event) {
       event.preventDefault()
       try {
@@ -1624,6 +1883,7 @@
         testimonials: ['Testimonials', 'Manage school and parent feedback.'],
         inquiries: ['Inquiries', 'Review and export school inquiry submissions.'],
         gallery: ['Gallery', 'Manage photo slots and hero images across the site.'],
+        blog: ['Blog Posts', 'Write and publish blog posts.'],
         settings: ['Settings', 'Manage local admin access.']
       }
       pageHeading.textContent = titles[section][0]
@@ -1635,6 +1895,7 @@
       if (section === 'testimonials') loadTestimonials()
       if (section === 'inquiries') loadInquiries()
       if (section === 'gallery') loadGallery()
+      if (section === 'blog') loadBlogPosts()
     }
 
     function openSidebar() {
