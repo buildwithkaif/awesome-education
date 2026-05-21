@@ -1422,7 +1422,7 @@
                 <td><small style="color:var(--gray)">${escapeHtml(row.photo_url)}</small></td>
                 <td><div class="actions">
                   <button class="action-btn btn-blue" onclick="openGalleryModal(${row.id})">Edit</button>
-                  <button class="action-btn btn-red" onclick="deleteRecord('gallery', ${row.id})">Delete</button>
+                  <button class="action-btn btn-red" onclick="deleteGalleryPhoto(${row.id}, '${row.photo_url}')">Delete</button>
                 </div></td>
               </tr>
             `).join('')}
@@ -1522,6 +1522,28 @@
 
     async function loadGalleryPhotos() {
       await loadGallery();
+    }
+
+    async function deleteGalleryPhoto(id, url) {
+      if (!confirm('Delete this photo?')) return;
+      try {
+        const { error } = await db
+          .from('gallery')
+          .delete()
+          .eq('id', id);
+        if (error) throw error;
+        const path = url.split('/images/')[1];
+        if (path) {
+          await db.storage
+            .from('images')
+            .remove([path]);
+        }
+        loadGalleryPhotos();
+        showToast('Photo deleted!', 'success');
+      } catch(e) {
+        showToast('Delete failed: ' + e.message,
+          'error');
+      }
     }
 
     async function saveGallery(event) {
