@@ -1422,7 +1422,7 @@
                 <td><small style="color:var(--gray)">${escapeHtml(row.photo_url)}</small></td>
                 <td><div class="actions">
                   <button class="action-btn btn-blue" onclick="openGalleryModal(${row.id})">Edit</button>
-                  <button class="action-btn btn-red" onclick="deleteGalleryPhoto(${row.id}, '${row.photo_url}')">Delete</button>
+                  <button class="action-btn btn-red" onclick="deleteGalleryPhoto(${row.id}, &quot;${escapeHtml(row.photo_url)}&quot;)">Delete</button>
                 </div></td>
               </tr>
             `).join('')}
